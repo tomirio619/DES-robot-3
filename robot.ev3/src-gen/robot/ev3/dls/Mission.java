@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link robot.ev3.dls.Mission#getBehaviorList <em>Behavior List</em>}</li>
+ *   <li>{@link robot.ev3.dls.Mission#getTasks <em>Tasks</em>}</li>
  * </ul>
  *
  * @see robot.ev3.dls.DlsPackage#getMission()
@@ -26,19 +26,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface Mission extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Behavior List</b></em>' containment reference list.
-   * The list contents are of type {@link robot.ev3.dls.Behavior}.
+   * Returns the value of the '<em><b>Tasks</b></em>' containment reference list.
+   * The list contents are of type {@link robot.ev3.dls.Task}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Behavior List</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Tasks</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Behavior List</em>' containment reference list.
-   * @see robot.ev3.dls.DlsPackage#getMission_BehaviorList()
+   * @return the value of the '<em>Tasks</em>' containment reference list.
+   * @see robot.ev3.dls.DlsPackage#getMission_Tasks()
    * @model containment="true"
    * @generated
    */
-  EList<Behavior> getBehaviorList();
+  EList<Task> getTasks();
 
 } // Mission

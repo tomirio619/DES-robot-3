@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import robot.ev3.dls.Behavior;
 import robot.ev3.dls.DlsPackage;
 import robot.ev3.dls.Mission;
+import robot.ev3.dls.Task;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +29,7 @@ import robot.ev3.dls.Mission;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robot.ev3.dls.impl.MissionImpl#getBehaviorList <em>Behavior List</em>}</li>
+ *   <li>{@link robot.ev3.dls.impl.MissionImpl#getTasks <em>Tasks</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,14 +37,14 @@ import robot.ev3.dls.Mission;
 public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
 {
   /**
-   * The cached value of the '{@link #getBehaviorList() <em>Behavior List</em>}' containment reference list.
+   * The cached value of the '{@link #getTasks() <em>Tasks</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBehaviorList()
+   * @see #getTasks()
    * @generated
    * @ordered
    */
-  protected EList<Behavior> behaviorList;
+  protected EList<Task> tasks;
 
   /**
    * <!-- begin-user-doc -->
@@ -72,13 +72,13 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Behavior> getBehaviorList()
+  public EList<Task> getTasks()
   {
-    if (behaviorList == null)
+    if (tasks == null)
     {
-      behaviorList = new EObjectContainmentEList<Behavior>(Behavior.class, this, DlsPackage.MISSION__BEHAVIOR_LIST);
+      tasks = new EObjectContainmentEList<Task>(Task.class, this, DlsPackage.MISSION__TASKS);
     }
-    return behaviorList;
+    return tasks;
   }
 
   /**
@@ -91,8 +91,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case DlsPackage.MISSION__BEHAVIOR_LIST:
-        return ((InternalEList<?>)getBehaviorList()).basicRemove(otherEnd, msgs);
+      case DlsPackage.MISSION__TASKS:
+        return ((InternalEList<?>)getTasks()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -107,8 +107,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case DlsPackage.MISSION__BEHAVIOR_LIST:
-        return getBehaviorList();
+      case DlsPackage.MISSION__TASKS:
+        return getTasks();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +124,9 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case DlsPackage.MISSION__BEHAVIOR_LIST:
-        getBehaviorList().clear();
-        getBehaviorList().addAll((Collection<? extends Behavior>)newValue);
+      case DlsPackage.MISSION__TASKS:
+        getTasks().clear();
+        getTasks().addAll((Collection<? extends Task>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +142,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case DlsPackage.MISSION__BEHAVIOR_LIST:
-        getBehaviorList().clear();
+      case DlsPackage.MISSION__TASKS:
+        getTasks().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,8 +159,8 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case DlsPackage.MISSION__BEHAVIOR_LIST:
-        return behaviorList != null && !behaviorList.isEmpty();
+      case DlsPackage.MISSION__TASKS:
+        return tasks != null && !tasks.isEmpty();
     }
     return super.eIsSet(featureID);
   }

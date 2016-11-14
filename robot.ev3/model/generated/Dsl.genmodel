@@ -6,19 +6,10 @@
     copyrightFields="false" runtimeVersion="2.12">
   <genPackages prefix="Dls" basePackage="robot.ev3" disposableProviderFactory="true"
       fileExtensions="mars" ecorePackage="Dsl.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//MeasurementUnit">
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//MeasurementUnit/DISTANCE"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//MeasurementUnit/COLOR"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//MeasurementUnit/INT"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//BehaviorTypes">
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//BehaviorTypes/DRIVE"/>
-    </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//Measurables">
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Measurables/FLOOR_COLOR"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Measurables/LEFT_TOUCH"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Measurables/RIGHT_TOUCH"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Measurables/DIST_TO_OBJECT_FRONT"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//TouchSensorSides">
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//TouchSensorSides/LEFT"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//TouchSensorSides/RIGHT"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//TouchSensorSides/BOTH"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//Actions">
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/ROTATE_L"/>
@@ -26,6 +17,8 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/DRIVE_FORWARD"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/DRIVE_BACKWARD"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/STOP_DRIVING"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/TURN_AROUND"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/BEEP"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//Directions">
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Directions/N"/>
@@ -52,10 +45,6 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Colors/WHITE"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Colors/YELLOW"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//BinaryBooleanOperator">
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//BinaryBooleanOperator/AND"/>
-      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//BinaryBooleanOperator/OR"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//CompareOperator">
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//CompareOperator/EQ"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//CompareOperator/NEQ"/>
@@ -65,91 +54,23 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//CompareOperator/L"/>
     </genEnums>
     <genClasses ecoreClass="Dsl.ecore#//Mission">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Mission/behaviorList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Mission/tasks"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Behavior">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Behavior/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Behavior/behaviorType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Behavior/prio"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Behavior/control"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Behavior/actions"/>
+    <genClasses ecoreClass="Dsl.ecore#//Task">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Task/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Task/sensor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Task/action"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//TakeControl">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//TakeControl/takecontrol"/>
+    <genClasses ecoreClass="Dsl.ecore#//SensorType"/>
+    <genClasses ecoreClass="Dsl.ecore#//ColorSensor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//ColorSensor/key"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//MeasurableConditions">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//MeasurableConditions/measurableConditions"/>
+    <genClasses ecoreClass="Dsl.ecore#//TouchSensor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//TouchSensor/key"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//MeasurableCondition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//MeasurableCondition/measurable"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//MeasurableCondition/unit"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//MeasurableCondition/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//MeasurableCondition/operator"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//IntExpression"/>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionMinus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMinus/sub"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionPlus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionPlus/sub"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionBracket">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionBracket/sub"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionConstantInt">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//ExpressionConstantInt/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//BooleanExpression"/>
-    <genClasses ecoreClass="Dsl.ecore#//NotExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//NotExpression/sub"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//BooleanExpressionBracket">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//BooleanExpressionBracket/sub"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//BooleanExpressionConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//BooleanExpressionConstant/value"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionAddition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionAddition/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionAddition/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionSubtraction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionSubtraction/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionSubtraction/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionMultiply">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMultiply/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMultiply/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionDivision">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionDivision/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionDivision/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionMaximum">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMaximum/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMaximum/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionMinimum">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMinimum/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionMinimum/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionModulo">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionModulo/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionModulo/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionPower">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionPower/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionPower/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionBinOp">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionBinOp/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//ExpressionBinOp/bop"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionBinOp/right"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ExpressionCompOp">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionCompOp/left"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//ExpressionCompOp/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//ExpressionCompOp/right"/>
+    <genClasses ecoreClass="Dsl.ecore#//UltrasonicSensor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//UltrasonicSensor/comparator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//UltrasonicSensor/distance"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

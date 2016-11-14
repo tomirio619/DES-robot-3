@@ -2,51 +2,39 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dls" nsURI="http://www.ev3.robot/dsl" nsPrefix="dls">
   <eClassifiers xsi:type="ecore:EClass" name="Mission">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorList" upperBound="-1"
-        eType="#//Behavior" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
+        eType="#//Task" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Behavior">
+  <eClassifiers xsi:type="ecore:EClass" name="Task">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="behaviorType" eType="#//BehaviorTypes"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="control" eType="#//TakeControl"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" eType="#//SensorType"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actions" eType="#//Actions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//Actions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TakeControl">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="takecontrol" eType="#//BooleanExpression"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorSensor" eSuperTypes="#//SensorType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//Colors"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MeasurableConditions" eSuperTypes="#//TakeControl">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="measurableConditions" upperBound="-1"
-        eType="#//MeasurableCondition" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TouchSensor" eSuperTypes="#//SensorType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//TouchSensorSides"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MeasurableCondition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measurable" eType="#//Measurables"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MeasurementUnit"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//CompareOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UltrasonicSensor" eSuperTypes="#//SensorType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparator" eType="#//CompareOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="MeasurementUnit">
-    <eLiterals name="DISTANCE" literal="distance"/>
-    <eLiterals name="COLOR" value="1" literal="color"/>
-    <eLiterals name="INT" value="2" literal="int"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="BehaviorTypes">
-    <eLiterals name="DRIVE" literal="drive"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Measurables">
-    <eLiterals name="FLOOR_COLOR" literal="floorColor"/>
-    <eLiterals name="LEFT_TOUCH" value="1" literal="leftTouch"/>
-    <eLiterals name="RIGHT_TOUCH" value="2" literal="rightTouch"/>
-    <eLiterals name="DIST_TO_OBJECT_FRONT" value="3" literal="distanceObjectInFront"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="TouchSensorSides">
+    <eLiterals name="LEFT" literal="LEFT"/>
+    <eLiterals name="RIGHT" value="1" literal="RIGHT"/>
+    <eLiterals name="BOTH" value="2" literal="BOTH"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Actions">
-    <eLiterals name="ROTATE_L" literal="rotateLeft"/>
-    <eLiterals name="ROTATE_R" value="1" literal="rotateRight"/>
-    <eLiterals name="DRIVE_FORWARD" value="2" literal="driveForward"/>
-    <eLiterals name="DRIVE_BACKWARD" value="3" literal="driveBackward"/>
-    <eLiterals name="STOP_DRIVING" value="4" literal="stopDriving"/>
+    <eLiterals name="ROTATE_L" literal="ROTATELEFT"/>
+    <eLiterals name="ROTATE_R" value="1" literal="ROTATERIGHT"/>
+    <eLiterals name="DRIVE_FORWARD" value="2" literal="DRIVEFORWARD"/>
+    <eLiterals name="DRIVE_BACKWARD" value="3" literal="DRIVEBACKWARD"/>
+    <eLiterals name="STOP_DRIVING" value="4" literal="STOP"/>
+    <eLiterals name="TURN_AROUND" value="5" literal="TURNAROUND"/>
+    <eLiterals name="BEEP" value="6" literal="BEEP"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Directions">
     <eLiterals name="N" literal="N"/>
@@ -73,31 +61,6 @@
     <eLiterals name="WHITE" value="11" literal="WHITE"/>
     <eLiterals name="YELLOW" value="12" literal="YELLOW"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IntExpression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionMinus" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionPlus" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionBracket" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionConstantInt" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="BinaryBooleanOperator">
-    <eLiterals name="AND" literal="AND"/>
-    <eLiterals name="OR" value="1" literal="OR"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NotExpression" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//BooleanExpression"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CompareOperator">
     <eLiterals name="EQ" literal="=="/>
     <eLiterals name="NEQ" value="1" literal="!="/>
@@ -105,74 +68,5 @@
     <eLiterals name="G" value="3" literal=">"/>
     <eLiterals name="LEQ" value="4" literal="&lt;="/>
     <eLiterals name="L" value="5" literal="&lt;"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpressionBracket" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sub" eType="#//BooleanExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpressionConstant" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionAddition" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionSubtraction" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionMultiply" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionDivision" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionMaximum" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionMinimum" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionModulo" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionPower" eSuperTypes="#//IntExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionBinOp" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//BooleanExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bop" eType="#//BinaryBooleanOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//BooleanExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionCompOp" eSuperTypes="#//BooleanExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//IntExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="#//CompareOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//IntExpression"
-        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

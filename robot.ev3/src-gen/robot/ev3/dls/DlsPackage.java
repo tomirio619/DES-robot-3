@@ -69,13 +69,13 @@ public interface DlsPackage extends EPackage
   int MISSION = 0;
 
   /**
-   * The feature id for the '<em><b>Behavior List</b></em>' containment reference list.
+   * The feature id for the '<em><b>Tasks</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MISSION__BEHAVIOR_LIST = 0;
+  int MISSION__TASKS = 0;
 
   /**
    * The number of structural features of the '<em>Mission</em>' class.
@@ -87,14 +87,14 @@ public interface DlsPackage extends EPackage
   int MISSION_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.BehaviorImpl <em>Behavior</em>}' class.
+   * The meta object id for the '{@link robot.ev3.dls.impl.TaskImpl <em>Task</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.BehaviorImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBehavior()
+   * @see robot.ev3.dls.impl.TaskImpl
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getTask()
    * @generated
    */
-  int BEHAVIOR = 1;
+  int TASK = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -103,824 +103,156 @@ public interface DlsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BEHAVIOR__NAME = 0;
+  int TASK__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Behavior Type</b></em>' attribute.
+   * The feature id for the '<em><b>Sensor</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BEHAVIOR__BEHAVIOR_TYPE = 1;
+  int TASK__SENSOR = 1;
 
   /**
-   * The feature id for the '<em><b>Prio</b></em>' attribute.
+   * The feature id for the '<em><b>Action</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BEHAVIOR__PRIO = 2;
+  int TASK__ACTION = 2;
 
   /**
-   * The feature id for the '<em><b>Control</b></em>' containment reference.
+   * The number of structural features of the '<em>Task</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BEHAVIOR__CONTROL = 3;
+  int TASK_FEATURE_COUNT = 3;
 
   /**
-   * The feature id for the '<em><b>Actions</b></em>' attribute.
+   * The meta object id for the '{@link robot.ev3.dls.impl.SensorTypeImpl <em>Sensor Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.ev3.dls.impl.SensorTypeImpl
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getSensorType()
+   * @generated
+   */
+  int SENSOR_TYPE = 2;
+
+  /**
+   * The number of structural features of the '<em>Sensor Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BEHAVIOR__ACTIONS = 4;
+  int SENSOR_TYPE_FEATURE_COUNT = 0;
 
   /**
-   * The number of structural features of the '<em>Behavior</em>' class.
+   * The meta object id for the '{@link robot.ev3.dls.impl.ColorSensorImpl <em>Color Sensor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.ev3.dls.impl.ColorSensorImpl
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getColorSensor()
+   * @generated
+   */
+  int COLOR_SENSOR = 3;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BEHAVIOR_FEATURE_COUNT = 5;
+  int COLOR_SENSOR__KEY = SENSOR_TYPE_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.TakeControlImpl <em>Take Control</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.TakeControlImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getTakeControl()
-   * @generated
-   */
-  int TAKE_CONTROL = 2;
-
-  /**
-   * The feature id for the '<em><b>Takecontrol</b></em>' containment reference.
+   * The number of structural features of the '<em>Color Sensor</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TAKE_CONTROL__TAKECONTROL = 0;
+  int COLOR_SENSOR_FEATURE_COUNT = SENSOR_TYPE_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Take Control</em>' class.
+   * The meta object id for the '{@link robot.ev3.dls.impl.TouchSensorImpl <em>Touch Sensor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.ev3.dls.impl.TouchSensorImpl
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getTouchSensor()
+   * @generated
+   */
+  int TOUCH_SENSOR = 4;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TAKE_CONTROL_FEATURE_COUNT = 1;
+  int TOUCH_SENSOR__KEY = SENSOR_TYPE_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.MeasurableConditionsImpl <em>Measurable Conditions</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.MeasurableConditionsImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurableConditions()
-   * @generated
-   */
-  int MEASURABLE_CONDITIONS = 3;
-
-  /**
-   * The feature id for the '<em><b>Takecontrol</b></em>' containment reference.
+   * The number of structural features of the '<em>Touch Sensor</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MEASURABLE_CONDITIONS__TAKECONTROL = TAKE_CONTROL__TAKECONTROL;
+  int TOUCH_SENSOR_FEATURE_COUNT = SENSOR_TYPE_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Measurable Conditions</b></em>' containment reference list.
+   * The meta object id for the '{@link robot.ev3.dls.impl.UltrasonicSensorImpl <em>Ultrasonic Sensor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see robot.ev3.dls.impl.UltrasonicSensorImpl
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getUltrasonicSensor()
+   * @generated
+   */
+  int ULTRASONIC_SENSOR = 5;
+
+  /**
+   * The feature id for the '<em><b>Comparator</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MEASURABLE_CONDITIONS__MEASURABLE_CONDITIONS = TAKE_CONTROL_FEATURE_COUNT + 0;
+  int ULTRASONIC_SENSOR__COMPARATOR = SENSOR_TYPE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Measurable Conditions</em>' class.
+   * The feature id for the '<em><b>Distance</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MEASURABLE_CONDITIONS_FEATURE_COUNT = TAKE_CONTROL_FEATURE_COUNT + 1;
+  int ULTRASONIC_SENSOR__DISTANCE = SENSOR_TYPE_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.MeasurableConditionImpl <em>Measurable Condition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.MeasurableConditionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurableCondition()
-   * @generated
-   */
-  int MEASURABLE_CONDITION = 4;
-
-  /**
-   * The feature id for the '<em><b>Measurable</b></em>' attribute.
+   * The number of structural features of the '<em>Ultrasonic Sensor</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MEASURABLE_CONDITION__MEASURABLE = 0;
+  int ULTRASONIC_SENSOR_FEATURE_COUNT = SENSOR_TYPE_FEATURE_COUNT + 2;
 
   /**
-   * The feature id for the '<em><b>Unit</b></em>' attribute.
+   * The meta object id for the '{@link robot.ev3.dls.TouchSensorSides <em>Touch Sensor Sides</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @see robot.ev3.dls.TouchSensorSides
+   * @see robot.ev3.dls.impl.DlsPackageImpl#getTouchSensorSides()
    * @generated
-   * @ordered
    */
-  int MEASURABLE_CONDITION__UNIT = 1;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MEASURABLE_CONDITION__VALUE = 2;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MEASURABLE_CONDITION__OPERATOR = 3;
-
-  /**
-   * The number of structural features of the '<em>Measurable Condition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MEASURABLE_CONDITION_FEATURE_COUNT = 4;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.IntExpressionImpl <em>Int Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.IntExpressionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getIntExpression()
-   * @generated
-   */
-  int INT_EXPRESSION = 5;
-
-  /**
-   * The number of structural features of the '<em>Int Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INT_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionMinusImpl <em>Expression Minus</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionMinusImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMinus()
-   * @generated
-   */
-  int EXPRESSION_MINUS = 6;
-
-  /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MINUS__SUB = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Expression Minus</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MINUS_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionPlusImpl <em>Expression Plus</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionPlusImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionPlus()
-   * @generated
-   */
-  int EXPRESSION_PLUS = 7;
-
-  /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_PLUS__SUB = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Expression Plus</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_PLUS_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionBracketImpl <em>Expression Bracket</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionBracketImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionBracket()
-   * @generated
-   */
-  int EXPRESSION_BRACKET = 8;
-
-  /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BRACKET__SUB = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Expression Bracket</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BRACKET_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionConstantIntImpl <em>Expression Constant Int</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionConstantIntImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionConstantInt()
-   * @generated
-   */
-  int EXPRESSION_CONSTANT_INT = 9;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_CONSTANT_INT__VALUE = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Expression Constant Int</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_CONSTANT_INT_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.BooleanExpressionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpression()
-   * @generated
-   */
-  int BOOLEAN_EXPRESSION = 10;
-
-  /**
-   * The number of structural features of the '<em>Boolean Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_EXPRESSION_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.NotExpressionImpl <em>Not Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.NotExpressionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getNotExpression()
-   * @generated
-   */
-  int NOT_EXPRESSION = 11;
-
-  /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NOT_EXPRESSION__SUB = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Not Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NOT_EXPRESSION_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.BooleanExpressionBracketImpl <em>Boolean Expression Bracket</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.BooleanExpressionBracketImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpressionBracket()
-   * @generated
-   */
-  int BOOLEAN_EXPRESSION_BRACKET = 12;
-
-  /**
-   * The feature id for the '<em><b>Sub</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_EXPRESSION_BRACKET__SUB = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Boolean Expression Bracket</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_EXPRESSION_BRACKET_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.BooleanExpressionConstantImpl <em>Boolean Expression Constant</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.BooleanExpressionConstantImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpressionConstant()
-   * @generated
-   */
-  int BOOLEAN_EXPRESSION_CONSTANT = 13;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_EXPRESSION_CONSTANT__VALUE = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Boolean Expression Constant</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_EXPRESSION_CONSTANT_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionAdditionImpl <em>Expression Addition</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionAdditionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionAddition()
-   * @generated
-   */
-  int EXPRESSION_ADDITION = 14;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_ADDITION__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_ADDITION__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Addition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_ADDITION_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionSubtractionImpl <em>Expression Subtraction</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionSubtractionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionSubtraction()
-   * @generated
-   */
-  int EXPRESSION_SUBTRACTION = 15;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_SUBTRACTION__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_SUBTRACTION__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Subtraction</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_SUBTRACTION_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionMultiplyImpl <em>Expression Multiply</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionMultiplyImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMultiply()
-   * @generated
-   */
-  int EXPRESSION_MULTIPLY = 16;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MULTIPLY__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MULTIPLY__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Multiply</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MULTIPLY_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionDivisionImpl <em>Expression Division</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionDivisionImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionDivision()
-   * @generated
-   */
-  int EXPRESSION_DIVISION = 17;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_DIVISION__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_DIVISION__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Division</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_DIVISION_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionMaximumImpl <em>Expression Maximum</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionMaximumImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMaximum()
-   * @generated
-   */
-  int EXPRESSION_MAXIMUM = 18;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MAXIMUM__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MAXIMUM__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Maximum</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MAXIMUM_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionMinimumImpl <em>Expression Minimum</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionMinimumImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMinimum()
-   * @generated
-   */
-  int EXPRESSION_MINIMUM = 19;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MINIMUM__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MINIMUM__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Minimum</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MINIMUM_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionModuloImpl <em>Expression Modulo</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionModuloImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionModulo()
-   * @generated
-   */
-  int EXPRESSION_MODULO = 20;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MODULO__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MODULO__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Modulo</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_MODULO_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionPowerImpl <em>Expression Power</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionPowerImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionPower()
-   * @generated
-   */
-  int EXPRESSION_POWER = 21;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_POWER__LEFT = INT_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_POWER__RIGHT = INT_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Expression Power</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_POWER_FEATURE_COUNT = INT_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionBinOpImpl <em>Expression Bin Op</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionBinOpImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionBinOp()
-   * @generated
-   */
-  int EXPRESSION_BIN_OP = 22;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BIN_OP__LEFT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Bop</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BIN_OP__BOP = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BIN_OP__RIGHT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Expression Bin Op</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_BIN_OP_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.impl.ExpressionCompOpImpl <em>Expression Comp Op</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.impl.ExpressionCompOpImpl
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionCompOp()
-   * @generated
-   */
-  int EXPRESSION_COMP_OP = 23;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_COMP_OP__LEFT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Op</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_COMP_OP__OP = BOOLEAN_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_COMP_OP__RIGHT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Expression Comp Op</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EXPRESSION_COMP_OP_FEATURE_COUNT = BOOLEAN_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.MeasurementUnit <em>Measurement Unit</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.MeasurementUnit
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurementUnit()
-   * @generated
-   */
-  int MEASUREMENT_UNIT = 24;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.BehaviorTypes <em>Behavior Types</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.BehaviorTypes
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBehaviorTypes()
-   * @generated
-   */
-  int BEHAVIOR_TYPES = 25;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.Measurables <em>Measurables</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.Measurables
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurables()
-   * @generated
-   */
-  int MEASURABLES = 26;
+  int TOUCH_SENSOR_SIDES = 6;
 
   /**
    * The meta object id for the '{@link robot.ev3.dls.Actions <em>Actions</em>}' enum.
@@ -930,7 +262,7 @@ public interface DlsPackage extends EPackage
    * @see robot.ev3.dls.impl.DlsPackageImpl#getActions()
    * @generated
    */
-  int ACTIONS = 27;
+  int ACTIONS = 7;
 
   /**
    * The meta object id for the '{@link robot.ev3.dls.Directions <em>Directions</em>}' enum.
@@ -940,7 +272,7 @@ public interface DlsPackage extends EPackage
    * @see robot.ev3.dls.impl.DlsPackageImpl#getDirections()
    * @generated
    */
-  int DIRECTIONS = 28;
+  int DIRECTIONS = 8;
 
   /**
    * The meta object id for the '{@link robot.ev3.dls.Colors <em>Colors</em>}' enum.
@@ -950,17 +282,7 @@ public interface DlsPackage extends EPackage
    * @see robot.ev3.dls.impl.DlsPackageImpl#getColors()
    * @generated
    */
-  int COLORS = 29;
-
-  /**
-   * The meta object id for the '{@link robot.ev3.dls.BinaryBooleanOperator <em>Binary Boolean Operator</em>}' enum.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see robot.ev3.dls.BinaryBooleanOperator
-   * @see robot.ev3.dls.impl.DlsPackageImpl#getBinaryBooleanOperator()
-   * @generated
-   */
-  int BINARY_BOOLEAN_OPERATOR = 30;
+  int COLORS = 9;
 
   /**
    * The meta object id for the '{@link robot.ev3.dls.CompareOperator <em>Compare Operator</em>}' enum.
@@ -970,7 +292,7 @@ public interface DlsPackage extends EPackage
    * @see robot.ev3.dls.impl.DlsPackageImpl#getCompareOperator()
    * @generated
    */
-  int COMPARE_OPERATOR = 31;
+  int COMPARE_OPERATOR = 10;
 
 
   /**
@@ -984,715 +306,152 @@ public interface DlsPackage extends EPackage
   EClass getMission();
 
   /**
-   * Returns the meta object for the containment reference list '{@link robot.ev3.dls.Mission#getBehaviorList <em>Behavior List</em>}'.
+   * Returns the meta object for the containment reference list '{@link robot.ev3.dls.Mission#getTasks <em>Tasks</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Behavior List</em>'.
-   * @see robot.ev3.dls.Mission#getBehaviorList()
+   * @return the meta object for the containment reference list '<em>Tasks</em>'.
+   * @see robot.ev3.dls.Mission#getTasks()
    * @see #getMission()
    * @generated
    */
-  EReference getMission_BehaviorList();
+  EReference getMission_Tasks();
 
   /**
-   * Returns the meta object for class '{@link robot.ev3.dls.Behavior <em>Behavior</em>}'.
+   * Returns the meta object for class '{@link robot.ev3.dls.Task <em>Task</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Behavior</em>'.
-   * @see robot.ev3.dls.Behavior
+   * @return the meta object for class '<em>Task</em>'.
+   * @see robot.ev3.dls.Task
    * @generated
    */
-  EClass getBehavior();
+  EClass getTask();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.Behavior#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.Task#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see robot.ev3.dls.Behavior#getName()
-   * @see #getBehavior()
+   * @see robot.ev3.dls.Task#getName()
+   * @see #getTask()
    * @generated
    */
-  EAttribute getBehavior_Name();
+  EAttribute getTask_Name();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.Behavior#getBehaviorType <em>Behavior Type</em>}'.
+   * Returns the meta object for the containment reference '{@link robot.ev3.dls.Task#getSensor <em>Sensor</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Behavior Type</em>'.
-   * @see robot.ev3.dls.Behavior#getBehaviorType()
-   * @see #getBehavior()
+   * @return the meta object for the containment reference '<em>Sensor</em>'.
+   * @see robot.ev3.dls.Task#getSensor()
+   * @see #getTask()
    * @generated
    */
-  EAttribute getBehavior_BehaviorType();
+  EReference getTask_Sensor();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.Behavior#getPrio <em>Prio</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.Task#getAction <em>Action</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Prio</em>'.
-   * @see robot.ev3.dls.Behavior#getPrio()
-   * @see #getBehavior()
+   * @return the meta object for the attribute '<em>Action</em>'.
+   * @see robot.ev3.dls.Task#getAction()
+   * @see #getTask()
    * @generated
    */
-  EAttribute getBehavior_Prio();
+  EAttribute getTask_Action();
 
   /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.Behavior#getControl <em>Control</em>}'.
+   * Returns the meta object for class '{@link robot.ev3.dls.SensorType <em>Sensor Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Control</em>'.
-   * @see robot.ev3.dls.Behavior#getControl()
-   * @see #getBehavior()
+   * @return the meta object for class '<em>Sensor Type</em>'.
+   * @see robot.ev3.dls.SensorType
    * @generated
    */
-  EReference getBehavior_Control();
+  EClass getSensorType();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.Behavior#getActions <em>Actions</em>}'.
+   * Returns the meta object for class '{@link robot.ev3.dls.ColorSensor <em>Color Sensor</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Actions</em>'.
-   * @see robot.ev3.dls.Behavior#getActions()
-   * @see #getBehavior()
+   * @return the meta object for class '<em>Color Sensor</em>'.
+   * @see robot.ev3.dls.ColorSensor
    * @generated
    */
-  EAttribute getBehavior_Actions();
+  EClass getColorSensor();
 
   /**
-   * Returns the meta object for class '{@link robot.ev3.dls.TakeControl <em>Take Control</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.ColorSensor#getKey <em>Key</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Take Control</em>'.
-   * @see robot.ev3.dls.TakeControl
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see robot.ev3.dls.ColorSensor#getKey()
+   * @see #getColorSensor()
    * @generated
    */
-  EClass getTakeControl();
+  EAttribute getColorSensor_Key();
 
   /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.TakeControl#getTakecontrol <em>Takecontrol</em>}'.
+   * Returns the meta object for class '{@link robot.ev3.dls.TouchSensor <em>Touch Sensor</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Takecontrol</em>'.
-   * @see robot.ev3.dls.TakeControl#getTakecontrol()
-   * @see #getTakeControl()
+   * @return the meta object for class '<em>Touch Sensor</em>'.
+   * @see robot.ev3.dls.TouchSensor
    * @generated
    */
-  EReference getTakeControl_Takecontrol();
+  EClass getTouchSensor();
 
   /**
-   * Returns the meta object for class '{@link robot.ev3.dls.MeasurableConditions <em>Measurable Conditions</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.TouchSensor#getKey <em>Key</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Measurable Conditions</em>'.
-   * @see robot.ev3.dls.MeasurableConditions
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see robot.ev3.dls.TouchSensor#getKey()
+   * @see #getTouchSensor()
    * @generated
    */
-  EClass getMeasurableConditions();
+  EAttribute getTouchSensor_Key();
 
   /**
-   * Returns the meta object for the containment reference list '{@link robot.ev3.dls.MeasurableConditions#getMeasurableConditions <em>Measurable Conditions</em>}'.
+   * Returns the meta object for class '{@link robot.ev3.dls.UltrasonicSensor <em>Ultrasonic Sensor</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Measurable Conditions</em>'.
-   * @see robot.ev3.dls.MeasurableConditions#getMeasurableConditions()
-   * @see #getMeasurableConditions()
+   * @return the meta object for class '<em>Ultrasonic Sensor</em>'.
+   * @see robot.ev3.dls.UltrasonicSensor
    * @generated
    */
-  EReference getMeasurableConditions_MeasurableConditions();
+  EClass getUltrasonicSensor();
 
   /**
-   * Returns the meta object for class '{@link robot.ev3.dls.MeasurableCondition <em>Measurable Condition</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.UltrasonicSensor#getComparator <em>Comparator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Measurable Condition</em>'.
-   * @see robot.ev3.dls.MeasurableCondition
+   * @return the meta object for the attribute '<em>Comparator</em>'.
+   * @see robot.ev3.dls.UltrasonicSensor#getComparator()
+   * @see #getUltrasonicSensor()
    * @generated
    */
-  EClass getMeasurableCondition();
+  EAttribute getUltrasonicSensor_Comparator();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.MeasurableCondition#getMeasurable <em>Measurable</em>}'.
+   * Returns the meta object for the attribute '{@link robot.ev3.dls.UltrasonicSensor#getDistance <em>Distance</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Measurable</em>'.
-   * @see robot.ev3.dls.MeasurableCondition#getMeasurable()
-   * @see #getMeasurableCondition()
+   * @return the meta object for the attribute '<em>Distance</em>'.
+   * @see robot.ev3.dls.UltrasonicSensor#getDistance()
+   * @see #getUltrasonicSensor()
    * @generated
    */
-  EAttribute getMeasurableCondition_Measurable();
+  EAttribute getUltrasonicSensor_Distance();
 
   /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.MeasurableCondition#getUnit <em>Unit</em>}'.
+   * Returns the meta object for enum '{@link robot.ev3.dls.TouchSensorSides <em>Touch Sensor Sides</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Unit</em>'.
-   * @see robot.ev3.dls.MeasurableCondition#getUnit()
-   * @see #getMeasurableCondition()
+   * @return the meta object for enum '<em>Touch Sensor Sides</em>'.
+   * @see robot.ev3.dls.TouchSensorSides
    * @generated
    */
-  EAttribute getMeasurableCondition_Unit();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.MeasurableCondition#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see robot.ev3.dls.MeasurableCondition#getValue()
-   * @see #getMeasurableCondition()
-   * @generated
-   */
-  EAttribute getMeasurableCondition_Value();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.MeasurableCondition#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see robot.ev3.dls.MeasurableCondition#getOperator()
-   * @see #getMeasurableCondition()
-   * @generated
-   */
-  EAttribute getMeasurableCondition_Operator();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.IntExpression <em>Int Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Int Expression</em>'.
-   * @see robot.ev3.dls.IntExpression
-   * @generated
-   */
-  EClass getIntExpression();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionMinus <em>Expression Minus</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Minus</em>'.
-   * @see robot.ev3.dls.ExpressionMinus
-   * @generated
-   */
-  EClass getExpressionMinus();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMinus#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sub</em>'.
-   * @see robot.ev3.dls.ExpressionMinus#getSub()
-   * @see #getExpressionMinus()
-   * @generated
-   */
-  EReference getExpressionMinus_Sub();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionPlus <em>Expression Plus</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Plus</em>'.
-   * @see robot.ev3.dls.ExpressionPlus
-   * @generated
-   */
-  EClass getExpressionPlus();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionPlus#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sub</em>'.
-   * @see robot.ev3.dls.ExpressionPlus#getSub()
-   * @see #getExpressionPlus()
-   * @generated
-   */
-  EReference getExpressionPlus_Sub();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionBracket <em>Expression Bracket</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Bracket</em>'.
-   * @see robot.ev3.dls.ExpressionBracket
-   * @generated
-   */
-  EClass getExpressionBracket();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionBracket#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sub</em>'.
-   * @see robot.ev3.dls.ExpressionBracket#getSub()
-   * @see #getExpressionBracket()
-   * @generated
-   */
-  EReference getExpressionBracket_Sub();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionConstantInt <em>Expression Constant Int</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Constant Int</em>'.
-   * @see robot.ev3.dls.ExpressionConstantInt
-   * @generated
-   */
-  EClass getExpressionConstantInt();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.ExpressionConstantInt#getValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see robot.ev3.dls.ExpressionConstantInt#getValue()
-   * @see #getExpressionConstantInt()
-   * @generated
-   */
-  EAttribute getExpressionConstantInt_Value();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.BooleanExpression <em>Boolean Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Expression</em>'.
-   * @see robot.ev3.dls.BooleanExpression
-   * @generated
-   */
-  EClass getBooleanExpression();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.NotExpression <em>Not Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Not Expression</em>'.
-   * @see robot.ev3.dls.NotExpression
-   * @generated
-   */
-  EClass getNotExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.NotExpression#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sub</em>'.
-   * @see robot.ev3.dls.NotExpression#getSub()
-   * @see #getNotExpression()
-   * @generated
-   */
-  EReference getNotExpression_Sub();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.BooleanExpressionBracket <em>Boolean Expression Bracket</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Expression Bracket</em>'.
-   * @see robot.ev3.dls.BooleanExpressionBracket
-   * @generated
-   */
-  EClass getBooleanExpressionBracket();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.BooleanExpressionBracket#getSub <em>Sub</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Sub</em>'.
-   * @see robot.ev3.dls.BooleanExpressionBracket#getSub()
-   * @see #getBooleanExpressionBracket()
-   * @generated
-   */
-  EReference getBooleanExpressionBracket_Sub();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.BooleanExpressionConstant <em>Boolean Expression Constant</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Expression Constant</em>'.
-   * @see robot.ev3.dls.BooleanExpressionConstant
-   * @generated
-   */
-  EClass getBooleanExpressionConstant();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.BooleanExpressionConstant#isValue <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
-   * @see robot.ev3.dls.BooleanExpressionConstant#isValue()
-   * @see #getBooleanExpressionConstant()
-   * @generated
-   */
-  EAttribute getBooleanExpressionConstant_Value();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionAddition <em>Expression Addition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Addition</em>'.
-   * @see robot.ev3.dls.ExpressionAddition
-   * @generated
-   */
-  EClass getExpressionAddition();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionAddition#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionAddition#getLeft()
-   * @see #getExpressionAddition()
-   * @generated
-   */
-  EReference getExpressionAddition_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionAddition#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionAddition#getRight()
-   * @see #getExpressionAddition()
-   * @generated
-   */
-  EReference getExpressionAddition_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionSubtraction <em>Expression Subtraction</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Subtraction</em>'.
-   * @see robot.ev3.dls.ExpressionSubtraction
-   * @generated
-   */
-  EClass getExpressionSubtraction();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionSubtraction#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionSubtraction#getLeft()
-   * @see #getExpressionSubtraction()
-   * @generated
-   */
-  EReference getExpressionSubtraction_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionSubtraction#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionSubtraction#getRight()
-   * @see #getExpressionSubtraction()
-   * @generated
-   */
-  EReference getExpressionSubtraction_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionMultiply <em>Expression Multiply</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Multiply</em>'.
-   * @see robot.ev3.dls.ExpressionMultiply
-   * @generated
-   */
-  EClass getExpressionMultiply();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMultiply#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionMultiply#getLeft()
-   * @see #getExpressionMultiply()
-   * @generated
-   */
-  EReference getExpressionMultiply_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMultiply#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionMultiply#getRight()
-   * @see #getExpressionMultiply()
-   * @generated
-   */
-  EReference getExpressionMultiply_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionDivision <em>Expression Division</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Division</em>'.
-   * @see robot.ev3.dls.ExpressionDivision
-   * @generated
-   */
-  EClass getExpressionDivision();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionDivision#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionDivision#getLeft()
-   * @see #getExpressionDivision()
-   * @generated
-   */
-  EReference getExpressionDivision_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionDivision#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionDivision#getRight()
-   * @see #getExpressionDivision()
-   * @generated
-   */
-  EReference getExpressionDivision_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionMaximum <em>Expression Maximum</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Maximum</em>'.
-   * @see robot.ev3.dls.ExpressionMaximum
-   * @generated
-   */
-  EClass getExpressionMaximum();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMaximum#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionMaximum#getLeft()
-   * @see #getExpressionMaximum()
-   * @generated
-   */
-  EReference getExpressionMaximum_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMaximum#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionMaximum#getRight()
-   * @see #getExpressionMaximum()
-   * @generated
-   */
-  EReference getExpressionMaximum_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionMinimum <em>Expression Minimum</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Minimum</em>'.
-   * @see robot.ev3.dls.ExpressionMinimum
-   * @generated
-   */
-  EClass getExpressionMinimum();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMinimum#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionMinimum#getLeft()
-   * @see #getExpressionMinimum()
-   * @generated
-   */
-  EReference getExpressionMinimum_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionMinimum#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionMinimum#getRight()
-   * @see #getExpressionMinimum()
-   * @generated
-   */
-  EReference getExpressionMinimum_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionModulo <em>Expression Modulo</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Modulo</em>'.
-   * @see robot.ev3.dls.ExpressionModulo
-   * @generated
-   */
-  EClass getExpressionModulo();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionModulo#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionModulo#getLeft()
-   * @see #getExpressionModulo()
-   * @generated
-   */
-  EReference getExpressionModulo_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionModulo#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionModulo#getRight()
-   * @see #getExpressionModulo()
-   * @generated
-   */
-  EReference getExpressionModulo_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionPower <em>Expression Power</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Power</em>'.
-   * @see robot.ev3.dls.ExpressionPower
-   * @generated
-   */
-  EClass getExpressionPower();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionPower#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionPower#getLeft()
-   * @see #getExpressionPower()
-   * @generated
-   */
-  EReference getExpressionPower_Left();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionPower#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionPower#getRight()
-   * @see #getExpressionPower()
-   * @generated
-   */
-  EReference getExpressionPower_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionBinOp <em>Expression Bin Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Bin Op</em>'.
-   * @see robot.ev3.dls.ExpressionBinOp
-   * @generated
-   */
-  EClass getExpressionBinOp();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionBinOp#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionBinOp#getLeft()
-   * @see #getExpressionBinOp()
-   * @generated
-   */
-  EReference getExpressionBinOp_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.ExpressionBinOp#getBop <em>Bop</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Bop</em>'.
-   * @see robot.ev3.dls.ExpressionBinOp#getBop()
-   * @see #getExpressionBinOp()
-   * @generated
-   */
-  EAttribute getExpressionBinOp_Bop();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionBinOp#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionBinOp#getRight()
-   * @see #getExpressionBinOp()
-   * @generated
-   */
-  EReference getExpressionBinOp_Right();
-
-  /**
-   * Returns the meta object for class '{@link robot.ev3.dls.ExpressionCompOp <em>Expression Comp Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Expression Comp Op</em>'.
-   * @see robot.ev3.dls.ExpressionCompOp
-   * @generated
-   */
-  EClass getExpressionCompOp();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionCompOp#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see robot.ev3.dls.ExpressionCompOp#getLeft()
-   * @see #getExpressionCompOp()
-   * @generated
-   */
-  EReference getExpressionCompOp_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link robot.ev3.dls.ExpressionCompOp#getOp <em>Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Op</em>'.
-   * @see robot.ev3.dls.ExpressionCompOp#getOp()
-   * @see #getExpressionCompOp()
-   * @generated
-   */
-  EAttribute getExpressionCompOp_Op();
-
-  /**
-   * Returns the meta object for the containment reference '{@link robot.ev3.dls.ExpressionCompOp#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see robot.ev3.dls.ExpressionCompOp#getRight()
-   * @see #getExpressionCompOp()
-   * @generated
-   */
-  EReference getExpressionCompOp_Right();
-
-  /**
-   * Returns the meta object for enum '{@link robot.ev3.dls.MeasurementUnit <em>Measurement Unit</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Measurement Unit</em>'.
-   * @see robot.ev3.dls.MeasurementUnit
-   * @generated
-   */
-  EEnum getMeasurementUnit();
-
-  /**
-   * Returns the meta object for enum '{@link robot.ev3.dls.BehaviorTypes <em>Behavior Types</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Behavior Types</em>'.
-   * @see robot.ev3.dls.BehaviorTypes
-   * @generated
-   */
-  EEnum getBehaviorTypes();
-
-  /**
-   * Returns the meta object for enum '{@link robot.ev3.dls.Measurables <em>Measurables</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Measurables</em>'.
-   * @see robot.ev3.dls.Measurables
-   * @generated
-   */
-  EEnum getMeasurables();
+  EEnum getTouchSensorSides();
 
   /**
    * Returns the meta object for enum '{@link robot.ev3.dls.Actions <em>Actions</em>}'.
@@ -1723,16 +482,6 @@ public interface DlsPackage extends EPackage
    * @generated
    */
   EEnum getColors();
-
-  /**
-   * Returns the meta object for enum '{@link robot.ev3.dls.BinaryBooleanOperator <em>Binary Boolean Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Binary Boolean Operator</em>'.
-   * @see robot.ev3.dls.BinaryBooleanOperator
-   * @generated
-   */
-  EEnum getBinaryBooleanOperator();
 
   /**
    * Returns the meta object for enum '{@link robot.ev3.dls.CompareOperator <em>Compare Operator</em>}'.
@@ -1778,22 +527,22 @@ public interface DlsPackage extends EPackage
     EClass MISSION = eINSTANCE.getMission();
 
     /**
-     * The meta object literal for the '<em><b>Behavior List</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Tasks</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MISSION__BEHAVIOR_LIST = eINSTANCE.getMission_BehaviorList();
+    EReference MISSION__TASKS = eINSTANCE.getMission_Tasks();
 
     /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.BehaviorImpl <em>Behavior</em>}' class.
+     * The meta object literal for the '{@link robot.ev3.dls.impl.TaskImpl <em>Task</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.BehaviorImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBehavior()
+     * @see robot.ev3.dls.impl.TaskImpl
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getTask()
      * @generated
      */
-    EClass BEHAVIOR = eINSTANCE.getBehavior();
+    EClass TASK = eINSTANCE.getTask();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1801,569 +550,105 @@ public interface DlsPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BEHAVIOR__NAME = eINSTANCE.getBehavior_Name();
+    EAttribute TASK__NAME = eINSTANCE.getTask_Name();
 
     /**
-     * The meta object literal for the '<em><b>Behavior Type</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Sensor</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BEHAVIOR__BEHAVIOR_TYPE = eINSTANCE.getBehavior_BehaviorType();
+    EReference TASK__SENSOR = eINSTANCE.getTask_Sensor();
 
     /**
-     * The meta object literal for the '<em><b>Prio</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Action</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute BEHAVIOR__PRIO = eINSTANCE.getBehavior_Prio();
+    EAttribute TASK__ACTION = eINSTANCE.getTask_Action();
 
     /**
-     * The meta object literal for the '<em><b>Control</b></em>' containment reference feature.
+     * The meta object literal for the '{@link robot.ev3.dls.impl.SensorTypeImpl <em>Sensor Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see robot.ev3.dls.impl.SensorTypeImpl
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getSensorType()
      * @generated
      */
-    EReference BEHAVIOR__CONTROL = eINSTANCE.getBehavior_Control();
+    EClass SENSOR_TYPE = eINSTANCE.getSensorType();
 
     /**
-     * The meta object literal for the '<em><b>Actions</b></em>' attribute feature.
+     * The meta object literal for the '{@link robot.ev3.dls.impl.ColorSensorImpl <em>Color Sensor</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see robot.ev3.dls.impl.ColorSensorImpl
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getColorSensor()
      * @generated
      */
-    EAttribute BEHAVIOR__ACTIONS = eINSTANCE.getBehavior_Actions();
+    EClass COLOR_SENSOR = eINSTANCE.getColorSensor();
 
     /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.TakeControlImpl <em>Take Control</em>}' class.
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.TakeControlImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getTakeControl()
      * @generated
      */
-    EClass TAKE_CONTROL = eINSTANCE.getTakeControl();
+    EAttribute COLOR_SENSOR__KEY = eINSTANCE.getColorSensor_Key();
 
     /**
-     * The meta object literal for the '<em><b>Takecontrol</b></em>' containment reference feature.
+     * The meta object literal for the '{@link robot.ev3.dls.impl.TouchSensorImpl <em>Touch Sensor</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see robot.ev3.dls.impl.TouchSensorImpl
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getTouchSensor()
      * @generated
      */
-    EReference TAKE_CONTROL__TAKECONTROL = eINSTANCE.getTakeControl_Takecontrol();
+    EClass TOUCH_SENSOR = eINSTANCE.getTouchSensor();
 
     /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.MeasurableConditionsImpl <em>Measurable Conditions</em>}' class.
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.MeasurableConditionsImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurableConditions()
      * @generated
      */
-    EClass MEASURABLE_CONDITIONS = eINSTANCE.getMeasurableConditions();
+    EAttribute TOUCH_SENSOR__KEY = eINSTANCE.getTouchSensor_Key();
 
     /**
-     * The meta object literal for the '<em><b>Measurable Conditions</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link robot.ev3.dls.impl.UltrasonicSensorImpl <em>Ultrasonic Sensor</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see robot.ev3.dls.impl.UltrasonicSensorImpl
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getUltrasonicSensor()
      * @generated
      */
-    EReference MEASURABLE_CONDITIONS__MEASURABLE_CONDITIONS = eINSTANCE.getMeasurableConditions_MeasurableConditions();
+    EClass ULTRASONIC_SENSOR = eINSTANCE.getUltrasonicSensor();
 
     /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.MeasurableConditionImpl <em>Measurable Condition</em>}' class.
+     * The meta object literal for the '<em><b>Comparator</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.MeasurableConditionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurableCondition()
      * @generated
      */
-    EClass MEASURABLE_CONDITION = eINSTANCE.getMeasurableCondition();
+    EAttribute ULTRASONIC_SENSOR__COMPARATOR = eINSTANCE.getUltrasonicSensor_Comparator();
 
     /**
-     * The meta object literal for the '<em><b>Measurable</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Distance</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MEASURABLE_CONDITION__MEASURABLE = eINSTANCE.getMeasurableCondition_Measurable();
+    EAttribute ULTRASONIC_SENSOR__DISTANCE = eINSTANCE.getUltrasonicSensor_Distance();
 
     /**
-     * The meta object literal for the '<em><b>Unit</b></em>' attribute feature.
+     * The meta object literal for the '{@link robot.ev3.dls.TouchSensorSides <em>Touch Sensor Sides</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see robot.ev3.dls.TouchSensorSides
+     * @see robot.ev3.dls.impl.DlsPackageImpl#getTouchSensorSides()
      * @generated
      */
-    EAttribute MEASURABLE_CONDITION__UNIT = eINSTANCE.getMeasurableCondition_Unit();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MEASURABLE_CONDITION__VALUE = eINSTANCE.getMeasurableCondition_Value();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MEASURABLE_CONDITION__OPERATOR = eINSTANCE.getMeasurableCondition_Operator();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.IntExpressionImpl <em>Int Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.IntExpressionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getIntExpression()
-     * @generated
-     */
-    EClass INT_EXPRESSION = eINSTANCE.getIntExpression();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionMinusImpl <em>Expression Minus</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionMinusImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMinus()
-     * @generated
-     */
-    EClass EXPRESSION_MINUS = eINSTANCE.getExpressionMinus();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MINUS__SUB = eINSTANCE.getExpressionMinus_Sub();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionPlusImpl <em>Expression Plus</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionPlusImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionPlus()
-     * @generated
-     */
-    EClass EXPRESSION_PLUS = eINSTANCE.getExpressionPlus();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_PLUS__SUB = eINSTANCE.getExpressionPlus_Sub();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionBracketImpl <em>Expression Bracket</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionBracketImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionBracket()
-     * @generated
-     */
-    EClass EXPRESSION_BRACKET = eINSTANCE.getExpressionBracket();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_BRACKET__SUB = eINSTANCE.getExpressionBracket_Sub();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionConstantIntImpl <em>Expression Constant Int</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionConstantIntImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionConstantInt()
-     * @generated
-     */
-    EClass EXPRESSION_CONSTANT_INT = eINSTANCE.getExpressionConstantInt();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXPRESSION_CONSTANT_INT__VALUE = eINSTANCE.getExpressionConstantInt_Value();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.BooleanExpressionImpl <em>Boolean Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.BooleanExpressionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpression()
-     * @generated
-     */
-    EClass BOOLEAN_EXPRESSION = eINSTANCE.getBooleanExpression();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.NotExpressionImpl <em>Not Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.NotExpressionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getNotExpression()
-     * @generated
-     */
-    EClass NOT_EXPRESSION = eINSTANCE.getNotExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference NOT_EXPRESSION__SUB = eINSTANCE.getNotExpression_Sub();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.BooleanExpressionBracketImpl <em>Boolean Expression Bracket</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.BooleanExpressionBracketImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpressionBracket()
-     * @generated
-     */
-    EClass BOOLEAN_EXPRESSION_BRACKET = eINSTANCE.getBooleanExpressionBracket();
-
-    /**
-     * The meta object literal for the '<em><b>Sub</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference BOOLEAN_EXPRESSION_BRACKET__SUB = eINSTANCE.getBooleanExpressionBracket_Sub();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.BooleanExpressionConstantImpl <em>Boolean Expression Constant</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.BooleanExpressionConstantImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBooleanExpressionConstant()
-     * @generated
-     */
-    EClass BOOLEAN_EXPRESSION_CONSTANT = eINSTANCE.getBooleanExpressionConstant();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BOOLEAN_EXPRESSION_CONSTANT__VALUE = eINSTANCE.getBooleanExpressionConstant_Value();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionAdditionImpl <em>Expression Addition</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionAdditionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionAddition()
-     * @generated
-     */
-    EClass EXPRESSION_ADDITION = eINSTANCE.getExpressionAddition();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_ADDITION__LEFT = eINSTANCE.getExpressionAddition_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_ADDITION__RIGHT = eINSTANCE.getExpressionAddition_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionSubtractionImpl <em>Expression Subtraction</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionSubtractionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionSubtraction()
-     * @generated
-     */
-    EClass EXPRESSION_SUBTRACTION = eINSTANCE.getExpressionSubtraction();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_SUBTRACTION__LEFT = eINSTANCE.getExpressionSubtraction_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_SUBTRACTION__RIGHT = eINSTANCE.getExpressionSubtraction_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionMultiplyImpl <em>Expression Multiply</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionMultiplyImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMultiply()
-     * @generated
-     */
-    EClass EXPRESSION_MULTIPLY = eINSTANCE.getExpressionMultiply();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MULTIPLY__LEFT = eINSTANCE.getExpressionMultiply_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MULTIPLY__RIGHT = eINSTANCE.getExpressionMultiply_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionDivisionImpl <em>Expression Division</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionDivisionImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionDivision()
-     * @generated
-     */
-    EClass EXPRESSION_DIVISION = eINSTANCE.getExpressionDivision();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_DIVISION__LEFT = eINSTANCE.getExpressionDivision_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_DIVISION__RIGHT = eINSTANCE.getExpressionDivision_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionMaximumImpl <em>Expression Maximum</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionMaximumImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMaximum()
-     * @generated
-     */
-    EClass EXPRESSION_MAXIMUM = eINSTANCE.getExpressionMaximum();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MAXIMUM__LEFT = eINSTANCE.getExpressionMaximum_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MAXIMUM__RIGHT = eINSTANCE.getExpressionMaximum_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionMinimumImpl <em>Expression Minimum</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionMinimumImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionMinimum()
-     * @generated
-     */
-    EClass EXPRESSION_MINIMUM = eINSTANCE.getExpressionMinimum();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MINIMUM__LEFT = eINSTANCE.getExpressionMinimum_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MINIMUM__RIGHT = eINSTANCE.getExpressionMinimum_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionModuloImpl <em>Expression Modulo</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionModuloImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionModulo()
-     * @generated
-     */
-    EClass EXPRESSION_MODULO = eINSTANCE.getExpressionModulo();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MODULO__LEFT = eINSTANCE.getExpressionModulo_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_MODULO__RIGHT = eINSTANCE.getExpressionModulo_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionPowerImpl <em>Expression Power</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionPowerImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionPower()
-     * @generated
-     */
-    EClass EXPRESSION_POWER = eINSTANCE.getExpressionPower();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_POWER__LEFT = eINSTANCE.getExpressionPower_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_POWER__RIGHT = eINSTANCE.getExpressionPower_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionBinOpImpl <em>Expression Bin Op</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionBinOpImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionBinOp()
-     * @generated
-     */
-    EClass EXPRESSION_BIN_OP = eINSTANCE.getExpressionBinOp();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_BIN_OP__LEFT = eINSTANCE.getExpressionBinOp_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Bop</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXPRESSION_BIN_OP__BOP = eINSTANCE.getExpressionBinOp_Bop();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_BIN_OP__RIGHT = eINSTANCE.getExpressionBinOp_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.impl.ExpressionCompOpImpl <em>Expression Comp Op</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.impl.ExpressionCompOpImpl
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getExpressionCompOp()
-     * @generated
-     */
-    EClass EXPRESSION_COMP_OP = eINSTANCE.getExpressionCompOp();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_COMP_OP__LEFT = eINSTANCE.getExpressionCompOp_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EXPRESSION_COMP_OP__OP = eINSTANCE.getExpressionCompOp_Op();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXPRESSION_COMP_OP__RIGHT = eINSTANCE.getExpressionCompOp_Right();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.MeasurementUnit <em>Measurement Unit</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.MeasurementUnit
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurementUnit()
-     * @generated
-     */
-    EEnum MEASUREMENT_UNIT = eINSTANCE.getMeasurementUnit();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.BehaviorTypes <em>Behavior Types</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.BehaviorTypes
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBehaviorTypes()
-     * @generated
-     */
-    EEnum BEHAVIOR_TYPES = eINSTANCE.getBehaviorTypes();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.Measurables <em>Measurables</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.Measurables
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getMeasurables()
-     * @generated
-     */
-    EEnum MEASURABLES = eINSTANCE.getMeasurables();
+    EEnum TOUCH_SENSOR_SIDES = eINSTANCE.getTouchSensorSides();
 
     /**
      * The meta object literal for the '{@link robot.ev3.dls.Actions <em>Actions</em>}' enum.
@@ -2394,16 +679,6 @@ public interface DlsPackage extends EPackage
      * @generated
      */
     EEnum COLORS = eINSTANCE.getColors();
-
-    /**
-     * The meta object literal for the '{@link robot.ev3.dls.BinaryBooleanOperator <em>Binary Boolean Operator</em>}' enum.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see robot.ev3.dls.BinaryBooleanOperator
-     * @see robot.ev3.dls.impl.DlsPackageImpl#getBinaryBooleanOperator()
-     * @generated
-     */
-    EEnum BINARY_BOOLEAN_OPERATOR = eINSTANCE.getBinaryBooleanOperator();
 
     /**
      * The meta object literal for the '{@link robot.ev3.dls.CompareOperator <em>Compare Operator</em>}' enum.

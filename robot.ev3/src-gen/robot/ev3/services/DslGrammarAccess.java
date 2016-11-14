@@ -6,7 +6,6 @@ package robot.ev3.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumLiteralDeclaration;
@@ -28,57 +27,65 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class MissionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Mission");
-		private final Assignment cBehaviorListAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cBehaviorListBehaviorParserRuleCall_0 = (RuleCall)cBehaviorListAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cMissionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTasksAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTasksTaskParserRuleCall_1_0 = (RuleCall)cTasksAssignment_1.eContents().get(0);
 		
 		/// *
 		// * A mission consists of a number of behaviors
 		// * / Mission:
-		//	behaviorList+=Behavior+;
+		//	'Mission:' tasks+=Task+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//behaviorList+=Behavior+
-		public Assignment getBehaviorListAssignment() { return cBehaviorListAssignment; }
-		
-		//Behavior
-		public RuleCall getBehaviorListBehaviorParserRuleCall_0() { return cBehaviorListBehaviorParserRuleCall_0; }
-	}
-	public class BehaviorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Behavior");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cBehaviorKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cTypeKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cBehaviorTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cBehaviorTypeBehaviorTypesEnumRuleCall_3_0 = (RuleCall)cBehaviorTypeAssignment_3.eContents().get(0);
-		private final Keyword cPriorityKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cPrioAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cPrioINTTerminalRuleCall_5_0 = (RuleCall)cPrioAssignment_5.eContents().get(0);
-		private final Keyword cTakeControlKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cControlAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cControlTakeControlParserRuleCall_7_0 = (RuleCall)cControlAssignment_7.eContents().get(0);
-		private final Keyword cActionsKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cActionsAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cActionsActionsEnumRuleCall_9_0 = (RuleCall)cActionsAssignment_9.eContents().get(0);
-		
-		/// *
-		// * A behavior consists of a name, an optional type (in case of driving), an optional priority
-		// * and a take control definition.
-		// * / Behavior:
-		//	'Behavior:' name=ID
-		//	'type:' behaviorType=BehaviorTypes?
-		//	'priority:' prio=INT?
-		//	'take-control:' control=TakeControl
-		//	'actions:' actions=Actions;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Behavior:' name=ID 'type:' behaviorType=BehaviorTypes? 'priority:' prio=INT? 'take-control:' control=TakeControl
-		//'actions:' actions=Actions
+		//'Mission:' tasks+=Task+
 		public Group getGroup() { return cGroup; }
 		
-		//'Behavior:'
-		public Keyword getBehaviorKeyword_0() { return cBehaviorKeyword_0; }
+		//'Mission:'
+		public Keyword getMissionKeyword_0() { return cMissionKeyword_0; }
+		
+		//tasks+=Task+
+		public Assignment getTasksAssignment_1() { return cTasksAssignment_1; }
+		
+		//Task
+		public RuleCall getTasksTaskParserRuleCall_1_0() { return cTasksTaskParserRuleCall_1_0; }
+	}
+	public class TaskElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Task");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTaskKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cUsesKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cSensorAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cSensorSensorTypeParserRuleCall_3_0 = (RuleCall)cSensorAssignment_3.eContents().get(0);
+		private final Keyword cDoKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cActionActionsEnumRuleCall_5_0 = (RuleCall)cActionAssignment_5.eContents().get(0);
+		
+		/// *Mission 1
+		//Task BeepOnRed Uses ColorSensor on Color RED Do Beep (Turn Around)
+		//
+		//Task CloserThanFifteen Uses Ultrasonic whenDistance 'bigger/smaller|compare' 15 
+		//
+		//Task InBlackBorder Uses ColorSensor On Color Black Do Turn Around 
+		//
+		//Task BounceDaBounce Uses touchSensor On Left/Right/Both Do Beep/TurnAround
+		//
+		//Task DriveForward On true Do Drive* / / *
+		// * A behavior consists of a name, an optional type (in case of driving), an optional priority
+		// * and a take control definition.
+		// * / Task:
+		//	'Task:' name=ID
+		//	'Uses:' sensor=SensorType
+		//	'Do:' action=Actions;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Task:' name=ID 'Uses:' sensor=SensorType 'Do:' action=Actions
+		public Group getGroup() { return cGroup; }
+		
+		//'Task:'
+		public Keyword getTaskKeyword_0() { return cTaskKeyword_0; }
 		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -86,860 +93,263 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//'type:'
-		public Keyword getTypeKeyword_2() { return cTypeKeyword_2; }
+		//'Uses:'
+		public Keyword getUsesKeyword_2() { return cUsesKeyword_2; }
 		
-		//behaviorType=BehaviorTypes?
-		public Assignment getBehaviorTypeAssignment_3() { return cBehaviorTypeAssignment_3; }
+		//sensor=SensorType
+		public Assignment getSensorAssignment_3() { return cSensorAssignment_3; }
 		
-		//BehaviorTypes
-		public RuleCall getBehaviorTypeBehaviorTypesEnumRuleCall_3_0() { return cBehaviorTypeBehaviorTypesEnumRuleCall_3_0; }
+		//SensorType
+		public RuleCall getSensorSensorTypeParserRuleCall_3_0() { return cSensorSensorTypeParserRuleCall_3_0; }
 		
-		//'priority:'
-		public Keyword getPriorityKeyword_4() { return cPriorityKeyword_4; }
+		//'Do:'
+		public Keyword getDoKeyword_4() { return cDoKeyword_4; }
 		
-		//prio=INT?
-		public Assignment getPrioAssignment_5() { return cPrioAssignment_5; }
-		
-		//INT
-		public RuleCall getPrioINTTerminalRuleCall_5_0() { return cPrioINTTerminalRuleCall_5_0; }
-		
-		//'take-control:'
-		public Keyword getTakeControlKeyword_6() { return cTakeControlKeyword_6; }
-		
-		//control=TakeControl
-		public Assignment getControlAssignment_7() { return cControlAssignment_7; }
-		
-		//TakeControl
-		public RuleCall getControlTakeControlParserRuleCall_7_0() { return cControlTakeControlParserRuleCall_7_0; }
-		
-		//'actions:'
-		public Keyword getActionsKeyword_8() { return cActionsKeyword_8; }
-		
-		//actions=Actions
-		public Assignment getActionsAssignment_9() { return cActionsAssignment_9; }
+		//action=Actions
+		public Assignment getActionAssignment_5() { return cActionAssignment_5; }
 		
 		//Actions
-		public RuleCall getActionsActionsEnumRuleCall_9_0() { return cActionsActionsEnumRuleCall_9_0; }
+		public RuleCall getActionActionsEnumRuleCall_5_0() { return cActionActionsEnumRuleCall_5_0; }
 	}
-	public class TakeControlElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.TakeControl");
+	public class SensorTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.SensorType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cTakecontrolAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cTakecontrolBooleanExpressionParserRuleCall_0_0 = (RuleCall)cTakecontrolAssignment_0.eContents().get(0);
-		private final RuleCall cMeasurableConditionsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cColorSensorParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTouchSensorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cUltrasonicSensorParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		/// *
-		// * Take control consists of either a boolean expression or a m
-		// * / TakeControl:
-		//	takecontrol=BooleanExpression | MeasurableConditions;
+		//SensorType:
+		//	ColorSensor | TouchSensor | UltrasonicSensor;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//takecontrol=BooleanExpression | MeasurableConditions
+		//ColorSensor | TouchSensor | UltrasonicSensor
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//takecontrol=BooleanExpression
-		public Assignment getTakecontrolAssignment_0() { return cTakecontrolAssignment_0; }
+		//ColorSensor
+		public RuleCall getColorSensorParserRuleCall_0() { return cColorSensorParserRuleCall_0; }
 		
-		//BooleanExpression
-		public RuleCall getTakecontrolBooleanExpressionParserRuleCall_0_0() { return cTakecontrolBooleanExpressionParserRuleCall_0_0; }
+		//TouchSensor
+		public RuleCall getTouchSensorParserRuleCall_1() { return cTouchSensorParserRuleCall_1; }
 		
-		//MeasurableConditions
-		public RuleCall getMeasurableConditionsParserRuleCall_1() { return cMeasurableConditionsParserRuleCall_1; }
+		//UltrasonicSensor
+		public RuleCall getUltrasonicSensorParserRuleCall_2() { return cUltrasonicSensorParserRuleCall_2; }
 	}
-	public class MeasurableConditionsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.MeasurableConditions");
-		private final Assignment cMeasurableConditionsAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cMeasurableConditionsMeasurableConditionParserRuleCall_0 = (RuleCall)cMeasurableConditionsAssignment.eContents().get(0);
-		
-		/// *
-		// * MeasurableConditions is a list of at least one measurable condition
-		// * / MeasurableConditions:
-		//	measurableConditions+=MeasurableCondition+;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//measurableConditions+=MeasurableCondition+
-		public Assignment getMeasurableConditionsAssignment() { return cMeasurableConditionsAssignment; }
-		
-		//MeasurableCondition
-		public RuleCall getMeasurableConditionsMeasurableConditionParserRuleCall_0() { return cMeasurableConditionsMeasurableConditionParserRuleCall_0; }
-	}
-	public class MeasurableConditionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.MeasurableCondition");
+	public class ColorSensorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ColorSensor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cMeasurableAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cMeasurableMeasurablesEnumRuleCall_0_0 = (RuleCall)cMeasurableAssignment_0.eContents().get(0);
-		private final Assignment cUnitAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cUnitMeasurementUnitEnumRuleCall_1_0 = (RuleCall)cUnitAssignment_1.eContents().get(0);
-		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
-		private final Assignment cOperatorAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOperatorCompareOperatorEnumRuleCall_3_0 = (RuleCall)cOperatorAssignment_3.eContents().get(0);
+		private final Keyword cColorSensorKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cDetectedColorKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cIsKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cKeyAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cKeyColorsEnumRuleCall_4_0 = (RuleCall)cKeyAssignment_4.eContents().get(0);
 		
-		/// *
-		// * A measurable condition is a measurable, a value and an operator
-		// * / MeasurableCondition:
-		//	measurable=Measurables unit=MeasurementUnit value=STRING operator=CompareOperator;
+		//ColorSensor:
+		//	'ColorSensor' 'On' 'DetectedColor' 'is:' key=Colors;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//measurable=Measurables unit=MeasurementUnit value=STRING operator=CompareOperator
+		//'ColorSensor' 'On' 'DetectedColor' 'is:' key=Colors
 		public Group getGroup() { return cGroup; }
 		
-		//measurable=Measurables
-		public Assignment getMeasurableAssignment_0() { return cMeasurableAssignment_0; }
+		//'ColorSensor'
+		public Keyword getColorSensorKeyword_0() { return cColorSensorKeyword_0; }
 		
-		//Measurables
-		public RuleCall getMeasurableMeasurablesEnumRuleCall_0_0() { return cMeasurableMeasurablesEnumRuleCall_0_0; }
+		//'On'
+		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
 		
-		//unit=MeasurementUnit
-		public Assignment getUnitAssignment_1() { return cUnitAssignment_1; }
+		//'DetectedColor'
+		public Keyword getDetectedColorKeyword_2() { return cDetectedColorKeyword_2; }
 		
-		//MeasurementUnit
-		public RuleCall getUnitMeasurementUnitEnumRuleCall_1_0() { return cUnitMeasurementUnitEnumRuleCall_1_0; }
+		//'is:'
+		public Keyword getIsKeyword_3() { return cIsKeyword_3; }
 		
-		//value=STRING
-		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
+		//key=Colors
+		public Assignment getKeyAssignment_4() { return cKeyAssignment_4; }
 		
-		//STRING
-		public RuleCall getValueSTRINGTerminalRuleCall_2_0() { return cValueSTRINGTerminalRuleCall_2_0; }
+		//Colors
+		public RuleCall getKeyColorsEnumRuleCall_4_0() { return cKeyColorsEnumRuleCall_4_0; }
+	}
+	public class TouchSensorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.TouchSensor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTouchSensorKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cTouchedSideKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cKeyAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cKeyTouchSensorSidesEnumRuleCall_3_0 = (RuleCall)cKeyAssignment_3.eContents().get(0);
 		
-		//operator=CompareOperator
-		public Assignment getOperatorAssignment_3() { return cOperatorAssignment_3; }
+		//TouchSensor:
+		//	'TouchSensor' 'On' 'TouchedSide:' key=TouchSensorSides;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'TouchSensor' 'On' 'TouchedSide:' key=TouchSensorSides
+		public Group getGroup() { return cGroup; }
+		
+		//'TouchSensor'
+		public Keyword getTouchSensorKeyword_0() { return cTouchSensorKeyword_0; }
+		
+		//'On'
+		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
+		
+		//'TouchedSide:'
+		public Keyword getTouchedSideKeyword_2() { return cTouchedSideKeyword_2; }
+		
+		//key=TouchSensorSides
+		public Assignment getKeyAssignment_3() { return cKeyAssignment_3; }
+		
+		//TouchSensorSides
+		public RuleCall getKeyTouchSensorSidesEnumRuleCall_3_0() { return cKeyTouchSensorSidesEnumRuleCall_3_0; }
+	}
+	public class UltrasonicSensorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.UltrasonicSensor");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cUSensorKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cOnKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cDistanceKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cComparatorAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cComparatorCompareOperatorEnumRuleCall_3_0 = (RuleCall)cComparatorAssignment_3.eContents().get(0);
+		private final Assignment cDistanceAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDistanceDECIMALTerminalRuleCall_4_0 = (RuleCall)cDistanceAssignment_4.eContents().get(0);
+		
+		//UltrasonicSensor:
+		//	'USensor' 'On' 'Distance:' comparator=CompareOperator distance=DECIMAL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'USensor' 'On' 'Distance:' comparator=CompareOperator distance=DECIMAL
+		public Group getGroup() { return cGroup; }
+		
+		//'USensor'
+		public Keyword getUSensorKeyword_0() { return cUSensorKeyword_0; }
+		
+		//'On'
+		public Keyword getOnKeyword_1() { return cOnKeyword_1; }
+		
+		//'Distance:'
+		public Keyword getDistanceKeyword_2() { return cDistanceKeyword_2; }
+		
+		//comparator=CompareOperator
+		public Assignment getComparatorAssignment_3() { return cComparatorAssignment_3; }
 		
 		//CompareOperator
-		public RuleCall getOperatorCompareOperatorEnumRuleCall_3_0() { return cOperatorCompareOperatorEnumRuleCall_3_0; }
-	}
-	public class IntExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.IntExpression");
-		private final RuleCall cExpressionLevel1ParserRuleCall = (RuleCall)rule.eContents().get(1);
+		public RuleCall getComparatorCompareOperatorEnumRuleCall_3_0() { return cComparatorCompareOperatorEnumRuleCall_3_0; }
 		
-		/// *
-		// * Integers Expression as defined in the manual
-		// * / IntExpression:
-		//	ExpressionLevel1;
-		@Override public ParserRule getRule() { return rule; }
+		//distance=DECIMAL
+		public Assignment getDistanceAssignment_4() { return cDistanceAssignment_4; }
 		
-		//ExpressionLevel1
-		public RuleCall getExpressionLevel1ParserRuleCall() { return cExpressionLevel1ParserRuleCall; }
-	}
-	public class ExpressionLevel1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionLevel1");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cExpressionLevel2ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Action cExpressionAdditionLeftAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
-		private final Keyword cPlusSignKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
-		private final Assignment cRightAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
-		private final RuleCall cRightExpressionLevel2ParserRuleCall_1_0_2_0 = (RuleCall)cRightAssignment_1_0_2.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Action cExpressionSubtractionLeftAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
-		private final Assignment cRightAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
-		private final RuleCall cRightExpressionLevel2ParserRuleCall_1_1_2_0 = (RuleCall)cRightAssignment_1_1_2.eContents().get(0);
-		
-		//ExpressionLevel1 IntExpression:
-		//	ExpressionLevel2 ({ExpressionAddition.left=current} "+" right=ExpressionLevel2 | {ExpressionSubtraction.left=current}
-		//	"-" right=ExpressionLevel2)*
-		@Override public ParserRule getRule() { return rule; }
-		
-		//// Left associativity
-		//ExpressionLevel2 ({ExpressionAddition.left=current} "+" right=ExpressionLevel2 | {ExpressionSubtraction.left=current}
-		//"-" right=ExpressionLevel2)*
-		public Group getGroup() { return cGroup; }
-		
-		//// Left associativity
-		//ExpressionLevel2
-		public RuleCall getExpressionLevel2ParserRuleCall_0() { return cExpressionLevel2ParserRuleCall_0; }
-		
-		//({ExpressionAddition.left=current} "+" right=ExpressionLevel2 | {ExpressionSubtraction.left=current} "-"
-		//right=ExpressionLevel2)*
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-		
-		//{ExpressionAddition.left=current} "+" right=ExpressionLevel2
-		public Group getGroup_1_0() { return cGroup_1_0; }
-		
-		//{ExpressionAddition.left=current}
-		public Action getExpressionAdditionLeftAction_1_0_0() { return cExpressionAdditionLeftAction_1_0_0; }
-		
-		//"+"
-		public Keyword getPlusSignKeyword_1_0_1() { return cPlusSignKeyword_1_0_1; }
-		
-		//right=ExpressionLevel2
-		public Assignment getRightAssignment_1_0_2() { return cRightAssignment_1_0_2; }
-		
-		//ExpressionLevel2
-		public RuleCall getRightExpressionLevel2ParserRuleCall_1_0_2_0() { return cRightExpressionLevel2ParserRuleCall_1_0_2_0; }
-		
-		//{ExpressionSubtraction.left=current} "-" right=ExpressionLevel2
-		public Group getGroup_1_1() { return cGroup_1_1; }
-		
-		//{ExpressionSubtraction.left=current}
-		public Action getExpressionSubtractionLeftAction_1_1_0() { return cExpressionSubtractionLeftAction_1_1_0; }
-		
-		//"-"
-		public Keyword getHyphenMinusKeyword_1_1_1() { return cHyphenMinusKeyword_1_1_1; }
-		
-		//right=ExpressionLevel2
-		public Assignment getRightAssignment_1_1_2() { return cRightAssignment_1_1_2; }
-		
-		//ExpressionLevel2
-		public RuleCall getRightExpressionLevel2ParserRuleCall_1_1_2_0() { return cRightExpressionLevel2ParserRuleCall_1_1_2_0; }
-	}
-	public class ExpressionLevel2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionLevel2");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cExpressionLevel3ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Action cExpressionMultiplyLeftAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
-		private final Keyword cAsteriskKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
-		private final Assignment cRightAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_0_2_0 = (RuleCall)cRightAssignment_1_0_2.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Action cExpressionDivisionLeftAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
-		private final Keyword cSolidusKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
-		private final Assignment cRightAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_1_2_0 = (RuleCall)cRightAssignment_1_1_2.eContents().get(0);
-		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
-		private final Action cExpressionMaximumLeftAction_1_2_0 = (Action)cGroup_1_2.eContents().get(0);
-		private final Keyword cMaxKeyword_1_2_1 = (Keyword)cGroup_1_2.eContents().get(1);
-		private final Assignment cRightAssignment_1_2_2 = (Assignment)cGroup_1_2.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_2_2_0 = (RuleCall)cRightAssignment_1_2_2.eContents().get(0);
-		private final Group cGroup_1_3 = (Group)cAlternatives_1.eContents().get(3);
-		private final Action cExpressionMinimumLeftAction_1_3_0 = (Action)cGroup_1_3.eContents().get(0);
-		private final Keyword cMinKeyword_1_3_1 = (Keyword)cGroup_1_3.eContents().get(1);
-		private final Assignment cRightAssignment_1_3_2 = (Assignment)cGroup_1_3.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_3_2_0 = (RuleCall)cRightAssignment_1_3_2.eContents().get(0);
-		private final Group cGroup_1_4 = (Group)cAlternatives_1.eContents().get(4);
-		private final Action cExpressionModuloLeftAction_1_4_0 = (Action)cGroup_1_4.eContents().get(0);
-		private final Keyword cModKeyword_1_4_1 = (Keyword)cGroup_1_4.eContents().get(1);
-		private final Assignment cRightAssignment_1_4_2 = (Assignment)cGroup_1_4.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_4_2_0 = (RuleCall)cRightAssignment_1_4_2.eContents().get(0);
-		
-		//ExpressionLevel2 IntExpression:
-		//	ExpressionLevel3 ({ExpressionMultiply.left=current} "*" right=ExpressionLevel3 | {ExpressionDivision.left=current}
-		//	"/" right=ExpressionLevel3 | {ExpressionMaximum.left=current} "max" right=ExpressionLevel3 |
-		//	{ExpressionMinimum.left=current} "min" right=ExpressionLevel3 | {ExpressionModulo.left=current} "mod"
-		//	right=ExpressionLevel3)*
-		@Override public ParserRule getRule() { return rule; }
-		
-		//// Left associativity
-		//ExpressionLevel3 ({ExpressionMultiply.left=current} "*" right=ExpressionLevel3 | {ExpressionDivision.left=current} "/"
-		//right=ExpressionLevel3 | {ExpressionMaximum.left=current} "max" right=ExpressionLevel3 |
-		//{ExpressionMinimum.left=current} "min" right=ExpressionLevel3 | {ExpressionModulo.left=current} "mod"
-		//right=ExpressionLevel3)*
-		public Group getGroup() { return cGroup; }
-		
-		//// Left associativity
-		//ExpressionLevel3
-		public RuleCall getExpressionLevel3ParserRuleCall_0() { return cExpressionLevel3ParserRuleCall_0; }
-		
-		//({ExpressionMultiply.left=current} "*" right=ExpressionLevel3 | {ExpressionDivision.left=current} "/"
-		//right=ExpressionLevel3 | {ExpressionMaximum.left=current} "max" right=ExpressionLevel3 |
-		//{ExpressionMinimum.left=current} "min" right=ExpressionLevel3 | {ExpressionModulo.left=current} "mod"
-		//right=ExpressionLevel3)*
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-		
-		//{ExpressionMultiply.left=current} "*" right=ExpressionLevel3
-		public Group getGroup_1_0() { return cGroup_1_0; }
-		
-		//{ExpressionMultiply.left=current}
-		public Action getExpressionMultiplyLeftAction_1_0_0() { return cExpressionMultiplyLeftAction_1_0_0; }
-		
-		//"*"
-		public Keyword getAsteriskKeyword_1_0_1() { return cAsteriskKeyword_1_0_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_0_2() { return cRightAssignment_1_0_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_0_2_0() { return cRightExpressionLevel3ParserRuleCall_1_0_2_0; }
-		
-		//{ExpressionDivision.left=current} "/" right=ExpressionLevel3
-		public Group getGroup_1_1() { return cGroup_1_1; }
-		
-		//{ExpressionDivision.left=current}
-		public Action getExpressionDivisionLeftAction_1_1_0() { return cExpressionDivisionLeftAction_1_1_0; }
-		
-		//"/"
-		public Keyword getSolidusKeyword_1_1_1() { return cSolidusKeyword_1_1_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_1_2() { return cRightAssignment_1_1_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_1_2_0() { return cRightExpressionLevel3ParserRuleCall_1_1_2_0; }
-		
-		//{ExpressionMaximum.left=current} "max" right=ExpressionLevel3
-		public Group getGroup_1_2() { return cGroup_1_2; }
-		
-		//{ExpressionMaximum.left=current}
-		public Action getExpressionMaximumLeftAction_1_2_0() { return cExpressionMaximumLeftAction_1_2_0; }
-		
-		//"max"
-		public Keyword getMaxKeyword_1_2_1() { return cMaxKeyword_1_2_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_2_2() { return cRightAssignment_1_2_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_2_2_0() { return cRightExpressionLevel3ParserRuleCall_1_2_2_0; }
-		
-		//{ExpressionMinimum.left=current} "min" right=ExpressionLevel3
-		public Group getGroup_1_3() { return cGroup_1_3; }
-		
-		//{ExpressionMinimum.left=current}
-		public Action getExpressionMinimumLeftAction_1_3_0() { return cExpressionMinimumLeftAction_1_3_0; }
-		
-		//"min"
-		public Keyword getMinKeyword_1_3_1() { return cMinKeyword_1_3_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_3_2() { return cRightAssignment_1_3_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_3_2_0() { return cRightExpressionLevel3ParserRuleCall_1_3_2_0; }
-		
-		//{ExpressionModulo.left=current} "mod" right=ExpressionLevel3
-		public Group getGroup_1_4() { return cGroup_1_4; }
-		
-		//{ExpressionModulo.left=current}
-		public Action getExpressionModuloLeftAction_1_4_0() { return cExpressionModuloLeftAction_1_4_0; }
-		
-		//"mod"
-		public Keyword getModKeyword_1_4_1() { return cModKeyword_1_4_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_4_2() { return cRightAssignment_1_4_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_4_2_0() { return cRightExpressionLevel3ParserRuleCall_1_4_2_0; }
-	}
-	public class ExpressionLevel3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionLevel3");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cExpressionLevel4ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cExpressionPowerLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cCircumflexAccentKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightExpressionLevel3ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
-		
-		//ExpressionLevel3 IntExpression:
-		//	ExpressionLevel4 ({ExpressionPower.left=current} "^"
-		//	right=ExpressionLevel3)?
-		@Override public ParserRule getRule() { return rule; }
-		
-		//// Right associativity
-		//ExpressionLevel4 ({ExpressionPower.left=current} "^" right=ExpressionLevel3)?
-		public Group getGroup() { return cGroup; }
-		
-		//// Right associativity
-		//ExpressionLevel4
-		public RuleCall getExpressionLevel4ParserRuleCall_0() { return cExpressionLevel4ParserRuleCall_0; }
-		
-		//({ExpressionPower.left=current} "^" right=ExpressionLevel3)?
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//{ExpressionPower.left=current}
-		public Action getExpressionPowerLeftAction_1_0() { return cExpressionPowerLeftAction_1_0; }
-		
-		//"^"
-		public Keyword getCircumflexAccentKeyword_1_1() { return cCircumflexAccentKeyword_1_1; }
-		
-		//right=ExpressionLevel3
-		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
-		
-		//ExpressionLevel3
-		public RuleCall getRightExpressionLevel3ParserRuleCall_1_2_0() { return cRightExpressionLevel3ParserRuleCall_1_2_0; }
-	}
-	public class ExpressionLevel4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionLevel4");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cExpressionMinusParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cExpressionPlusParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cExpressionLevel5ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//ExpressionLevel4 IntExpression:
-		//	ExpressionMinus | ExpressionPlus | ExpressionLevel5
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ExpressionMinus | ExpressionPlus | ExpressionLevel5
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ExpressionMinus
-		public RuleCall getExpressionMinusParserRuleCall_0() { return cExpressionMinusParserRuleCall_0; }
-		
-		//ExpressionPlus
-		public RuleCall getExpressionPlusParserRuleCall_1() { return cExpressionPlusParserRuleCall_1; }
-		
-		//ExpressionLevel5
-		public RuleCall getExpressionLevel5ParserRuleCall_2() { return cExpressionLevel5ParserRuleCall_2; }
-	}
-	public class ExpressionMinusElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionMinus");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSubExpressionLevel5ParserRuleCall_1_0 = (RuleCall)cSubAssignment_1.eContents().get(0);
-		
-		//ExpressionMinus:
-		//	"-" sub=ExpressionLevel5;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"-" sub=ExpressionLevel5
-		public Group getGroup() { return cGroup; }
-		
-		//"-"
-		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
-		
-		//sub=ExpressionLevel5
-		public Assignment getSubAssignment_1() { return cSubAssignment_1; }
-		
-		//ExpressionLevel5
-		public RuleCall getSubExpressionLevel5ParserRuleCall_1_0() { return cSubExpressionLevel5ParserRuleCall_1_0; }
-	}
-	public class ExpressionPlusElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionPlus");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPlusSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSubExpressionLevel5ParserRuleCall_1_0 = (RuleCall)cSubAssignment_1.eContents().get(0);
-		
-		//ExpressionPlus:
-		//	"+" sub=ExpressionLevel5;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"+" sub=ExpressionLevel5
-		public Group getGroup() { return cGroup; }
-		
-		//"+"
-		public Keyword getPlusSignKeyword_0() { return cPlusSignKeyword_0; }
-		
-		//sub=ExpressionLevel5
-		public Assignment getSubAssignment_1() { return cSubAssignment_1; }
-		
-		//ExpressionLevel5
-		public RuleCall getSubExpressionLevel5ParserRuleCall_1_0() { return cSubExpressionLevel5ParserRuleCall_1_0; }
-	}
-	public class ExpressionLevel5Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionLevel5");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cExpressionBracketParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cExpressionConstantIntParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//ExpressionLevel5 IntExpression:
-		//	ExpressionBracket | ExpressionConstantInt
-		@Override public ParserRule getRule() { return rule; }
-		
-		//ExpressionBracket | ExpressionConstantInt
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//ExpressionBracket
-		public RuleCall getExpressionBracketParserRuleCall_0() { return cExpressionBracketParserRuleCall_0; }
-		
-		//ExpressionConstantInt
-		public RuleCall getExpressionConstantIntParserRuleCall_1() { return cExpressionConstantIntParserRuleCall_1; }
-	}
-	public class ExpressionBracketElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionBracket");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSubIntExpressionParserRuleCall_1_0 = (RuleCall)cSubAssignment_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ExpressionBracket:
-		//	"(" sub=IntExpression ")";
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"(" sub=IntExpression ")"
-		public Group getGroup() { return cGroup; }
-		
-		//"("
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
-		
-		//sub=IntExpression
-		public Assignment getSubAssignment_1() { return cSubAssignment_1; }
-		
-		//IntExpression
-		public RuleCall getSubIntExpressionParserRuleCall_1_0() { return cSubIntExpressionParserRuleCall_1_0; }
-		
-		//")"
-		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
-	}
-	public class ExpressionConstantIntElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ExpressionConstantInt");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueINTTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
-		
-		//ExpressionConstantInt:
-		//	value=INT;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//value=INT
-		public Assignment getValueAssignment() { return cValueAssignment; }
-		
-		//INT
-		public RuleCall getValueINTTerminalRuleCall_0() { return cValueINTTerminalRuleCall_0; }
-	}
-	public class BooleanExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpression");
-		private final RuleCall cBooleanExpressionLevel1ParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		/// *
-		// * Boolean expression as defined in the manual
-		// * / BooleanExpression:
-		//	BooleanExpressionLevel1;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//BooleanExpressionLevel1
-		public RuleCall getBooleanExpressionLevel1ParserRuleCall() { return cBooleanExpressionLevel1ParserRuleCall; }
-	}
-	public class BooleanExpressionLevel1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpressionLevel1");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cBooleanExpressionLevel2ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cExpressionBinOpLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cBopAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cBopBinaryBooleanOperatorEnumRuleCall_1_1_0 = (RuleCall)cBopAssignment_1_1.eContents().get(0);
-		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightBooleanExpressionLevel2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
-		
-		//BooleanExpressionLevel1 BooleanExpression:
-		//	BooleanExpressionLevel2 ({ExpressionBinOp.left=current} bop=BinaryBooleanOperator
-		//	right=BooleanExpressionLevel2)*
-		@Override public ParserRule getRule() { return rule; }
-		
-		//// Left associativity
-		//BooleanExpressionLevel2 ({ExpressionBinOp.left=current} bop=BinaryBooleanOperator right=BooleanExpressionLevel2)*
-		public Group getGroup() { return cGroup; }
-		
-		//// Left associativity
-		//BooleanExpressionLevel2
-		public RuleCall getBooleanExpressionLevel2ParserRuleCall_0() { return cBooleanExpressionLevel2ParserRuleCall_0; }
-		
-		//({ExpressionBinOp.left=current} bop=BinaryBooleanOperator right=BooleanExpressionLevel2)*
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//{ExpressionBinOp.left=current}
-		public Action getExpressionBinOpLeftAction_1_0() { return cExpressionBinOpLeftAction_1_0; }
-		
-		//bop=BinaryBooleanOperator
-		public Assignment getBopAssignment_1_1() { return cBopAssignment_1_1; }
-		
-		//BinaryBooleanOperator
-		public RuleCall getBopBinaryBooleanOperatorEnumRuleCall_1_1_0() { return cBopBinaryBooleanOperatorEnumRuleCall_1_1_0; }
-		
-		//right=BooleanExpressionLevel2
-		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
-		
-		//BooleanExpressionLevel2
-		public RuleCall getRightBooleanExpressionLevel2ParserRuleCall_1_2_0() { return cRightBooleanExpressionLevel2ParserRuleCall_1_2_0; }
-	}
-	public class BooleanExpressionLevel2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpressionLevel2");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cNotExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cBooleanExpressionLevel3ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//BooleanExpressionLevel2 BooleanExpression:
-		//	NotExpression | BooleanExpressionLevel3
-		@Override public ParserRule getRule() { return rule; }
-		
-		//NotExpression | BooleanExpressionLevel3
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//NotExpression
-		public RuleCall getNotExpressionParserRuleCall_0() { return cNotExpressionParserRuleCall_0; }
-		
-		//BooleanExpressionLevel3
-		public RuleCall getBooleanExpressionLevel3ParserRuleCall_1() { return cBooleanExpressionLevel3ParserRuleCall_1; }
-	}
-	public class NotExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.NotExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cNOTKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSubBooleanExpressionLevel3ParserRuleCall_1_0 = (RuleCall)cSubAssignment_1.eContents().get(0);
-		
-		//NotExpression:
-		//	"NOT" sub=BooleanExpressionLevel3;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"NOT" sub=BooleanExpressionLevel3
-		public Group getGroup() { return cGroup; }
-		
-		//"NOT"
-		public Keyword getNOTKeyword_0() { return cNOTKeyword_0; }
-		
-		//sub=BooleanExpressionLevel3
-		public Assignment getSubAssignment_1() { return cSubAssignment_1; }
-		
-		//BooleanExpressionLevel3
-		public RuleCall getSubBooleanExpressionLevel3ParserRuleCall_1_0() { return cSubBooleanExpressionLevel3ParserRuleCall_1_0; }
-	}
-	public class BooleanExpressionLevel3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpressionLevel3");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cComparisonExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cBooleanExpressionBracketParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cBooleanExpressionConstantParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//BooleanExpressionLevel3 BooleanExpression:
-		//	=> ComparisonExpression | BooleanExpressionBracket | BooleanExpressionConstant
-		@Override public ParserRule getRule() { return rule; }
-		
-		//=> ComparisonExpression | BooleanExpressionBracket | BooleanExpressionConstant
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//=> ComparisonExpression
-		public RuleCall getComparisonExpressionParserRuleCall_0() { return cComparisonExpressionParserRuleCall_0; }
-		
-		//BooleanExpressionBracket
-		public RuleCall getBooleanExpressionBracketParserRuleCall_1() { return cBooleanExpressionBracketParserRuleCall_1; }
-		
-		//BooleanExpressionConstant
-		public RuleCall getBooleanExpressionConstantParserRuleCall_2() { return cBooleanExpressionConstantParserRuleCall_2; }
-	}
-	public class ComparisonExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.ComparisonExpression");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cExpressionCompOpAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cLeftAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cLeftIntExpressionParserRuleCall_1_0 = (RuleCall)cLeftAssignment_1.eContents().get(0);
-		private final Assignment cOpAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cOpCompareOperatorEnumRuleCall_2_0 = (RuleCall)cOpAssignment_2.eContents().get(0);
-		private final Assignment cRightAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cRightIntExpressionParserRuleCall_3_0 = (RuleCall)cRightAssignment_3.eContents().get(0);
-		
-		//ComparisonExpression BooleanExpression:
-		//	{ExpressionCompOp} left=IntExpression op=CompareOperator right=IntExpression
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{ExpressionCompOp} left=IntExpression op=CompareOperator right=IntExpression
-		public Group getGroup() { return cGroup; }
-		
-		//{ExpressionCompOp}
-		public Action getExpressionCompOpAction_0() { return cExpressionCompOpAction_0; }
-		
-		//left=IntExpression
-		public Assignment getLeftAssignment_1() { return cLeftAssignment_1; }
-		
-		//IntExpression
-		public RuleCall getLeftIntExpressionParserRuleCall_1_0() { return cLeftIntExpressionParserRuleCall_1_0; }
-		
-		//op=CompareOperator
-		public Assignment getOpAssignment_2() { return cOpAssignment_2; }
-		
-		//CompareOperator
-		public RuleCall getOpCompareOperatorEnumRuleCall_2_0() { return cOpCompareOperatorEnumRuleCall_2_0; }
-		
-		//right=IntExpression
-		public Assignment getRightAssignment_3() { return cRightAssignment_3; }
-		
-		//IntExpression
-		public RuleCall getRightIntExpressionParserRuleCall_3_0() { return cRightIntExpressionParserRuleCall_3_0; }
-	}
-	public class BooleanExpressionBracketElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpressionBracket");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cSubAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSubBooleanExpressionParserRuleCall_1_0 = (RuleCall)cSubAssignment_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//BooleanExpressionBracket:
-		//	"(" sub=BooleanExpression ")";
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"(" sub=BooleanExpression ")"
-		public Group getGroup() { return cGroup; }
-		
-		//"("
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
-		
-		//sub=BooleanExpression
-		public Assignment getSubAssignment_1() { return cSubAssignment_1; }
-		
-		//BooleanExpression
-		public RuleCall getSubBooleanExpressionParserRuleCall_1_0() { return cSubBooleanExpressionParserRuleCall_1_0; }
-		
-		//")"
-		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
-	}
-	public class BooleanExpressionConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BooleanExpressionConstant");
-		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cValueBOOL_LITERALTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
-		
-		//BooleanExpressionConstant:
-		//	value=BOOL_LITERAL;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//value=BOOL_LITERAL
-		public Assignment getValueAssignment() { return cValueAssignment; }
-		
-		//BOOL_LITERAL
-		public RuleCall getValueBOOL_LITERALTerminalRuleCall_0() { return cValueBOOL_LITERALTerminalRuleCall_0; }
+		//DECIMAL
+		public RuleCall getDistanceDECIMALTerminalRuleCall_4_0() { return cDistanceDECIMALTerminalRuleCall_4_0; }
 	}
 	
-	public class MeasurementUnitElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.MeasurementUnit");
+	public class TouchSensorSidesElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.TouchSensorSides");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cDISTANCEEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cDISTANCEDistanceKeyword_0_0 = (Keyword)cDISTANCEEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cCOLOREnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cCOLORColorKeyword_1_0 = (Keyword)cCOLOREnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cINTEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cINTIntKeyword_2_0 = (Keyword)cINTEnumLiteralDeclaration_2.eContents().get(0);
+		private final EnumLiteralDeclaration cLEFTEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLEFTLEFTKeyword_0_0 = (Keyword)cLEFTEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cRIGHTEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cRIGHTRIGHTKeyword_1_0 = (Keyword)cRIGHTEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cBOTHEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cBOTHBOTHKeyword_2_0 = (Keyword)cBOTHEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//enum MeasurementUnit:
-		//	DISTANCE="distance" |
-		//	COLOR="color" |
-		//	INT="int";
+		//enum TouchSensorSides:
+		//	LEFT |
+		//	RIGHT |
+		//	BOTH;
 		public EnumRule getRule() { return rule; }
 		
-		//DISTANCE="distance" | COLOR="color" | INT="int"
+		//LEFT | RIGHT | BOTH
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//DISTANCE="distance"
-		public EnumLiteralDeclaration getDISTANCEEnumLiteralDeclaration_0() { return cDISTANCEEnumLiteralDeclaration_0; }
+		//LEFT
+		public EnumLiteralDeclaration getLEFTEnumLiteralDeclaration_0() { return cLEFTEnumLiteralDeclaration_0; }
 		
-		//"distance"
-		public Keyword getDISTANCEDistanceKeyword_0_0() { return cDISTANCEDistanceKeyword_0_0; }
+		//"LEFT"
+		public Keyword getLEFTLEFTKeyword_0_0() { return cLEFTLEFTKeyword_0_0; }
 		
-		//COLOR="color"
-		public EnumLiteralDeclaration getCOLOREnumLiteralDeclaration_1() { return cCOLOREnumLiteralDeclaration_1; }
+		//RIGHT
+		public EnumLiteralDeclaration getRIGHTEnumLiteralDeclaration_1() { return cRIGHTEnumLiteralDeclaration_1; }
 		
-		//"color"
-		public Keyword getCOLORColorKeyword_1_0() { return cCOLORColorKeyword_1_0; }
+		//"RIGHT"
+		public Keyword getRIGHTRIGHTKeyword_1_0() { return cRIGHTRIGHTKeyword_1_0; }
 		
-		//INT="int"
-		public EnumLiteralDeclaration getINTEnumLiteralDeclaration_2() { return cINTEnumLiteralDeclaration_2; }
+		//BOTH
+		public EnumLiteralDeclaration getBOTHEnumLiteralDeclaration_2() { return cBOTHEnumLiteralDeclaration_2; }
 		
-		//"int"
-		public Keyword getINTIntKeyword_2_0() { return cINTIntKeyword_2_0; }
-	}
-	public class BehaviorTypesElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BehaviorTypes");
-		private final EnumLiteralDeclaration cDRIVEEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
-		private final Keyword cDRIVEDriveKeyword_0 = (Keyword)cDRIVEEnumLiteralDeclaration.eContents().get(0);
-		
-		//enum BehaviorTypes:
-		//	DRIVE="drive";
-		public EnumRule getRule() { return rule; }
-		
-		//DRIVE="drive"
-		public EnumLiteralDeclaration getDRIVEEnumLiteralDeclaration() { return cDRIVEEnumLiteralDeclaration; }
-		
-		//"drive"
-		public Keyword getDRIVEDriveKeyword_0() { return cDRIVEDriveKeyword_0; }
-	}
-	public class MeasurablesElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Measurables");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cFLOOR_COLOREnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cFLOOR_COLORFloorColorKeyword_0_0 = (Keyword)cFLOOR_COLOREnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cLEFT_TOUCHEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cLEFT_TOUCHLeftTouchKeyword_1_0 = (Keyword)cLEFT_TOUCHEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cRIGHT_TOUCHEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cRIGHT_TOUCHRightTouchKeyword_2_0 = (Keyword)cRIGHT_TOUCHEnumLiteralDeclaration_2.eContents().get(0);
-		private final EnumLiteralDeclaration cDIST_TO_OBJECT_FRONTEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cDIST_TO_OBJECT_FRONTDistanceObjectInFrontKeyword_3_0 = (Keyword)cDIST_TO_OBJECT_FRONTEnumLiteralDeclaration_3.eContents().get(0);
-		
-		//enum Measurables:
-		//	FLOOR_COLOR="floorColor" |
-		//	LEFT_TOUCH="leftTouch" |
-		//	RIGHT_TOUCH="rightTouch" |
-		//	DIST_TO_OBJECT_FRONT="distanceObjectInFront";
-		public EnumRule getRule() { return rule; }
-		
-		//FLOOR_COLOR="floorColor" | LEFT_TOUCH="leftTouch" | RIGHT_TOUCH="rightTouch" |
-		//DIST_TO_OBJECT_FRONT="distanceObjectInFront"
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//FLOOR_COLOR="floorColor"
-		public EnumLiteralDeclaration getFLOOR_COLOREnumLiteralDeclaration_0() { return cFLOOR_COLOREnumLiteralDeclaration_0; }
-		
-		//"floorColor"
-		public Keyword getFLOOR_COLORFloorColorKeyword_0_0() { return cFLOOR_COLORFloorColorKeyword_0_0; }
-		
-		//LEFT_TOUCH="leftTouch"
-		public EnumLiteralDeclaration getLEFT_TOUCHEnumLiteralDeclaration_1() { return cLEFT_TOUCHEnumLiteralDeclaration_1; }
-		
-		//"leftTouch"
-		public Keyword getLEFT_TOUCHLeftTouchKeyword_1_0() { return cLEFT_TOUCHLeftTouchKeyword_1_0; }
-		
-		//RIGHT_TOUCH="rightTouch"
-		public EnumLiteralDeclaration getRIGHT_TOUCHEnumLiteralDeclaration_2() { return cRIGHT_TOUCHEnumLiteralDeclaration_2; }
-		
-		//"rightTouch"
-		public Keyword getRIGHT_TOUCHRightTouchKeyword_2_0() { return cRIGHT_TOUCHRightTouchKeyword_2_0; }
-		
-		//DIST_TO_OBJECT_FRONT="distanceObjectInFront"
-		public EnumLiteralDeclaration getDIST_TO_OBJECT_FRONTEnumLiteralDeclaration_3() { return cDIST_TO_OBJECT_FRONTEnumLiteralDeclaration_3; }
-		
-		//"distanceObjectInFront"
-		public Keyword getDIST_TO_OBJECT_FRONTDistanceObjectInFrontKeyword_3_0() { return cDIST_TO_OBJECT_FRONTDistanceObjectInFrontKeyword_3_0; }
+		//"BOTH"
+		public Keyword getBOTHBOTHKeyword_2_0() { return cBOTHBOTHKeyword_2_0; }
 	}
 	public class ActionsElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Actions");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cROTATE_LEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cROTATE_LRotateLeftKeyword_0_0 = (Keyword)cROTATE_LEnumLiteralDeclaration_0.eContents().get(0);
+		private final Keyword cROTATE_LROTATELEFTKeyword_0_0 = (Keyword)cROTATE_LEnumLiteralDeclaration_0.eContents().get(0);
 		private final EnumLiteralDeclaration cROTATE_REnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cROTATE_RRotateRightKeyword_1_0 = (Keyword)cROTATE_REnumLiteralDeclaration_1.eContents().get(0);
+		private final Keyword cROTATE_RROTATERIGHTKeyword_1_0 = (Keyword)cROTATE_REnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cDRIVE_FORWARDEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cDRIVE_FORWARDDriveForwardKeyword_2_0 = (Keyword)cDRIVE_FORWARDEnumLiteralDeclaration_2.eContents().get(0);
+		private final Keyword cDRIVE_FORWARDDRIVEFORWARDKeyword_2_0 = (Keyword)cDRIVE_FORWARDEnumLiteralDeclaration_2.eContents().get(0);
 		private final EnumLiteralDeclaration cDRIVE_BACKWARDEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cDRIVE_BACKWARDDriveBackwardKeyword_3_0 = (Keyword)cDRIVE_BACKWARDEnumLiteralDeclaration_3.eContents().get(0);
+		private final Keyword cDRIVE_BACKWARDDRIVEBACKWARDKeyword_3_0 = (Keyword)cDRIVE_BACKWARDEnumLiteralDeclaration_3.eContents().get(0);
 		private final EnumLiteralDeclaration cSTOP_DRIVINGEnumLiteralDeclaration_4 = (EnumLiteralDeclaration)cAlternatives.eContents().get(4);
-		private final Keyword cSTOP_DRIVINGStopDrivingKeyword_4_0 = (Keyword)cSTOP_DRIVINGEnumLiteralDeclaration_4.eContents().get(0);
+		private final Keyword cSTOP_DRIVINGSTOPKeyword_4_0 = (Keyword)cSTOP_DRIVINGEnumLiteralDeclaration_4.eContents().get(0);
+		private final EnumLiteralDeclaration cTURN_AROUNDEnumLiteralDeclaration_5 = (EnumLiteralDeclaration)cAlternatives.eContents().get(5);
+		private final Keyword cTURN_AROUNDTURNAROUNDKeyword_5_0 = (Keyword)cTURN_AROUNDEnumLiteralDeclaration_5.eContents().get(0);
+		private final EnumLiteralDeclaration cBEEPEnumLiteralDeclaration_6 = (EnumLiteralDeclaration)cAlternatives.eContents().get(6);
+		private final Keyword cBEEPBEEPKeyword_6_0 = (Keyword)cBEEPEnumLiteralDeclaration_6.eContents().get(0);
 		
 		//enum Actions:
-		//	ROTATE_L="rotateLeft" |
-		//	ROTATE_R="rotateRight" |
-		//	DRIVE_FORWARD="driveForward" |
-		//	DRIVE_BACKWARD="driveBackward" |
-		//	STOP_DRIVING="stopDriving";
+		//	ROTATE_L="ROTATELEFT" |
+		//	ROTATE_R="ROTATERIGHT" |
+		//	DRIVE_FORWARD="DRIVEFORWARD" |
+		//	DRIVE_BACKWARD="DRIVEBACKWARD" |
+		//	STOP_DRIVING="STOP" |
+		//	TURN_AROUND="TURNAROUND" |
+		//	BEEP;
 		public EnumRule getRule() { return rule; }
 		
-		//ROTATE_L="rotateLeft" | ROTATE_R="rotateRight" | DRIVE_FORWARD="driveForward" | DRIVE_BACKWARD="driveBackward" |
-		//STOP_DRIVING="stopDriving"
+		//ROTATE_L="ROTATELEFT" | ROTATE_R="ROTATERIGHT" | DRIVE_FORWARD="DRIVEFORWARD" | DRIVE_BACKWARD="DRIVEBACKWARD" |
+		//STOP_DRIVING="STOP" | TURN_AROUND="TURNAROUND" | BEEP
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//ROTATE_L="rotateLeft"
+		//ROTATE_L="ROTATELEFT"
 		public EnumLiteralDeclaration getROTATE_LEnumLiteralDeclaration_0() { return cROTATE_LEnumLiteralDeclaration_0; }
 		
-		//"rotateLeft"
-		public Keyword getROTATE_LRotateLeftKeyword_0_0() { return cROTATE_LRotateLeftKeyword_0_0; }
+		//"ROTATELEFT"
+		public Keyword getROTATE_LROTATELEFTKeyword_0_0() { return cROTATE_LROTATELEFTKeyword_0_0; }
 		
-		//ROTATE_R="rotateRight"
+		//ROTATE_R="ROTATERIGHT"
 		public EnumLiteralDeclaration getROTATE_REnumLiteralDeclaration_1() { return cROTATE_REnumLiteralDeclaration_1; }
 		
-		//"rotateRight"
-		public Keyword getROTATE_RRotateRightKeyword_1_0() { return cROTATE_RRotateRightKeyword_1_0; }
+		//"ROTATERIGHT"
+		public Keyword getROTATE_RROTATERIGHTKeyword_1_0() { return cROTATE_RROTATERIGHTKeyword_1_0; }
 		
-		//DRIVE_FORWARD="driveForward"
+		//DRIVE_FORWARD="DRIVEFORWARD"
 		public EnumLiteralDeclaration getDRIVE_FORWARDEnumLiteralDeclaration_2() { return cDRIVE_FORWARDEnumLiteralDeclaration_2; }
 		
-		//"driveForward"
-		public Keyword getDRIVE_FORWARDDriveForwardKeyword_2_0() { return cDRIVE_FORWARDDriveForwardKeyword_2_0; }
+		//"DRIVEFORWARD"
+		public Keyword getDRIVE_FORWARDDRIVEFORWARDKeyword_2_0() { return cDRIVE_FORWARDDRIVEFORWARDKeyword_2_0; }
 		
-		//DRIVE_BACKWARD="driveBackward"
+		//DRIVE_BACKWARD="DRIVEBACKWARD"
 		public EnumLiteralDeclaration getDRIVE_BACKWARDEnumLiteralDeclaration_3() { return cDRIVE_BACKWARDEnumLiteralDeclaration_3; }
 		
-		//"driveBackward"
-		public Keyword getDRIVE_BACKWARDDriveBackwardKeyword_3_0() { return cDRIVE_BACKWARDDriveBackwardKeyword_3_0; }
+		//"DRIVEBACKWARD"
+		public Keyword getDRIVE_BACKWARDDRIVEBACKWARDKeyword_3_0() { return cDRIVE_BACKWARDDRIVEBACKWARDKeyword_3_0; }
 		
-		//STOP_DRIVING="stopDriving"
+		//STOP_DRIVING="STOP"
 		public EnumLiteralDeclaration getSTOP_DRIVINGEnumLiteralDeclaration_4() { return cSTOP_DRIVINGEnumLiteralDeclaration_4; }
 		
-		//"stopDriving"
-		public Keyword getSTOP_DRIVINGStopDrivingKeyword_4_0() { return cSTOP_DRIVINGStopDrivingKeyword_4_0; }
+		//"STOP"
+		public Keyword getSTOP_DRIVINGSTOPKeyword_4_0() { return cSTOP_DRIVINGSTOPKeyword_4_0; }
+		
+		//TURN_AROUND="TURNAROUND"
+		public EnumLiteralDeclaration getTURN_AROUNDEnumLiteralDeclaration_5() { return cTURN_AROUNDEnumLiteralDeclaration_5; }
+		
+		//"TURNAROUND"
+		public Keyword getTURN_AROUNDTURNAROUNDKeyword_5_0() { return cTURN_AROUNDTURNAROUNDKeyword_5_0; }
+		
+		//BEEP
+		public EnumLiteralDeclaration getBEEPEnumLiteralDeclaration_6() { return cBEEPEnumLiteralDeclaration_6; }
+		
+		//"BEEP"
+		public Keyword getBEEPBEEPKeyword_6_0() { return cBEEPBEEPKeyword_6_0; }
 	}
 	public class DirectionsElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Directions");
@@ -1150,34 +560,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//"YELLOW"
 		public Keyword getYELLOWYELLOWKeyword_12_0() { return cYELLOWYELLOWKeyword_12_0; }
 	}
-	public class BinaryBooleanOperatorElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BinaryBooleanOperator");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cANDEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cANDANDKeyword_0_0 = (Keyword)cANDEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cOREnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cORORKeyword_1_0 = (Keyword)cOREnumLiteralDeclaration_1.eContents().get(0);
-		
-		//enum BinaryBooleanOperator:
-		//	AND |
-		//	OR;
-		public EnumRule getRule() { return rule; }
-		
-		//AND | OR
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//AND
-		public EnumLiteralDeclaration getANDEnumLiteralDeclaration_0() { return cANDEnumLiteralDeclaration_0; }
-		
-		//'AND'
-		public Keyword getANDANDKeyword_0_0() { return cANDANDKeyword_0_0; }
-		
-		//OR
-		public EnumLiteralDeclaration getOREnumLiteralDeclaration_1() { return cOREnumLiteralDeclaration_1; }
-		
-		//'OR'
-		public Keyword getORORKeyword_1_0() { return cORORKeyword_1_0; }
-	}
 	public class CompareOperatorElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.CompareOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1244,37 +626,17 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	private final MissionElements pMission;
-	private final BehaviorElements pBehavior;
-	private final TakeControlElements pTakeControl;
-	private final MeasurableConditionsElements pMeasurableConditions;
-	private final MeasurableConditionElements pMeasurableCondition;
-	private final MeasurementUnitElements eMeasurementUnit;
-	private final BehaviorTypesElements eBehaviorTypes;
-	private final MeasurablesElements eMeasurables;
+	private final TaskElements pTask;
+	private final SensorTypeElements pSensorType;
+	private final ColorSensorElements pColorSensor;
+	private final TouchSensorElements pTouchSensor;
+	private final UltrasonicSensorElements pUltrasonicSensor;
+	private final TerminalRule tDECIMAL;
+	private final TouchSensorSidesElements eTouchSensorSides;
 	private final ActionsElements eActions;
 	private final DirectionsElements eDirections;
 	private final ColorsElements eColors;
-	private final IntExpressionElements pIntExpression;
-	private final ExpressionLevel1Elements pExpressionLevel1;
-	private final ExpressionLevel2Elements pExpressionLevel2;
-	private final ExpressionLevel3Elements pExpressionLevel3;
-	private final ExpressionLevel4Elements pExpressionLevel4;
-	private final ExpressionMinusElements pExpressionMinus;
-	private final ExpressionPlusElements pExpressionPlus;
-	private final ExpressionLevel5Elements pExpressionLevel5;
-	private final ExpressionBracketElements pExpressionBracket;
-	private final ExpressionConstantIntElements pExpressionConstantInt;
-	private final BooleanExpressionElements pBooleanExpression;
-	private final BooleanExpressionLevel1Elements pBooleanExpressionLevel1;
-	private final BinaryBooleanOperatorElements eBinaryBooleanOperator;
-	private final BooleanExpressionLevel2Elements pBooleanExpressionLevel2;
-	private final NotExpressionElements pNotExpression;
-	private final BooleanExpressionLevel3Elements pBooleanExpressionLevel3;
-	private final ComparisonExpressionElements pComparisonExpression;
 	private final CompareOperatorElements eCompareOperator;
-	private final BooleanExpressionBracketElements pBooleanExpressionBracket;
-	private final BooleanExpressionConstantElements pBooleanExpressionConstant;
-	private final TerminalRule tBOOL_LITERAL;
 	
 	private final Grammar grammar;
 	
@@ -1286,37 +648,17 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pMission = new MissionElements();
-		this.pBehavior = new BehaviorElements();
-		this.pTakeControl = new TakeControlElements();
-		this.pMeasurableConditions = new MeasurableConditionsElements();
-		this.pMeasurableCondition = new MeasurableConditionElements();
-		this.eMeasurementUnit = new MeasurementUnitElements();
-		this.eBehaviorTypes = new BehaviorTypesElements();
-		this.eMeasurables = new MeasurablesElements();
+		this.pTask = new TaskElements();
+		this.pSensorType = new SensorTypeElements();
+		this.pColorSensor = new ColorSensorElements();
+		this.pTouchSensor = new TouchSensorElements();
+		this.pUltrasonicSensor = new UltrasonicSensorElements();
+		this.tDECIMAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.DECIMAL");
+		this.eTouchSensorSides = new TouchSensorSidesElements();
 		this.eActions = new ActionsElements();
 		this.eDirections = new DirectionsElements();
 		this.eColors = new ColorsElements();
-		this.pIntExpression = new IntExpressionElements();
-		this.pExpressionLevel1 = new ExpressionLevel1Elements();
-		this.pExpressionLevel2 = new ExpressionLevel2Elements();
-		this.pExpressionLevel3 = new ExpressionLevel3Elements();
-		this.pExpressionLevel4 = new ExpressionLevel4Elements();
-		this.pExpressionMinus = new ExpressionMinusElements();
-		this.pExpressionPlus = new ExpressionPlusElements();
-		this.pExpressionLevel5 = new ExpressionLevel5Elements();
-		this.pExpressionBracket = new ExpressionBracketElements();
-		this.pExpressionConstantInt = new ExpressionConstantIntElements();
-		this.pBooleanExpression = new BooleanExpressionElements();
-		this.pBooleanExpressionLevel1 = new BooleanExpressionLevel1Elements();
-		this.eBinaryBooleanOperator = new BinaryBooleanOperatorElements();
-		this.pBooleanExpressionLevel2 = new BooleanExpressionLevel2Elements();
-		this.pNotExpression = new NotExpressionElements();
-		this.pBooleanExpressionLevel3 = new BooleanExpressionLevel3Elements();
-		this.pComparisonExpression = new ComparisonExpressionElements();
 		this.eCompareOperator = new CompareOperatorElements();
-		this.pBooleanExpressionBracket = new BooleanExpressionBracketElements();
-		this.pBooleanExpressionConstant = new BooleanExpressionConstantElements();
-		this.tBOOL_LITERAL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.BOOL_LITERAL");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1349,7 +691,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	/// *
 	// * A mission consists of a number of behaviors
 	// * / Mission:
-	//	behaviorList+=Behavior+;
+	//	'Mission:' tasks+=Task+;
 	public MissionElements getMissionAccess() {
 		return pMission;
 	}
@@ -1358,100 +700,96 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getMissionAccess().getRule();
 	}
 	
-	/// *
+	/// *Mission 1
+	//Task BeepOnRed Uses ColorSensor on Color RED Do Beep (Turn Around)
+	//
+	//Task CloserThanFifteen Uses Ultrasonic whenDistance 'bigger/smaller|compare' 15 
+	//
+	//Task InBlackBorder Uses ColorSensor On Color Black Do Turn Around 
+	//
+	//Task BounceDaBounce Uses touchSensor On Left/Right/Both Do Beep/TurnAround
+	//
+	//Task DriveForward On true Do Drive* / / *
 	// * A behavior consists of a name, an optional type (in case of driving), an optional priority
 	// * and a take control definition.
-	// * / Behavior:
-	//	'Behavior:' name=ID
-	//	'type:' behaviorType=BehaviorTypes?
-	//	'priority:' prio=INT?
-	//	'take-control:' control=TakeControl
-	//	'actions:' actions=Actions;
-	public BehaviorElements getBehaviorAccess() {
-		return pBehavior;
+	// * / Task:
+	//	'Task:' name=ID
+	//	'Uses:' sensor=SensorType
+	//	'Do:' action=Actions;
+	public TaskElements getTaskAccess() {
+		return pTask;
 	}
 	
-	public ParserRule getBehaviorRule() {
-		return getBehaviorAccess().getRule();
+	public ParserRule getTaskRule() {
+		return getTaskAccess().getRule();
 	}
 	
-	/// *
-	// * Take control consists of either a boolean expression or a m
-	// * / TakeControl:
-	//	takecontrol=BooleanExpression | MeasurableConditions;
-	public TakeControlElements getTakeControlAccess() {
-		return pTakeControl;
+	//SensorType:
+	//	ColorSensor | TouchSensor | UltrasonicSensor;
+	public SensorTypeElements getSensorTypeAccess() {
+		return pSensorType;
 	}
 	
-	public ParserRule getTakeControlRule() {
-		return getTakeControlAccess().getRule();
+	public ParserRule getSensorTypeRule() {
+		return getSensorTypeAccess().getRule();
 	}
 	
-	/// *
-	// * MeasurableConditions is a list of at least one measurable condition
-	// * / MeasurableConditions:
-	//	measurableConditions+=MeasurableCondition+;
-	public MeasurableConditionsElements getMeasurableConditionsAccess() {
-		return pMeasurableConditions;
+	//ColorSensor:
+	//	'ColorSensor' 'On' 'DetectedColor' 'is:' key=Colors;
+	public ColorSensorElements getColorSensorAccess() {
+		return pColorSensor;
 	}
 	
-	public ParserRule getMeasurableConditionsRule() {
-		return getMeasurableConditionsAccess().getRule();
+	public ParserRule getColorSensorRule() {
+		return getColorSensorAccess().getRule();
 	}
 	
-	/// *
-	// * A measurable condition is a measurable, a value and an operator
-	// * / MeasurableCondition:
-	//	measurable=Measurables unit=MeasurementUnit value=STRING operator=CompareOperator;
-	public MeasurableConditionElements getMeasurableConditionAccess() {
-		return pMeasurableCondition;
+	//TouchSensor:
+	//	'TouchSensor' 'On' 'TouchedSide:' key=TouchSensorSides;
+	public TouchSensorElements getTouchSensorAccess() {
+		return pTouchSensor;
 	}
 	
-	public ParserRule getMeasurableConditionRule() {
-		return getMeasurableConditionAccess().getRule();
+	public ParserRule getTouchSensorRule() {
+		return getTouchSensorAccess().getRule();
 	}
 	
-	//enum MeasurementUnit:
-	//	DISTANCE="distance" |
-	//	COLOR="color" |
-	//	INT="int";
-	public MeasurementUnitElements getMeasurementUnitAccess() {
-		return eMeasurementUnit;
+	//UltrasonicSensor:
+	//	'USensor' 'On' 'Distance:' comparator=CompareOperator distance=DECIMAL;
+	public UltrasonicSensorElements getUltrasonicSensorAccess() {
+		return pUltrasonicSensor;
 	}
 	
-	public EnumRule getMeasurementUnitRule() {
-		return getMeasurementUnitAccess().getRule();
+	public ParserRule getUltrasonicSensorRule() {
+		return getUltrasonicSensorAccess().getRule();
 	}
 	
-	//enum BehaviorTypes:
-	//	DRIVE="drive";
-	public BehaviorTypesElements getBehaviorTypesAccess() {
-		return eBehaviorTypes;
+	//terminal DECIMAL:
+	//	INT '.' INT;
+	public TerminalRule getDECIMALRule() {
+		return tDECIMAL;
 	}
 	
-	public EnumRule getBehaviorTypesRule() {
-		return getBehaviorTypesAccess().getRule();
+	//enum TouchSensorSides:
+	//	LEFT |
+	//	RIGHT |
+	//	BOTH;
+	public TouchSensorSidesElements getTouchSensorSidesAccess() {
+		return eTouchSensorSides;
 	}
 	
-	//enum Measurables:
-	//	FLOOR_COLOR="floorColor" |
-	//	LEFT_TOUCH="leftTouch" |
-	//	RIGHT_TOUCH="rightTouch" |
-	//	DIST_TO_OBJECT_FRONT="distanceObjectInFront";
-	public MeasurablesElements getMeasurablesAccess() {
-		return eMeasurables;
-	}
-	
-	public EnumRule getMeasurablesRule() {
-		return getMeasurablesAccess().getRule();
+	public EnumRule getTouchSensorSidesRule() {
+		return getTouchSensorSidesAccess().getRule();
 	}
 	
 	//enum Actions:
-	//	ROTATE_L="rotateLeft" |
-	//	ROTATE_R="rotateRight" |
-	//	DRIVE_FORWARD="driveForward" |
-	//	DRIVE_BACKWARD="driveBackward" |
-	//	STOP_DRIVING="stopDriving";
+	//	ROTATE_L="ROTATELEFT" |
+	//	ROTATE_R="ROTATERIGHT" |
+	//	DRIVE_FORWARD="DRIVEFORWARD" |
+	//	DRIVE_BACKWARD="DRIVEBACKWARD" |
+	//	STOP_DRIVING="STOP" |
+	//	TURN_AROUND="TURNAROUND" |
+	//	BEEP;
 	public ActionsElements getActionsAccess() {
 		return eActions;
 	}
@@ -1499,187 +837,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getColorsAccess().getRule();
 	}
 	
-	/// *
-	// * Integers Expression as defined in the manual
-	// * / IntExpression:
-	//	ExpressionLevel1;
-	public IntExpressionElements getIntExpressionAccess() {
-		return pIntExpression;
-	}
-	
-	public ParserRule getIntExpressionRule() {
-		return getIntExpressionAccess().getRule();
-	}
-	
-	//ExpressionLevel1 IntExpression:
-	//	ExpressionLevel2 ({ExpressionAddition.left=current} "+" right=ExpressionLevel2 | {ExpressionSubtraction.left=current}
-	//	"-" right=ExpressionLevel2)*
-	public ExpressionLevel1Elements getExpressionLevel1Access() {
-		return pExpressionLevel1;
-	}
-	
-	public ParserRule getExpressionLevel1Rule() {
-		return getExpressionLevel1Access().getRule();
-	}
-	
-	//ExpressionLevel2 IntExpression:
-	//	ExpressionLevel3 ({ExpressionMultiply.left=current} "*" right=ExpressionLevel3 | {ExpressionDivision.left=current}
-	//	"/" right=ExpressionLevel3 | {ExpressionMaximum.left=current} "max" right=ExpressionLevel3 |
-	//	{ExpressionMinimum.left=current} "min" right=ExpressionLevel3 | {ExpressionModulo.left=current} "mod"
-	//	right=ExpressionLevel3)*
-	public ExpressionLevel2Elements getExpressionLevel2Access() {
-		return pExpressionLevel2;
-	}
-	
-	public ParserRule getExpressionLevel2Rule() {
-		return getExpressionLevel2Access().getRule();
-	}
-	
-	//ExpressionLevel3 IntExpression:
-	//	ExpressionLevel4 ({ExpressionPower.left=current} "^"
-	//	right=ExpressionLevel3)?
-	public ExpressionLevel3Elements getExpressionLevel3Access() {
-		return pExpressionLevel3;
-	}
-	
-	public ParserRule getExpressionLevel3Rule() {
-		return getExpressionLevel3Access().getRule();
-	}
-	
-	//ExpressionLevel4 IntExpression:
-	//	ExpressionMinus | ExpressionPlus | ExpressionLevel5
-	public ExpressionLevel4Elements getExpressionLevel4Access() {
-		return pExpressionLevel4;
-	}
-	
-	public ParserRule getExpressionLevel4Rule() {
-		return getExpressionLevel4Access().getRule();
-	}
-	
-	//ExpressionMinus:
-	//	"-" sub=ExpressionLevel5;
-	public ExpressionMinusElements getExpressionMinusAccess() {
-		return pExpressionMinus;
-	}
-	
-	public ParserRule getExpressionMinusRule() {
-		return getExpressionMinusAccess().getRule();
-	}
-	
-	//ExpressionPlus:
-	//	"+" sub=ExpressionLevel5;
-	public ExpressionPlusElements getExpressionPlusAccess() {
-		return pExpressionPlus;
-	}
-	
-	public ParserRule getExpressionPlusRule() {
-		return getExpressionPlusAccess().getRule();
-	}
-	
-	//ExpressionLevel5 IntExpression:
-	//	ExpressionBracket | ExpressionConstantInt
-	public ExpressionLevel5Elements getExpressionLevel5Access() {
-		return pExpressionLevel5;
-	}
-	
-	public ParserRule getExpressionLevel5Rule() {
-		return getExpressionLevel5Access().getRule();
-	}
-	
-	//ExpressionBracket:
-	//	"(" sub=IntExpression ")";
-	public ExpressionBracketElements getExpressionBracketAccess() {
-		return pExpressionBracket;
-	}
-	
-	public ParserRule getExpressionBracketRule() {
-		return getExpressionBracketAccess().getRule();
-	}
-	
-	//ExpressionConstantInt:
-	//	value=INT;
-	public ExpressionConstantIntElements getExpressionConstantIntAccess() {
-		return pExpressionConstantInt;
-	}
-	
-	public ParserRule getExpressionConstantIntRule() {
-		return getExpressionConstantIntAccess().getRule();
-	}
-	
-	/// *
-	// * Boolean expression as defined in the manual
-	// * / BooleanExpression:
-	//	BooleanExpressionLevel1;
-	public BooleanExpressionElements getBooleanExpressionAccess() {
-		return pBooleanExpression;
-	}
-	
-	public ParserRule getBooleanExpressionRule() {
-		return getBooleanExpressionAccess().getRule();
-	}
-	
-	//BooleanExpressionLevel1 BooleanExpression:
-	//	BooleanExpressionLevel2 ({ExpressionBinOp.left=current} bop=BinaryBooleanOperator
-	//	right=BooleanExpressionLevel2)*
-	public BooleanExpressionLevel1Elements getBooleanExpressionLevel1Access() {
-		return pBooleanExpressionLevel1;
-	}
-	
-	public ParserRule getBooleanExpressionLevel1Rule() {
-		return getBooleanExpressionLevel1Access().getRule();
-	}
-	
-	//enum BinaryBooleanOperator:
-	//	AND |
-	//	OR;
-	public BinaryBooleanOperatorElements getBinaryBooleanOperatorAccess() {
-		return eBinaryBooleanOperator;
-	}
-	
-	public EnumRule getBinaryBooleanOperatorRule() {
-		return getBinaryBooleanOperatorAccess().getRule();
-	}
-	
-	//BooleanExpressionLevel2 BooleanExpression:
-	//	NotExpression | BooleanExpressionLevel3
-	public BooleanExpressionLevel2Elements getBooleanExpressionLevel2Access() {
-		return pBooleanExpressionLevel2;
-	}
-	
-	public ParserRule getBooleanExpressionLevel2Rule() {
-		return getBooleanExpressionLevel2Access().getRule();
-	}
-	
-	//NotExpression:
-	//	"NOT" sub=BooleanExpressionLevel3;
-	public NotExpressionElements getNotExpressionAccess() {
-		return pNotExpression;
-	}
-	
-	public ParserRule getNotExpressionRule() {
-		return getNotExpressionAccess().getRule();
-	}
-	
-	//BooleanExpressionLevel3 BooleanExpression:
-	//	=> ComparisonExpression | BooleanExpressionBracket | BooleanExpressionConstant
-	public BooleanExpressionLevel3Elements getBooleanExpressionLevel3Access() {
-		return pBooleanExpressionLevel3;
-	}
-	
-	public ParserRule getBooleanExpressionLevel3Rule() {
-		return getBooleanExpressionLevel3Access().getRule();
-	}
-	
-	//ComparisonExpression BooleanExpression:
-	//	{ExpressionCompOp} left=IntExpression op=CompareOperator right=IntExpression
-	public ComparisonExpressionElements getComparisonExpressionAccess() {
-		return pComparisonExpression;
-	}
-	
-	public ParserRule getComparisonExpressionRule() {
-		return getComparisonExpressionAccess().getRule();
-	}
-	
 	//enum CompareOperator:
 	//	EQ='==' |
 	//	NEQ='!=' |
@@ -1693,32 +850,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public EnumRule getCompareOperatorRule() {
 		return getCompareOperatorAccess().getRule();
-	}
-	
-	//BooleanExpressionBracket:
-	//	"(" sub=BooleanExpression ")";
-	public BooleanExpressionBracketElements getBooleanExpressionBracketAccess() {
-		return pBooleanExpressionBracket;
-	}
-	
-	public ParserRule getBooleanExpressionBracketRule() {
-		return getBooleanExpressionBracketAccess().getRule();
-	}
-	
-	//BooleanExpressionConstant:
-	//	value=BOOL_LITERAL;
-	public BooleanExpressionConstantElements getBooleanExpressionConstantAccess() {
-		return pBooleanExpressionConstant;
-	}
-	
-	public ParserRule getBooleanExpressionConstantRule() {
-		return getBooleanExpressionConstantAccess().getRule();
-	}
-	
-	//terminal BOOL_LITERAL returns ecore::EBoolean:
-	//	'true' | 'false' | 'TRUE' | 'FALSE';
-	public TerminalRule getBOOL_LITERALRule() {
-		return tBOOL_LITERAL;
 	}
 	
 	//terminal ID:

@@ -81,119 +81,29 @@ public class DlsAdapterFactory extends AdapterFactoryImpl
         return createMissionAdapter();
       }
       @Override
-      public Adapter caseBehavior(Behavior object)
+      public Adapter caseTask(Task object)
       {
-        return createBehaviorAdapter();
+        return createTaskAdapter();
       }
       @Override
-      public Adapter caseTakeControl(TakeControl object)
+      public Adapter caseSensorType(SensorType object)
       {
-        return createTakeControlAdapter();
+        return createSensorTypeAdapter();
       }
       @Override
-      public Adapter caseMeasurableConditions(MeasurableConditions object)
+      public Adapter caseColorSensor(ColorSensor object)
       {
-        return createMeasurableConditionsAdapter();
+        return createColorSensorAdapter();
       }
       @Override
-      public Adapter caseMeasurableCondition(MeasurableCondition object)
+      public Adapter caseTouchSensor(TouchSensor object)
       {
-        return createMeasurableConditionAdapter();
+        return createTouchSensorAdapter();
       }
       @Override
-      public Adapter caseIntExpression(IntExpression object)
+      public Adapter caseUltrasonicSensor(UltrasonicSensor object)
       {
-        return createIntExpressionAdapter();
-      }
-      @Override
-      public Adapter caseExpressionMinus(ExpressionMinus object)
-      {
-        return createExpressionMinusAdapter();
-      }
-      @Override
-      public Adapter caseExpressionPlus(ExpressionPlus object)
-      {
-        return createExpressionPlusAdapter();
-      }
-      @Override
-      public Adapter caseExpressionBracket(ExpressionBracket object)
-      {
-        return createExpressionBracketAdapter();
-      }
-      @Override
-      public Adapter caseExpressionConstantInt(ExpressionConstantInt object)
-      {
-        return createExpressionConstantIntAdapter();
-      }
-      @Override
-      public Adapter caseBooleanExpression(BooleanExpression object)
-      {
-        return createBooleanExpressionAdapter();
-      }
-      @Override
-      public Adapter caseNotExpression(NotExpression object)
-      {
-        return createNotExpressionAdapter();
-      }
-      @Override
-      public Adapter caseBooleanExpressionBracket(BooleanExpressionBracket object)
-      {
-        return createBooleanExpressionBracketAdapter();
-      }
-      @Override
-      public Adapter caseBooleanExpressionConstant(BooleanExpressionConstant object)
-      {
-        return createBooleanExpressionConstantAdapter();
-      }
-      @Override
-      public Adapter caseExpressionAddition(ExpressionAddition object)
-      {
-        return createExpressionAdditionAdapter();
-      }
-      @Override
-      public Adapter caseExpressionSubtraction(ExpressionSubtraction object)
-      {
-        return createExpressionSubtractionAdapter();
-      }
-      @Override
-      public Adapter caseExpressionMultiply(ExpressionMultiply object)
-      {
-        return createExpressionMultiplyAdapter();
-      }
-      @Override
-      public Adapter caseExpressionDivision(ExpressionDivision object)
-      {
-        return createExpressionDivisionAdapter();
-      }
-      @Override
-      public Adapter caseExpressionMaximum(ExpressionMaximum object)
-      {
-        return createExpressionMaximumAdapter();
-      }
-      @Override
-      public Adapter caseExpressionMinimum(ExpressionMinimum object)
-      {
-        return createExpressionMinimumAdapter();
-      }
-      @Override
-      public Adapter caseExpressionModulo(ExpressionModulo object)
-      {
-        return createExpressionModuloAdapter();
-      }
-      @Override
-      public Adapter caseExpressionPower(ExpressionPower object)
-      {
-        return createExpressionPowerAdapter();
-      }
-      @Override
-      public Adapter caseExpressionBinOp(ExpressionBinOp object)
-      {
-        return createExpressionBinOpAdapter();
-      }
-      @Override
-      public Adapter caseExpressionCompOp(ExpressionCompOp object)
-      {
-        return createExpressionCompOpAdapter();
+        return createUltrasonicSensorAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -233,346 +143,76 @@ public class DlsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.Behavior <em>Behavior</em>}'.
+   * Creates a new adapter for an object of class '{@link robot.ev3.dls.Task <em>Task</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see robot.ev3.dls.Behavior
+   * @see robot.ev3.dls.Task
    * @generated
    */
-  public Adapter createBehaviorAdapter()
+  public Adapter createTaskAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.TakeControl <em>Take Control</em>}'.
+   * Creates a new adapter for an object of class '{@link robot.ev3.dls.SensorType <em>Sensor Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see robot.ev3.dls.TakeControl
+   * @see robot.ev3.dls.SensorType
    * @generated
    */
-  public Adapter createTakeControlAdapter()
+  public Adapter createSensorTypeAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.MeasurableConditions <em>Measurable Conditions</em>}'.
+   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ColorSensor <em>Color Sensor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see robot.ev3.dls.MeasurableConditions
+   * @see robot.ev3.dls.ColorSensor
    * @generated
    */
-  public Adapter createMeasurableConditionsAdapter()
+  public Adapter createColorSensorAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.MeasurableCondition <em>Measurable Condition</em>}'.
+   * Creates a new adapter for an object of class '{@link robot.ev3.dls.TouchSensor <em>Touch Sensor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see robot.ev3.dls.MeasurableCondition
+   * @see robot.ev3.dls.TouchSensor
    * @generated
    */
-  public Adapter createMeasurableConditionAdapter()
+  public Adapter createTouchSensorAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.IntExpression <em>Int Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link robot.ev3.dls.UltrasonicSensor <em>Ultrasonic Sensor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see robot.ev3.dls.IntExpression
+   * @see robot.ev3.dls.UltrasonicSensor
    * @generated
    */
-  public Adapter createIntExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionMinus <em>Expression Minus</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionMinus
-   * @generated
-   */
-  public Adapter createExpressionMinusAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionPlus <em>Expression Plus</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionPlus
-   * @generated
-   */
-  public Adapter createExpressionPlusAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionBracket <em>Expression Bracket</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionBracket
-   * @generated
-   */
-  public Adapter createExpressionBracketAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionConstantInt <em>Expression Constant Int</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionConstantInt
-   * @generated
-   */
-  public Adapter createExpressionConstantIntAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.BooleanExpression <em>Boolean Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.BooleanExpression
-   * @generated
-   */
-  public Adapter createBooleanExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.NotExpression <em>Not Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.NotExpression
-   * @generated
-   */
-  public Adapter createNotExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.BooleanExpressionBracket <em>Boolean Expression Bracket</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.BooleanExpressionBracket
-   * @generated
-   */
-  public Adapter createBooleanExpressionBracketAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.BooleanExpressionConstant <em>Boolean Expression Constant</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.BooleanExpressionConstant
-   * @generated
-   */
-  public Adapter createBooleanExpressionConstantAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionAddition <em>Expression Addition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionAddition
-   * @generated
-   */
-  public Adapter createExpressionAdditionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionSubtraction <em>Expression Subtraction</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionSubtraction
-   * @generated
-   */
-  public Adapter createExpressionSubtractionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionMultiply <em>Expression Multiply</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionMultiply
-   * @generated
-   */
-  public Adapter createExpressionMultiplyAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionDivision <em>Expression Division</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionDivision
-   * @generated
-   */
-  public Adapter createExpressionDivisionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionMaximum <em>Expression Maximum</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionMaximum
-   * @generated
-   */
-  public Adapter createExpressionMaximumAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionMinimum <em>Expression Minimum</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionMinimum
-   * @generated
-   */
-  public Adapter createExpressionMinimumAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionModulo <em>Expression Modulo</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionModulo
-   * @generated
-   */
-  public Adapter createExpressionModuloAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionPower <em>Expression Power</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionPower
-   * @generated
-   */
-  public Adapter createExpressionPowerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionBinOp <em>Expression Bin Op</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionBinOp
-   * @generated
-   */
-  public Adapter createExpressionBinOpAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link robot.ev3.dls.ExpressionCompOp <em>Expression Comp Op</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see robot.ev3.dls.ExpressionCompOp
-   * @generated
-   */
-  public Adapter createExpressionCompOpAdapter()
+  public Adapter createUltrasonicSensorAdapter()
   {
     return null;
   }

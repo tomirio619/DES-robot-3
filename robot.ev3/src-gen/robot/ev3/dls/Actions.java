@@ -28,7 +28,7 @@ public enum Actions implements Enumerator
    * @generated
    * @ordered
    */
-  ROTATE_L(0, "ROTATE_L", "rotateLeft"),
+  ROTATE_L(0, "ROTATE_L", "ROTATELEFT"),
 
   /**
    * The '<em><b>ROTATE R</b></em>' literal object.
@@ -38,7 +38,7 @@ public enum Actions implements Enumerator
    * @generated
    * @ordered
    */
-  ROTATE_R(1, "ROTATE_R", "rotateRight"),
+  ROTATE_R(1, "ROTATE_R", "ROTATERIGHT"),
 
   /**
    * The '<em><b>DRIVE FORWARD</b></em>' literal object.
@@ -48,7 +48,7 @@ public enum Actions implements Enumerator
    * @generated
    * @ordered
    */
-  DRIVE_FORWARD(2, "DRIVE_FORWARD", "driveForward"),
+  DRIVE_FORWARD(2, "DRIVE_FORWARD", "DRIVEFORWARD"),
 
   /**
    * The '<em><b>DRIVE BACKWARD</b></em>' literal object.
@@ -58,7 +58,7 @@ public enum Actions implements Enumerator
    * @generated
    * @ordered
    */
-  DRIVE_BACKWARD(3, "DRIVE_BACKWARD", "driveBackward"),
+  DRIVE_BACKWARD(3, "DRIVE_BACKWARD", "DRIVEBACKWARD"),
 
   /**
    * The '<em><b>STOP DRIVING</b></em>' literal object.
@@ -68,7 +68,27 @@ public enum Actions implements Enumerator
    * @generated
    * @ordered
    */
-  STOP_DRIVING(4, "STOP_DRIVING", "stopDriving");
+  STOP_DRIVING(4, "STOP_DRIVING", "STOP"),
+
+  /**
+   * The '<em><b>TURN AROUND</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #TURN_AROUND_VALUE
+   * @generated
+   * @ordered
+   */
+  TURN_AROUND(5, "TURN_AROUND", "TURNAROUND"),
+
+  /**
+   * The '<em><b>BEEP</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #BEEP_VALUE
+   * @generated
+   * @ordered
+   */
+  BEEP(6, "BEEP", "BEEP");
 
   /**
    * The '<em><b>ROTATE L</b></em>' literal value.
@@ -79,7 +99,7 @@ public enum Actions implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #ROTATE_L
-   * @model literal="rotateLeft"
+   * @model literal="ROTATELEFT"
    * @generated
    * @ordered
    */
@@ -94,7 +114,7 @@ public enum Actions implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #ROTATE_R
-   * @model literal="rotateRight"
+   * @model literal="ROTATERIGHT"
    * @generated
    * @ordered
    */
@@ -109,7 +129,7 @@ public enum Actions implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #DRIVE_FORWARD
-   * @model literal="driveForward"
+   * @model literal="DRIVEFORWARD"
    * @generated
    * @ordered
    */
@@ -124,7 +144,7 @@ public enum Actions implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #DRIVE_BACKWARD
-   * @model literal="driveBackward"
+   * @model literal="DRIVEBACKWARD"
    * @generated
    * @ordered
    */
@@ -139,11 +159,41 @@ public enum Actions implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #STOP_DRIVING
-   * @model literal="stopDriving"
+   * @model literal="STOP"
    * @generated
    * @ordered
    */
   public static final int STOP_DRIVING_VALUE = 4;
+
+  /**
+   * The '<em><b>TURN AROUND</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>TURN AROUND</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #TURN_AROUND
+   * @model literal="TURNAROUND"
+   * @generated
+   * @ordered
+   */
+  public static final int TURN_AROUND_VALUE = 5;
+
+  /**
+   * The '<em><b>BEEP</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>BEEP</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #BEEP
+   * @model
+   * @generated
+   * @ordered
+   */
+  public static final int BEEP_VALUE = 6;
 
   /**
    * An array of all the '<em><b>Actions</b></em>' enumerators.
@@ -159,6 +209,8 @@ public enum Actions implements Enumerator
       DRIVE_FORWARD,
       DRIVE_BACKWARD,
       STOP_DRIVING,
+      TURN_AROUND,
+      BEEP,
     };
 
   /**
@@ -228,6 +280,8 @@ public enum Actions implements Enumerator
       case DRIVE_FORWARD_VALUE: return DRIVE_FORWARD;
       case DRIVE_BACKWARD_VALUE: return DRIVE_BACKWARD;
       case STOP_DRIVING_VALUE: return STOP_DRIVING;
+      case TURN_AROUND_VALUE: return TURN_AROUND;
+      case BEEP_VALUE: return BEEP;
     }
     return null;
   }

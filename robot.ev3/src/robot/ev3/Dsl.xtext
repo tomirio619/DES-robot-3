@@ -1,80 +1,72 @@
 grammar robot.ev3.Dsl with org.eclipse.xtext.common.Terminals
 
-// next needed because of Ecore type EBoolean used
-import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-
 generate dls "http://www.ev3.robot/dsl"
 
 /*
  * A mission consists of a number of behaviors
  */
-Mission: behaviorList += Behavior+
+Mission: 'Mission:' tasks += Task+
 ;
+
+/*Mission 1
+Task BeepOnRed Uses ColorSensor on Color RED Do Beep (Turn Around)
+
+Task CloserThanFifteen Uses Ultrasonic whenDistance 'bigger/smaller|compare' 15 
+
+Task InBlackBorder Uses ColorSensor On Color Black Do Turn Around 
+
+Task BounceDaBounce Uses touchSensor On Left/Right/Both Do Beep/TurnAround
+
+Task DriveForward On true Do Drive*/   
 
 
 /*
  * A behavior consists of a name, an optional type (in case of driving), an optional priority
  * and a take control definition.
  */
-Behavior: 'Behavior:' name = ID
-	'type:' behaviorType = BehaviorTypes?
-	'priority:' prio = INT?
-	'take-control:' control = TakeControl
-	'actions:' actions = Actions
+Task: 'Task:' name = ID
+	'Uses:' sensor = SensorType
+	'Do:' action = Actions
 ;
 
-/*
- * Take control consists of either a boolean expression or a m
- */
-TakeControl: takecontrol = BooleanExpression | MeasurableConditions;
-
-
-/*
- * MeasurableConditions is a list of at least one measurable condition
- */
-MeasurableConditions: measurableConditions += MeasurableCondition+;
-
-/*
- * A measurable condition is a measurable, a value and an operator
- */
-MeasurableCondition: (measurable = Measurables unit = MeasurementUnit value = STRING  operator = CompareOperator);
-
-
-/*
- * Units of the measurements that can be performed
- */
-enum MeasurementUnit:
-	DISTANCE = "distance" |
-	COLOR = "color" | 
-	INT = "int"
+SensorType:
+	ColorSensor | 
+	TouchSensor | 
+	UltrasonicSensor 
 ;
 
-/*
- * Types of behavior, only consists of driving
- */
-enum BehaviorTypes:
-	DRIVE = "drive"
+ColorSensor:
+	'ColorSensor' 'On' 'DetectedColor' 'is:' key = Colors 
 ;
 
-/*
- * Measurement that can be performed by the sensors
- */
-enum Measurables:
-	FLOOR_COLOR = "floorColor" | 
-	LEFT_TOUCH = "leftTouch"  |
-	RIGHT_TOUCH = "rightTouch" |
-	DIST_TO_OBJECT_FRONT = "distanceObjectInFront"
+TouchSensor: 
+	'TouchSensor' 'On' 'TouchedSide:' key = TouchSensorSides 
+;
+
+UltrasonicSensor:
+	'USensor' 'On' 'Distance:' comparator = CompareOperator distance = DECIMAL
+;
+
+terminal DECIMAL: INT '.' INT;
+
+
+enum TouchSensorSides:
+	LEFT = "LEFT" |
+	RIGHT = "RIGHT" |
+	BOTH = "BOTH"
 ;
 
 /*
  * Actions that can be performed
  */
 enum Actions:
-	ROTATE_L = "rotateLeft" |
-	ROTATE_R = "rotateRight" |
-	DRIVE_FORWARD = "driveForward" |
-	DRIVE_BACKWARD = "driveBackward" |
-	STOP_DRIVING = "stopDriving"
+	ROTATE_L = "ROTATELEFT" |
+	ROTATE_R = "ROTATERIGHT" |
+	DRIVE_FORWARD = "DRIVEFORWARD" |
+	DRIVE_BACKWARD = "DRIVEBACKWARD" |
+	STOP_DRIVING = "STOP" |
+	TURN_AROUND = "TURNAROUND" |
+	BEEP = "BEEP"
 ;
 
 
@@ -111,99 +103,6 @@ enum Colors:
 	YELLOW = "YELLOW"
 ;
 
-
-/*
- * Integers Expression as defined in the manual
- */
-IntExpression: ExpressionLevel1
-;
-
-ExpressionLevel1 returns IntExpression: // Left associativity
-	ExpressionLevel2
-	( ({ExpressionAddition.left =current} "+" right=ExpressionLevel2)
-	| ({ExpressionSubtraction.left=current} "-" right=ExpressionLevel2)
-	)*
-;
-
-ExpressionLevel2 returns IntExpression: // Left associativity
-	ExpressionLevel3
-	( ({ExpressionMultiply.left=current} "*" right=ExpressionLevel3)
-	| ({ExpressionDivision.left=current} "/" right=ExpressionLevel3)
-	| ({ExpressionMaximum.left =current} "max" right=ExpressionLevel3)
-	| ({ExpressionMinimum.left =current} "min" right=ExpressionLevel3)
-	| ({ExpressionModulo.left =current} "mod" right=ExpressionLevel3)
-	)*
-;
-
-ExpressionLevel3 returns IntExpression: // Right associativity
-	ExpressionLevel4
-	( ({ExpressionPower.left=current} "^"
-	right=ExpressionLevel3)
-	)?
-;
-
-ExpressionLevel4 returns IntExpression:
-	ExpressionMinus | ExpressionPlus | ExpressionLevel5
-;
-
-ExpressionMinus:
-"-" sub=ExpressionLevel5
-;
-
-ExpressionPlus:
-"+" sub=ExpressionLevel5
-;
-
-ExpressionLevel5 returns IntExpression:
-	ExpressionBracket |
-	ExpressionConstantInt
-;
-
-ExpressionBracket:
-	"(" sub=IntExpression ")"
-;
-
-ExpressionConstantInt:
-value=INT
-;
-
-/*
- * Boolean expression as defined in the manual
- */
-
-BooleanExpression: BooleanExpressionLevel1
-;
-
-BooleanExpressionLevel1 returns BooleanExpression: // Left associativity
-	BooleanExpressionLevel2
-	( {ExpressionBinOp.left=current} bop = BinaryBooleanOperator
-	right=BooleanExpressionLevel2
-)*
-;
-
-enum BinaryBooleanOperator:
-	AND = 'AND' |
-	OR = 'OR'
-;
-
-BooleanExpressionLevel2 returns BooleanExpression:
-	NotExpression |
-	BooleanExpressionLevel3
-;
-
-NotExpression:
-	"NOT" sub = BooleanExpressionLevel3
-;
-BooleanExpressionLevel3 returns BooleanExpression:
-	(=> ComparisonExpression) |
-	BooleanExpressionBracket |
-	BooleanExpressionConstant
-;
-
-ComparisonExpression returns BooleanExpression: {ExpressionCompOp}
-left=IntExpression op = CompareOperator right = IntExpression
-;
-
 enum CompareOperator:
 	EQ = '==' |
 	NEQ = '!=' |
@@ -211,16 +110,4 @@ enum CompareOperator:
 	G = '>' |
 	LEQ = '<=' |
 	L = '<'
-;
-
-BooleanExpressionBracket:
-"(" sub=BooleanExpression ")"
-;
-
-BooleanExpressionConstant:
-value=BOOL_LITERAL
-;
-
-terminal BOOL_LITERAL returns ecore::EBoolean: 
-	'true' | 'false' | 'TRUE' | 'FALSE'
 ;

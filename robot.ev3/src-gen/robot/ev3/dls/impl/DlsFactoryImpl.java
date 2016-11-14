@@ -67,29 +67,11 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
     switch (eClass.getClassifierID())
     {
       case DlsPackage.MISSION: return createMission();
-      case DlsPackage.BEHAVIOR: return createBehavior();
-      case DlsPackage.TAKE_CONTROL: return createTakeControl();
-      case DlsPackage.MEASURABLE_CONDITIONS: return createMeasurableConditions();
-      case DlsPackage.MEASURABLE_CONDITION: return createMeasurableCondition();
-      case DlsPackage.INT_EXPRESSION: return createIntExpression();
-      case DlsPackage.EXPRESSION_MINUS: return createExpressionMinus();
-      case DlsPackage.EXPRESSION_PLUS: return createExpressionPlus();
-      case DlsPackage.EXPRESSION_BRACKET: return createExpressionBracket();
-      case DlsPackage.EXPRESSION_CONSTANT_INT: return createExpressionConstantInt();
-      case DlsPackage.BOOLEAN_EXPRESSION: return createBooleanExpression();
-      case DlsPackage.NOT_EXPRESSION: return createNotExpression();
-      case DlsPackage.BOOLEAN_EXPRESSION_BRACKET: return createBooleanExpressionBracket();
-      case DlsPackage.BOOLEAN_EXPRESSION_CONSTANT: return createBooleanExpressionConstant();
-      case DlsPackage.EXPRESSION_ADDITION: return createExpressionAddition();
-      case DlsPackage.EXPRESSION_SUBTRACTION: return createExpressionSubtraction();
-      case DlsPackage.EXPRESSION_MULTIPLY: return createExpressionMultiply();
-      case DlsPackage.EXPRESSION_DIVISION: return createExpressionDivision();
-      case DlsPackage.EXPRESSION_MAXIMUM: return createExpressionMaximum();
-      case DlsPackage.EXPRESSION_MINIMUM: return createExpressionMinimum();
-      case DlsPackage.EXPRESSION_MODULO: return createExpressionModulo();
-      case DlsPackage.EXPRESSION_POWER: return createExpressionPower();
-      case DlsPackage.EXPRESSION_BIN_OP: return createExpressionBinOp();
-      case DlsPackage.EXPRESSION_COMP_OP: return createExpressionCompOp();
+      case DlsPackage.TASK: return createTask();
+      case DlsPackage.SENSOR_TYPE: return createSensorType();
+      case DlsPackage.COLOR_SENSOR: return createColorSensor();
+      case DlsPackage.TOUCH_SENSOR: return createTouchSensor();
+      case DlsPackage.ULTRASONIC_SENSOR: return createUltrasonicSensor();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -105,20 +87,14 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case DlsPackage.MEASUREMENT_UNIT:
-        return createMeasurementUnitFromString(eDataType, initialValue);
-      case DlsPackage.BEHAVIOR_TYPES:
-        return createBehaviorTypesFromString(eDataType, initialValue);
-      case DlsPackage.MEASURABLES:
-        return createMeasurablesFromString(eDataType, initialValue);
+      case DlsPackage.TOUCH_SENSOR_SIDES:
+        return createTouchSensorSidesFromString(eDataType, initialValue);
       case DlsPackage.ACTIONS:
         return createActionsFromString(eDataType, initialValue);
       case DlsPackage.DIRECTIONS:
         return createDirectionsFromString(eDataType, initialValue);
       case DlsPackage.COLORS:
         return createColorsFromString(eDataType, initialValue);
-      case DlsPackage.BINARY_BOOLEAN_OPERATOR:
-        return createBinaryBooleanOperatorFromString(eDataType, initialValue);
       case DlsPackage.COMPARE_OPERATOR:
         return createCompareOperatorFromString(eDataType, initialValue);
       default:
@@ -136,20 +112,14 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case DlsPackage.MEASUREMENT_UNIT:
-        return convertMeasurementUnitToString(eDataType, instanceValue);
-      case DlsPackage.BEHAVIOR_TYPES:
-        return convertBehaviorTypesToString(eDataType, instanceValue);
-      case DlsPackage.MEASURABLES:
-        return convertMeasurablesToString(eDataType, instanceValue);
+      case DlsPackage.TOUCH_SENSOR_SIDES:
+        return convertTouchSensorSidesToString(eDataType, instanceValue);
       case DlsPackage.ACTIONS:
         return convertActionsToString(eDataType, instanceValue);
       case DlsPackage.DIRECTIONS:
         return convertDirectionsToString(eDataType, instanceValue);
       case DlsPackage.COLORS:
         return convertColorsToString(eDataType, instanceValue);
-      case DlsPackage.BINARY_BOOLEAN_OPERATOR:
-        return convertBinaryBooleanOperatorToString(eDataType, instanceValue);
       case DlsPackage.COMPARE_OPERATOR:
         return convertCompareOperatorToString(eDataType, instanceValue);
       default:
@@ -173,10 +143,10 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Behavior createBehavior()
+  public Task createTask()
   {
-    BehaviorImpl behavior = new BehaviorImpl();
-    return behavior;
+    TaskImpl task = new TaskImpl();
+    return task;
   }
 
   /**
@@ -184,10 +154,10 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TakeControl createTakeControl()
+  public SensorType createSensorType()
   {
-    TakeControlImpl takeControl = new TakeControlImpl();
-    return takeControl;
+    SensorTypeImpl sensorType = new SensorTypeImpl();
+    return sensorType;
   }
 
   /**
@@ -195,10 +165,10 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MeasurableConditions createMeasurableConditions()
+  public ColorSensor createColorSensor()
   {
-    MeasurableConditionsImpl measurableConditions = new MeasurableConditionsImpl();
-    return measurableConditions;
+    ColorSensorImpl colorSensor = new ColorSensorImpl();
+    return colorSensor;
   }
 
   /**
@@ -206,10 +176,10 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public MeasurableCondition createMeasurableCondition()
+  public TouchSensor createTouchSensor()
   {
-    MeasurableConditionImpl measurableCondition = new MeasurableConditionImpl();
-    return measurableCondition;
+    TouchSensorImpl touchSensor = new TouchSensorImpl();
+    return touchSensor;
   }
 
   /**
@@ -217,10 +187,10 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public IntExpression createIntExpression()
+  public UltrasonicSensor createUltrasonicSensor()
   {
-    IntExpressionImpl intExpression = new IntExpressionImpl();
-    return intExpression;
+    UltrasonicSensorImpl ultrasonicSensor = new UltrasonicSensorImpl();
+    return ultrasonicSensor;
   }
 
   /**
@@ -228,207 +198,9 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionMinus createExpressionMinus()
+  public TouchSensorSides createTouchSensorSidesFromString(EDataType eDataType, String initialValue)
   {
-    ExpressionMinusImpl expressionMinus = new ExpressionMinusImpl();
-    return expressionMinus;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionPlus createExpressionPlus()
-  {
-    ExpressionPlusImpl expressionPlus = new ExpressionPlusImpl();
-    return expressionPlus;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionBracket createExpressionBracket()
-  {
-    ExpressionBracketImpl expressionBracket = new ExpressionBracketImpl();
-    return expressionBracket;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionConstantInt createExpressionConstantInt()
-  {
-    ExpressionConstantIntImpl expressionConstantInt = new ExpressionConstantIntImpl();
-    return expressionConstantInt;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanExpression createBooleanExpression()
-  {
-    BooleanExpressionImpl booleanExpression = new BooleanExpressionImpl();
-    return booleanExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotExpression createNotExpression()
-  {
-    NotExpressionImpl notExpression = new NotExpressionImpl();
-    return notExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanExpressionBracket createBooleanExpressionBracket()
-  {
-    BooleanExpressionBracketImpl booleanExpressionBracket = new BooleanExpressionBracketImpl();
-    return booleanExpressionBracket;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BooleanExpressionConstant createBooleanExpressionConstant()
-  {
-    BooleanExpressionConstantImpl booleanExpressionConstant = new BooleanExpressionConstantImpl();
-    return booleanExpressionConstant;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionAddition createExpressionAddition()
-  {
-    ExpressionAdditionImpl expressionAddition = new ExpressionAdditionImpl();
-    return expressionAddition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionSubtraction createExpressionSubtraction()
-  {
-    ExpressionSubtractionImpl expressionSubtraction = new ExpressionSubtractionImpl();
-    return expressionSubtraction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionMultiply createExpressionMultiply()
-  {
-    ExpressionMultiplyImpl expressionMultiply = new ExpressionMultiplyImpl();
-    return expressionMultiply;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionDivision createExpressionDivision()
-  {
-    ExpressionDivisionImpl expressionDivision = new ExpressionDivisionImpl();
-    return expressionDivision;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionMaximum createExpressionMaximum()
-  {
-    ExpressionMaximumImpl expressionMaximum = new ExpressionMaximumImpl();
-    return expressionMaximum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionMinimum createExpressionMinimum()
-  {
-    ExpressionMinimumImpl expressionMinimum = new ExpressionMinimumImpl();
-    return expressionMinimum;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionModulo createExpressionModulo()
-  {
-    ExpressionModuloImpl expressionModulo = new ExpressionModuloImpl();
-    return expressionModulo;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionPower createExpressionPower()
-  {
-    ExpressionPowerImpl expressionPower = new ExpressionPowerImpl();
-    return expressionPower;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionBinOp createExpressionBinOp()
-  {
-    ExpressionBinOpImpl expressionBinOp = new ExpressionBinOpImpl();
-    return expressionBinOp;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExpressionCompOp createExpressionCompOp()
-  {
-    ExpressionCompOpImpl expressionCompOp = new ExpressionCompOpImpl();
-    return expressionCompOp;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MeasurementUnit createMeasurementUnitFromString(EDataType eDataType, String initialValue)
-  {
-    MeasurementUnit result = MeasurementUnit.get(initialValue);
+    TouchSensorSides result = TouchSensorSides.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -438,51 +210,7 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertMeasurementUnitToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BehaviorTypes createBehaviorTypesFromString(EDataType eDataType, String initialValue)
-  {
-    BehaviorTypes result = BehaviorTypes.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertBehaviorTypesToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Measurables createMeasurablesFromString(EDataType eDataType, String initialValue)
-  {
-    Measurables result = Measurables.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertMeasurablesToString(EDataType eDataType, Object instanceValue)
+  public String convertTouchSensorSidesToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }
@@ -549,28 +277,6 @@ public class DlsFactoryImpl extends EFactoryImpl implements DlsFactory
    * @generated
    */
   public String convertColorsToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BinaryBooleanOperator createBinaryBooleanOperatorFromString(EDataType eDataType, String initialValue)
-  {
-    BinaryBooleanOperator result = BinaryBooleanOperator.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertBinaryBooleanOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

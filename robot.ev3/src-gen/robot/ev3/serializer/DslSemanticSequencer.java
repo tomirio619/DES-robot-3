@@ -14,29 +14,12 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import robot.ev3.dls.Behavior;
-import robot.ev3.dls.BooleanExpressionBracket;
-import robot.ev3.dls.BooleanExpressionConstant;
+import robot.ev3.dls.ColorSensor;
 import robot.ev3.dls.DlsPackage;
-import robot.ev3.dls.ExpressionAddition;
-import robot.ev3.dls.ExpressionBinOp;
-import robot.ev3.dls.ExpressionBracket;
-import robot.ev3.dls.ExpressionCompOp;
-import robot.ev3.dls.ExpressionConstantInt;
-import robot.ev3.dls.ExpressionDivision;
-import robot.ev3.dls.ExpressionMaximum;
-import robot.ev3.dls.ExpressionMinimum;
-import robot.ev3.dls.ExpressionMinus;
-import robot.ev3.dls.ExpressionModulo;
-import robot.ev3.dls.ExpressionMultiply;
-import robot.ev3.dls.ExpressionPlus;
-import robot.ev3.dls.ExpressionPower;
-import robot.ev3.dls.ExpressionSubtraction;
-import robot.ev3.dls.MeasurableCondition;
-import robot.ev3.dls.MeasurableConditions;
 import robot.ev3.dls.Mission;
-import robot.ev3.dls.NotExpression;
-import robot.ev3.dls.TakeControl;
+import robot.ev3.dls.Task;
+import robot.ev3.dls.TouchSensor;
+import robot.ev3.dls.UltrasonicSensor;
 import robot.ev3.services.DslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -53,71 +36,20 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == DlsPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case DlsPackage.BEHAVIOR:
-				sequence_Behavior(context, (Behavior) semanticObject); 
-				return; 
-			case DlsPackage.BOOLEAN_EXPRESSION_BRACKET:
-				sequence_BooleanExpressionBracket(context, (BooleanExpressionBracket) semanticObject); 
-				return; 
-			case DlsPackage.BOOLEAN_EXPRESSION_CONSTANT:
-				sequence_BooleanExpressionConstant(context, (BooleanExpressionConstant) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_ADDITION:
-				sequence_ExpressionLevel1(context, (ExpressionAddition) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_BIN_OP:
-				sequence_BooleanExpressionLevel1(context, (ExpressionBinOp) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_BRACKET:
-				sequence_ExpressionBracket(context, (ExpressionBracket) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_COMP_OP:
-				sequence_ComparisonExpression(context, (ExpressionCompOp) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_CONSTANT_INT:
-				sequence_ExpressionConstantInt(context, (ExpressionConstantInt) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_DIVISION:
-				sequence_ExpressionLevel2(context, (ExpressionDivision) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_MAXIMUM:
-				sequence_ExpressionLevel2(context, (ExpressionMaximum) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_MINIMUM:
-				sequence_ExpressionLevel2(context, (ExpressionMinimum) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_MINUS:
-				sequence_ExpressionMinus(context, (ExpressionMinus) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_MODULO:
-				sequence_ExpressionLevel2(context, (ExpressionModulo) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_MULTIPLY:
-				sequence_ExpressionLevel2(context, (ExpressionMultiply) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_PLUS:
-				sequence_ExpressionPlus(context, (ExpressionPlus) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_POWER:
-				sequence_ExpressionLevel3(context, (ExpressionPower) semanticObject); 
-				return; 
-			case DlsPackage.EXPRESSION_SUBTRACTION:
-				sequence_ExpressionLevel1(context, (ExpressionSubtraction) semanticObject); 
-				return; 
-			case DlsPackage.MEASURABLE_CONDITION:
-				sequence_MeasurableCondition(context, (MeasurableCondition) semanticObject); 
-				return; 
-			case DlsPackage.MEASURABLE_CONDITIONS:
-				sequence_MeasurableConditions(context, (MeasurableConditions) semanticObject); 
+			case DlsPackage.COLOR_SENSOR:
+				sequence_ColorSensor(context, (ColorSensor) semanticObject); 
 				return; 
 			case DlsPackage.MISSION:
 				sequence_Mission(context, (Mission) semanticObject); 
 				return; 
-			case DlsPackage.NOT_EXPRESSION:
-				sequence_NotExpression(context, (NotExpression) semanticObject); 
+			case DlsPackage.TASK:
+				sequence_Task(context, (Task) semanticObject); 
 				return; 
-			case DlsPackage.TAKE_CONTROL:
-				sequence_TakeControl(context, (TakeControl) semanticObject); 
+			case DlsPackage.TOUCH_SENSOR:
+				sequence_TouchSensor(context, (TouchSensor) semanticObject); 
+				return; 
+			case DlsPackage.ULTRASONIC_SENSOR:
+				sequence_UltrasonicSensor(context, (UltrasonicSensor) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -126,509 +58,20 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     Behavior returns Behavior
+	 *     SensorType returns ColorSensor
+	 *     ColorSensor returns ColorSensor
 	 *
 	 * Constraint:
-	 *     (name=ID behaviorType=BehaviorTypes? prio=INT? control=TakeControl actions=Actions)
+	 *     key=Colors
 	 */
-	protected void sequence_Behavior(ISerializationContext context, Behavior semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     BooleanExpression returns BooleanExpressionBracket
-	 *     BooleanExpressionLevel1 returns BooleanExpressionBracket
-	 *     BooleanExpressionLevel1.ExpressionBinOp_1_0 returns BooleanExpressionBracket
-	 *     BooleanExpressionLevel2 returns BooleanExpressionBracket
-	 *     BooleanExpressionLevel3 returns BooleanExpressionBracket
-	 *     BooleanExpressionBracket returns BooleanExpressionBracket
-	 *
-	 * Constraint:
-	 *     sub=BooleanExpression
-	 */
-	protected void sequence_BooleanExpressionBracket(ISerializationContext context, BooleanExpressionBracket semanticObject) {
+	protected void sequence_ColorSensor(ISerializationContext context, ColorSensor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.BOOLEAN_EXPRESSION_BRACKET__SUB) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.BOOLEAN_EXPRESSION_BRACKET__SUB));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.COLOR_SENSOR__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.COLOR_SENSOR__KEY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBooleanExpressionBracketAccess().getSubBooleanExpressionParserRuleCall_1_0(), semanticObject.getSub());
+		feeder.accept(grammarAccess.getColorSensorAccess().getKeyColorsEnumRuleCall_4_0(), semanticObject.getKey());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     BooleanExpression returns BooleanExpressionConstant
-	 *     BooleanExpressionLevel1 returns BooleanExpressionConstant
-	 *     BooleanExpressionLevel1.ExpressionBinOp_1_0 returns BooleanExpressionConstant
-	 *     BooleanExpressionLevel2 returns BooleanExpressionConstant
-	 *     BooleanExpressionLevel3 returns BooleanExpressionConstant
-	 *     BooleanExpressionConstant returns BooleanExpressionConstant
-	 *
-	 * Constraint:
-	 *     value=BOOL_LITERAL
-	 */
-	protected void sequence_BooleanExpressionConstant(ISerializationContext context, BooleanExpressionConstant semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.BOOLEAN_EXPRESSION_CONSTANT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.BOOLEAN_EXPRESSION_CONSTANT__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBooleanExpressionConstantAccess().getValueBOOL_LITERALTerminalRuleCall_0(), semanticObject.isValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     BooleanExpression returns ExpressionBinOp
-	 *     BooleanExpressionLevel1 returns ExpressionBinOp
-	 *     BooleanExpressionLevel1.ExpressionBinOp_1_0 returns ExpressionBinOp
-	 *
-	 * Constraint:
-	 *     (left=BooleanExpressionLevel1_ExpressionBinOp_1_0 bop=BinaryBooleanOperator right=BooleanExpressionLevel2)
-	 */
-	protected void sequence_BooleanExpressionLevel1(ISerializationContext context, ExpressionBinOp semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__BOP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__BOP));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_BIN_OP__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBooleanExpressionLevel1Access().getExpressionBinOpLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getBooleanExpressionLevel1Access().getBopBinaryBooleanOperatorEnumRuleCall_1_1_0(), semanticObject.getBop());
-		feeder.accept(grammarAccess.getBooleanExpressionLevel1Access().getRightBooleanExpressionLevel2ParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     BooleanExpression returns ExpressionCompOp
-	 *     BooleanExpressionLevel1 returns ExpressionCompOp
-	 *     BooleanExpressionLevel1.ExpressionBinOp_1_0 returns ExpressionCompOp
-	 *     BooleanExpressionLevel2 returns ExpressionCompOp
-	 *     BooleanExpressionLevel3 returns ExpressionCompOp
-	 *     ComparisonExpression returns ExpressionCompOp
-	 *
-	 * Constraint:
-	 *     (left=IntExpression op=CompareOperator right=IntExpression)
-	 */
-	protected void sequence_ComparisonExpression(ISerializationContext context, ExpressionCompOp semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__OP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__OP));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_COMP_OP__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getComparisonExpressionAccess().getLeftIntExpressionParserRuleCall_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getComparisonExpressionAccess().getOpCompareOperatorEnumRuleCall_2_0(), semanticObject.getOp());
-		feeder.accept(grammarAccess.getComparisonExpressionAccess().getRightIntExpressionParserRuleCall_3_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionBracket
-	 *     ExpressionLevel1 returns ExpressionBracket
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionBracket
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionBracket
-	 *     ExpressionLevel2 returns ExpressionBracket
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionBracket
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionBracket
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionBracket
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionBracket
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionBracket
-	 *     ExpressionLevel3 returns ExpressionBracket
-	 *     ExpressionLevel3.ExpressionPower_1_0 returns ExpressionBracket
-	 *     ExpressionLevel4 returns ExpressionBracket
-	 *     ExpressionLevel5 returns ExpressionBracket
-	 *     ExpressionBracket returns ExpressionBracket
-	 *
-	 * Constraint:
-	 *     sub=IntExpression
-	 */
-	protected void sequence_ExpressionBracket(ISerializationContext context, ExpressionBracket semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_BRACKET__SUB) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_BRACKET__SUB));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionBracketAccess().getSubIntExpressionParserRuleCall_1_0(), semanticObject.getSub());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionConstantInt
-	 *     ExpressionLevel1 returns ExpressionConstantInt
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionConstantInt
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionConstantInt
-	 *     ExpressionLevel2 returns ExpressionConstantInt
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionConstantInt
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionConstantInt
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionConstantInt
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionConstantInt
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionConstantInt
-	 *     ExpressionLevel3 returns ExpressionConstantInt
-	 *     ExpressionLevel3.ExpressionPower_1_0 returns ExpressionConstantInt
-	 *     ExpressionLevel4 returns ExpressionConstantInt
-	 *     ExpressionLevel5 returns ExpressionConstantInt
-	 *     ExpressionConstantInt returns ExpressionConstantInt
-	 *
-	 * Constraint:
-	 *     value=INT
-	 */
-	protected void sequence_ExpressionConstantInt(ISerializationContext context, ExpressionConstantInt semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_CONSTANT_INT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_CONSTANT_INT__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionConstantIntAccess().getValueINTTerminalRuleCall_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionAddition
-	 *     ExpressionLevel1 returns ExpressionAddition
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionAddition
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionAddition
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel1_ExpressionAddition_1_0_0 right=ExpressionLevel2)
-	 */
-	protected void sequence_ExpressionLevel1(ISerializationContext context, ExpressionAddition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_ADDITION__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_ADDITION__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_ADDITION__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_ADDITION__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel1Access().getExpressionAdditionLeftAction_1_0_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel1Access().getRightExpressionLevel2ParserRuleCall_1_0_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionSubtraction
-	 *     ExpressionLevel1 returns ExpressionSubtraction
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionSubtraction
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionSubtraction
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel1_ExpressionSubtraction_1_1_0 right=ExpressionLevel2)
-	 */
-	protected void sequence_ExpressionLevel1(ISerializationContext context, ExpressionSubtraction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_SUBTRACTION__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_SUBTRACTION__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_SUBTRACTION__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_SUBTRACTION__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel1Access().getExpressionSubtractionLeftAction_1_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel1Access().getRightExpressionLevel2ParserRuleCall_1_1_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionDivision
-	 *     ExpressionLevel1 returns ExpressionDivision
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionDivision
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionDivision
-	 *     ExpressionLevel2 returns ExpressionDivision
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionDivision
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionDivision
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionDivision
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionDivision
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionDivision
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel2_ExpressionDivision_1_1_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel2(ISerializationContext context, ExpressionDivision semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_DIVISION__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_DIVISION__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_DIVISION__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_DIVISION__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getExpressionDivisionLeftAction_1_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getRightExpressionLevel3ParserRuleCall_1_1_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionMaximum
-	 *     ExpressionLevel1 returns ExpressionMaximum
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionMaximum
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionMaximum
-	 *     ExpressionLevel2 returns ExpressionMaximum
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionMaximum
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionMaximum
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionMaximum
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionMaximum
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionMaximum
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel2_ExpressionMaximum_1_2_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel2(ISerializationContext context, ExpressionMaximum semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MAXIMUM__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MAXIMUM__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MAXIMUM__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MAXIMUM__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getExpressionMaximumLeftAction_1_2_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getRightExpressionLevel3ParserRuleCall_1_2_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionMinimum
-	 *     ExpressionLevel1 returns ExpressionMinimum
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionMinimum
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionMinimum
-	 *     ExpressionLevel2 returns ExpressionMinimum
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionMinimum
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionMinimum
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionMinimum
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionMinimum
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionMinimum
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel2_ExpressionMinimum_1_3_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel2(ISerializationContext context, ExpressionMinimum semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MINIMUM__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MINIMUM__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MINIMUM__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MINIMUM__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getExpressionMinimumLeftAction_1_3_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getRightExpressionLevel3ParserRuleCall_1_3_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionModulo
-	 *     ExpressionLevel1 returns ExpressionModulo
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionModulo
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionModulo
-	 *     ExpressionLevel2 returns ExpressionModulo
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionModulo
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionModulo
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionModulo
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionModulo
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionModulo
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel2_ExpressionModulo_1_4_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel2(ISerializationContext context, ExpressionModulo semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MODULO__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MODULO__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MODULO__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MODULO__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getExpressionModuloLeftAction_1_4_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getRightExpressionLevel3ParserRuleCall_1_4_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionMultiply
-	 *     ExpressionLevel1 returns ExpressionMultiply
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionMultiply
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionMultiply
-	 *     ExpressionLevel2 returns ExpressionMultiply
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionMultiply
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionMultiply
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionMultiply
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionMultiply
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionMultiply
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel2_ExpressionMultiply_1_0_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel2(ISerializationContext context, ExpressionMultiply semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MULTIPLY__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MULTIPLY__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MULTIPLY__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MULTIPLY__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getExpressionMultiplyLeftAction_1_0_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel2Access().getRightExpressionLevel3ParserRuleCall_1_0_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionPower
-	 *     ExpressionLevel1 returns ExpressionPower
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionPower
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionPower
-	 *     ExpressionLevel2 returns ExpressionPower
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionPower
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionPower
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionPower
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionPower
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionPower
-	 *     ExpressionLevel3 returns ExpressionPower
-	 *
-	 * Constraint:
-	 *     (left=ExpressionLevel3_ExpressionPower_1_0 right=ExpressionLevel3)
-	 */
-	protected void sequence_ExpressionLevel3(ISerializationContext context, ExpressionPower semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_POWER__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_POWER__LEFT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_POWER__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_POWER__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionLevel3Access().getExpressionPowerLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpressionLevel3Access().getRightExpressionLevel3ParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionMinus
-	 *     ExpressionLevel1 returns ExpressionMinus
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionMinus
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionMinus
-	 *     ExpressionLevel2 returns ExpressionMinus
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionMinus
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionMinus
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionMinus
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionMinus
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionMinus
-	 *     ExpressionLevel3 returns ExpressionMinus
-	 *     ExpressionLevel3.ExpressionPower_1_0 returns ExpressionMinus
-	 *     ExpressionLevel4 returns ExpressionMinus
-	 *     ExpressionMinus returns ExpressionMinus
-	 *
-	 * Constraint:
-	 *     sub=ExpressionLevel5
-	 */
-	protected void sequence_ExpressionMinus(ISerializationContext context, ExpressionMinus semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_MINUS__SUB) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_MINUS__SUB));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionMinusAccess().getSubExpressionLevel5ParserRuleCall_1_0(), semanticObject.getSub());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     IntExpression returns ExpressionPlus
-	 *     ExpressionLevel1 returns ExpressionPlus
-	 *     ExpressionLevel1.ExpressionAddition_1_0_0 returns ExpressionPlus
-	 *     ExpressionLevel1.ExpressionSubtraction_1_1_0 returns ExpressionPlus
-	 *     ExpressionLevel2 returns ExpressionPlus
-	 *     ExpressionLevel2.ExpressionMultiply_1_0_0 returns ExpressionPlus
-	 *     ExpressionLevel2.ExpressionDivision_1_1_0 returns ExpressionPlus
-	 *     ExpressionLevel2.ExpressionMaximum_1_2_0 returns ExpressionPlus
-	 *     ExpressionLevel2.ExpressionMinimum_1_3_0 returns ExpressionPlus
-	 *     ExpressionLevel2.ExpressionModulo_1_4_0 returns ExpressionPlus
-	 *     ExpressionLevel3 returns ExpressionPlus
-	 *     ExpressionLevel3.ExpressionPower_1_0 returns ExpressionPlus
-	 *     ExpressionLevel4 returns ExpressionPlus
-	 *     ExpressionPlus returns ExpressionPlus
-	 *
-	 * Constraint:
-	 *     sub=ExpressionLevel5
-	 */
-	protected void sequence_ExpressionPlus(ISerializationContext context, ExpressionPlus semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.EXPRESSION_PLUS__SUB) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.EXPRESSION_PLUS__SUB));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpressionPlusAccess().getSubExpressionLevel5ParserRuleCall_1_0(), semanticObject.getSub());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     MeasurableCondition returns MeasurableCondition
-	 *
-	 * Constraint:
-	 *     (measurable=Measurables unit=MeasurementUnit value=STRING operator=CompareOperator)
-	 */
-	protected void sequence_MeasurableCondition(ISerializationContext context, MeasurableCondition semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__MEASURABLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__MEASURABLE));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__UNIT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__UNIT));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__VALUE));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__OPERATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.MEASURABLE_CONDITION__OPERATOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMeasurableConditionAccess().getMeasurableMeasurablesEnumRuleCall_0_0(), semanticObject.getMeasurable());
-		feeder.accept(grammarAccess.getMeasurableConditionAccess().getUnitMeasurementUnitEnumRuleCall_1_0(), semanticObject.getUnit());
-		feeder.accept(grammarAccess.getMeasurableConditionAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
-		feeder.accept(grammarAccess.getMeasurableConditionAccess().getOperatorCompareOperatorEnumRuleCall_3_0(), semanticObject.getOperator());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     TakeControl returns MeasurableConditions
-	 *     MeasurableConditions returns MeasurableConditions
-	 *
-	 * Constraint:
-	 *     measurableConditions+=MeasurableCondition+
-	 */
-	protected void sequence_MeasurableConditions(ISerializationContext context, MeasurableConditions semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -637,7 +80,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mission returns Mission
 	 *
 	 * Constraint:
-	 *     behaviorList+=Behavior+
+	 *     tasks+=Task+
 	 */
 	protected void sequence_Mission(ISerializationContext context, Mission semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -646,40 +89,65 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     BooleanExpression returns NotExpression
-	 *     BooleanExpressionLevel1 returns NotExpression
-	 *     BooleanExpressionLevel1.ExpressionBinOp_1_0 returns NotExpression
-	 *     BooleanExpressionLevel2 returns NotExpression
-	 *     NotExpression returns NotExpression
+	 *     Task returns Task
 	 *
 	 * Constraint:
-	 *     sub=BooleanExpressionLevel3
+	 *     (name=ID sensor=SensorType action=Actions)
 	 */
-	protected void sequence_NotExpression(ISerializationContext context, NotExpression semanticObject) {
+	protected void sequence_Task(ISerializationContext context, Task semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.NOT_EXPRESSION__SUB) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.NOT_EXPRESSION__SUB));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__NAME));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__SENSOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__SENSOR));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__ACTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__ACTION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNotExpressionAccess().getSubBooleanExpressionLevel3ParserRuleCall_1_0(), semanticObject.getSub());
+		feeder.accept(grammarAccess.getTaskAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getTaskAccess().getSensorSensorTypeParserRuleCall_3_0(), semanticObject.getSensor());
+		feeder.accept(grammarAccess.getTaskAccess().getActionActionsEnumRuleCall_5_0(), semanticObject.getAction());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     TakeControl returns TakeControl
+	 *     SensorType returns TouchSensor
+	 *     TouchSensor returns TouchSensor
 	 *
 	 * Constraint:
-	 *     takecontrol=BooleanExpression
+	 *     key=TouchSensorSides
 	 */
-	protected void sequence_TakeControl(ISerializationContext context, TakeControl semanticObject) {
+	protected void sequence_TouchSensor(ISerializationContext context, TouchSensor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TAKE_CONTROL__TAKECONTROL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TAKE_CONTROL__TAKECONTROL));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TOUCH_SENSOR__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TOUCH_SENSOR__KEY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTakeControlAccess().getTakecontrolBooleanExpressionParserRuleCall_0_0(), semanticObject.getTakecontrol());
+		feeder.accept(grammarAccess.getTouchSensorAccess().getKeyTouchSensorSidesEnumRuleCall_3_0(), semanticObject.getKey());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     SensorType returns UltrasonicSensor
+	 *     UltrasonicSensor returns UltrasonicSensor
+	 *
+	 * Constraint:
+	 *     (comparator=CompareOperator distance=DECIMAL)
+	 */
+	protected void sequence_UltrasonicSensor(ISerializationContext context, UltrasonicSensor semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR));
+			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__DISTANCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__DISTANCE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getUltrasonicSensorAccess().getComparatorCompareOperatorEnumRuleCall_3_0(), semanticObject.getComparator());
+		feeder.accept(grammarAccess.getUltrasonicSensorAccess().getDistanceDECIMALTerminalRuleCall_4_0(), semanticObject.getDistance());
 		feeder.finish();
 	}
 	
