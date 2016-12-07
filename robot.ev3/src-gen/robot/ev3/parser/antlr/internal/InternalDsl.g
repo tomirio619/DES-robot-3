@@ -141,37 +141,39 @@ ruleTask returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2='Uses:'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getTaskAccess().getUsesKeyword_2());
-		}
 		(
+			otherlv_2='Uses:'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getTaskAccess().getUsesKeyword_2_0());
+			}
 			(
-				{
-					newCompositeNode(grammarAccess.getTaskAccess().getSensorSensorTypeParserRuleCall_3_0());
-				}
-				lv_sensor_3_0=ruleSensorType
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getTaskRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getTaskAccess().getSensorSensorTypeParserRuleCall_2_1_0());
 					}
-					set(
-						$current,
-						"sensor",
-						lv_sensor_3_0,
-						"robot.ev3.Dsl.SensorType");
-					afterParserOrEnumRuleCall();
-				}
+					lv_sensor_3_0=ruleSensorType
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getTaskRule());
+						}
+						set(
+							$current,
+							"sensor",
+							lv_sensor_3_0,
+							"robot.ev3.Dsl.SensorType");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
-		)
+		)?
 		otherlv_4='Do:'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getTaskAccess().getDoKeyword_4());
+			newLeafNode(otherlv_4, grammarAccess.getTaskAccess().getDoKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTaskAccess().getActionActionsEnumRuleCall_5_0());
+					newCompositeNode(grammarAccess.getTaskAccess().getActionActionsEnumRuleCall_4_0());
 				}
 				lv_action_5_0=ruleActions
 				{
@@ -186,6 +188,60 @@ ruleTask returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
+		)
+		otherlv_6='Not:'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getTaskAccess().getNotKeyword_5());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTaskAccess().getIgnoreBehaviorIgnorablesParserRuleCall_6_0());
+				}
+				lv_ignoreBehavior_7_0=ruleIgnorables
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTaskRule());
+					}
+					set(
+						$current,
+						"ignoreBehavior",
+						true,
+						"robot.ev3.Dsl.Ignorables");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleIgnorables
+entryRuleIgnorables returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIgnorablesRule()); }
+	iv_ruleIgnorables=ruleIgnorables
+	{ $current=$iv_ruleIgnorables.current; }
+	EOF;
+
+// Rule Ignorables
+ruleIgnorables returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_AVOID_OBJECTS_0_0='AvoidObjects'
+			{
+				newLeafNode(lv_AVOID_OBJECTS_0_0, grammarAccess.getIgnorablesAccess().getAVOID_OBJECTSAvoidObjectsKeyword_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getIgnorablesRule());
+				}
+				setWithLastConsumed($current, "AVOID_OBJECTS", lv_AVOID_OBJECTS_0_0, "AvoidObjects");
+			}
 		)
 	)
 ;
@@ -504,6 +560,22 @@ ruleActions returns [Enumerator current=null]
 			{
 				$current = grammarAccess.getActionsAccess().getBEEPEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
 				newLeafNode(enumLiteral_6, grammarAccess.getActionsAccess().getBEEPEnumLiteralDeclaration_6());
+			}
+		)
+		    |
+		(
+			enumLiteral_7='MEASURE'
+			{
+				$current = grammarAccess.getActionsAccess().getMEASUREEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_7, grammarAccess.getActionsAccess().getMEASUREEnumLiteralDeclaration_7());
+			}
+		)
+		    |
+		(
+			enumLiteral_8='DRIVETOEDGE'
+			{
+				$current = grammarAccess.getActionsAccess().getDRIVETOEDGEEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
+				newLeafNode(enumLiteral_8, grammarAccess.getActionsAccess().getDRIVETOEDGEEnumLiteralDeclaration_8());
 			}
 		)
 	)

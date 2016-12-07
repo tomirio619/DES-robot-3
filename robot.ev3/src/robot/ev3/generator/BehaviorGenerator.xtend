@@ -53,7 +53,7 @@ class BehaviorGenerator {
 		}
 	'''
 	
-	def static dispatch sensorTypeToTakeControl(SensorType sensor){
+	def static sensorTypeToTakeControl(SensorType sensor){
 		switch(sensor){
 			case (sensor instanceof ColorSensor): 
 				return '''return robot.getColorId() == Color.«(sensor as ColorSensor).key»; '''
@@ -87,7 +87,7 @@ class BehaviorGenerator {
 		}
 	}
 	
-	def static dispatch sensorTypeToAction(Task task){
+	def static sensorTypeToAction(Task task){
 		switch(task.action){
 			case Actions.BEEP:
 				return '''Sound.buzz()'''

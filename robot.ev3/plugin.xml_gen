@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
-			uri = "http://www.ev3.robot/dsl"
-			class = "robot.ev3.dls.DlsPackage"
+			uri = "http://www.ev3.robot/Dsl"
+			class = "robot.ev3.dsl.DslPackage"
 			genModel = "model/generated/Dsl.genmodel" />
 	</extension>
 </plugin>

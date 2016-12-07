@@ -14,12 +14,13 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import robot.ev3.dls.ColorSensor;
-import robot.ev3.dls.DlsPackage;
-import robot.ev3.dls.Mission;
-import robot.ev3.dls.Task;
-import robot.ev3.dls.TouchSensor;
-import robot.ev3.dls.UltrasonicSensor;
+import robot.ev3.dsl.ColorSensor;
+import robot.ev3.dsl.DslPackage;
+import robot.ev3.dsl.Ignorables;
+import robot.ev3.dsl.Mission;
+import robot.ev3.dsl.Task;
+import robot.ev3.dsl.TouchSensor;
+import robot.ev3.dsl.UltrasonicSensor;
 import robot.ev3.services.DslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -34,21 +35,24 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == DlsPackage.eINSTANCE)
+		if (epackage == DslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case DlsPackage.COLOR_SENSOR:
+			case DslPackage.COLOR_SENSOR:
 				sequence_ColorSensor(context, (ColorSensor) semanticObject); 
 				return; 
-			case DlsPackage.MISSION:
+			case DslPackage.IGNORABLES:
+				sequence_Ignorables(context, (Ignorables) semanticObject); 
+				return; 
+			case DslPackage.MISSION:
 				sequence_Mission(context, (Mission) semanticObject); 
 				return; 
-			case DlsPackage.TASK:
+			case DslPackage.TASK:
 				sequence_Task(context, (Task) semanticObject); 
 				return; 
-			case DlsPackage.TOUCH_SENSOR:
+			case DslPackage.TOUCH_SENSOR:
 				sequence_TouchSensor(context, (TouchSensor) semanticObject); 
 				return; 
-			case DlsPackage.ULTRASONIC_SENSOR:
+			case DslPackage.ULTRASONIC_SENSOR:
 				sequence_UltrasonicSensor(context, (UltrasonicSensor) semanticObject); 
 				return; 
 			}
@@ -66,11 +70,29 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_ColorSensor(ISerializationContext context, ColorSensor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.COLOR_SENSOR__KEY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.COLOR_SENSOR__KEY));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.COLOR_SENSOR__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.COLOR_SENSOR__KEY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getColorSensorAccess().getKeyColorsEnumRuleCall_4_0(), semanticObject.getKey());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Ignorables returns Ignorables
+	 *
+	 * Constraint:
+	 *     AVOID_OBJECTS='AvoidObjects'
+	 */
+	protected void sequence_Ignorables(ISerializationContext context, Ignorables semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.IGNORABLES__AVOID_OBJECTS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.IGNORABLES__AVOID_OBJECTS));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getIgnorablesAccess().getAVOID_OBJECTSAvoidObjectsKeyword_0(), semanticObject.getAVOID_OBJECTS());
 		feeder.finish();
 	}
 	
@@ -92,22 +114,10 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Task returns Task
 	 *
 	 * Constraint:
-	 *     (name=ID sensor=SensorType action=Actions)
+	 *     (name=ID sensor=SensorType? action=Actions ignoreBehavior?=Ignorables)
 	 */
 	protected void sequence_Task(ISerializationContext context, Task semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__NAME));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__SENSOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__SENSOR));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TASK__ACTION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TASK__ACTION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTaskAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getTaskAccess().getSensorSensorTypeParserRuleCall_3_0(), semanticObject.getSensor());
-		feeder.accept(grammarAccess.getTaskAccess().getActionActionsEnumRuleCall_5_0(), semanticObject.getAction());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -121,8 +131,8 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_TouchSensor(ISerializationContext context, TouchSensor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.TOUCH_SENSOR__KEY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.TOUCH_SENSOR__KEY));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.TOUCH_SENSOR__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.TOUCH_SENSOR__KEY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTouchSensorAccess().getKeyTouchSensorSidesEnumRuleCall_3_0(), semanticObject.getKey());
@@ -140,10 +150,10 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_UltrasonicSensor(ISerializationContext context, UltrasonicSensor semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR));
-			if (transientValues.isValueTransient(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__DISTANCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DlsPackage.Literals.ULTRASONIC_SENSOR__DISTANCE));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ULTRASONIC_SENSOR__COMPARATOR));
+			if (transientValues.isValueTransient(semanticObject, DslPackage.Literals.ULTRASONIC_SENSOR__DISTANCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DslPackage.Literals.ULTRASONIC_SENSOR__DISTANCE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUltrasonicSensorAccess().getComparatorCompareOperatorEnumRuleCall_3_0(), semanticObject.getComparator());

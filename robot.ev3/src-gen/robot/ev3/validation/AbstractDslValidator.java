@@ -13,7 +13,7 @@ public abstract class AbstractDslValidator extends AbstractDeclarativeValidator 
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(robot.ev3.dls.DlsPackage.eINSTANCE);
+		result.add(robot.ev3.dsl.DslPackage.eINSTANCE);
 		return result;
 	}
 	

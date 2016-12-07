@@ -25,5 +25,11 @@ Export-Package: robot.ev3.scoping,
  robot.ev3.dls.impl,
  robot.ev3.parser.antlr.internal,
  robot.ev3.generator,
- robot.ev3
+ robot.ev3,
+ robot.ev3.Dsl.impl,
+ robot.ev3.Dsl.util,
+ robot.ev3.Dsl,
+ robot.ev3.dsl.impl,
+ robot.ev3.dsl.util,
+ robot.ev3.dsl
 Import-Package: org.apache.log4j

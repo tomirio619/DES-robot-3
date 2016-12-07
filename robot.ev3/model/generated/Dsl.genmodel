@@ -4,7 +4,7 @@
     modelPluginID="robot.ev3" forceOverwrite="true" modelName="Dsl" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
     copyrightFields="false" runtimeVersion="2.12">
-  <genPackages prefix="Dls" basePackage="robot.ev3" disposableProviderFactory="true"
+  <genPackages prefix="Dsl" basePackage="robot.ev3" disposableProviderFactory="true"
       fileExtensions="mars" ecorePackage="Dsl.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//TouchSensorSides">
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//TouchSensorSides/LEFT"/>
@@ -19,6 +19,8 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/STOP_DRIVING"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/TURN_AROUND"/>
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/BEEP"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/MEASURE"/>
+      <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Actions/DRIVETOEDGE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Dsl.ecore#//Directions">
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//Directions/N"/>
@@ -60,6 +62,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Task/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Task/sensor"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Task/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Task/ignoreBehavior"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Ignorables">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Ignorables/AVOID_OBJECTS"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//SensorType"/>
     <genClasses ecoreClass="Dsl.ecore#//ColorSensor">

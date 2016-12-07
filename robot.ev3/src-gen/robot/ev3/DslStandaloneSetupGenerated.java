@@ -11,7 +11,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import robot.ev3.dls.DlsPackage;
+import robot.ev3.dsl.DslPackage;
 
 @SuppressWarnings("all")
 public class DslStandaloneSetupGenerated implements ISetup {
@@ -30,8 +30,8 @@ public class DslStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.ev3.robot/dsl")) {
-			EPackage.Registry.INSTANCE.put("http://www.ev3.robot/dsl", DlsPackage.eINSTANCE);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.ev3.robot/Dsl")) {
+			EPackage.Registry.INSTANCE.put("http://www.ev3.robot/Dsl", DslPackage.eINSTANCE);
 		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);

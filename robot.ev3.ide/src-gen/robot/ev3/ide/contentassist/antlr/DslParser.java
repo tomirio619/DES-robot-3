@@ -43,13 +43,16 @@ public class DslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCompareOperatorAccess().getAlternatives(), "rule__CompareOperator__Alternatives");
 					put(grammarAccess.getMissionAccess().getGroup(), "rule__Mission__Group__0");
 					put(grammarAccess.getTaskAccess().getGroup(), "rule__Task__Group__0");
+					put(grammarAccess.getTaskAccess().getGroup_2(), "rule__Task__Group_2__0");
 					put(grammarAccess.getColorSensorAccess().getGroup(), "rule__ColorSensor__Group__0");
 					put(grammarAccess.getTouchSensorAccess().getGroup(), "rule__TouchSensor__Group__0");
 					put(grammarAccess.getUltrasonicSensorAccess().getGroup(), "rule__UltrasonicSensor__Group__0");
 					put(grammarAccess.getMissionAccess().getTasksAssignment_1(), "rule__Mission__TasksAssignment_1");
 					put(grammarAccess.getTaskAccess().getNameAssignment_1(), "rule__Task__NameAssignment_1");
-					put(grammarAccess.getTaskAccess().getSensorAssignment_3(), "rule__Task__SensorAssignment_3");
-					put(grammarAccess.getTaskAccess().getActionAssignment_5(), "rule__Task__ActionAssignment_5");
+					put(grammarAccess.getTaskAccess().getSensorAssignment_2_1(), "rule__Task__SensorAssignment_2_1");
+					put(grammarAccess.getTaskAccess().getActionAssignment_4(), "rule__Task__ActionAssignment_4");
+					put(grammarAccess.getTaskAccess().getIgnoreBehaviorAssignment_6(), "rule__Task__IgnoreBehaviorAssignment_6");
+					put(grammarAccess.getIgnorablesAccess().getAVOID_OBJECTSAssignment(), "rule__Ignorables__AVOID_OBJECTSAssignment");
 					put(grammarAccess.getColorSensorAccess().getKeyAssignment_4(), "rule__ColorSensor__KeyAssignment_4");
 					put(grammarAccess.getTouchSensorAccess().getKeyAssignment_3(), "rule__TouchSensor__KeyAssignment_3");
 					put(grammarAccess.getUltrasonicSensorAccess().getComparatorAssignment_3(), "rule__UltrasonicSensor__ComparatorAssignment_3");

@@ -56,32 +56,46 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTaskKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cUsesKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cSensorAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cSensorSensorTypeParserRuleCall_3_0 = (RuleCall)cSensorAssignment_3.eContents().get(0);
-		private final Keyword cDoKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cActionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cActionActionsEnumRuleCall_5_0 = (RuleCall)cActionAssignment_5.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cUsesKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cSensorAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cSensorSensorTypeParserRuleCall_2_1_0 = (RuleCall)cSensorAssignment_2_1.eContents().get(0);
+		private final Keyword cDoKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cActionAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cActionActionsEnumRuleCall_4_0 = (RuleCall)cActionAssignment_4.eContents().get(0);
+		private final Keyword cNotKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cIgnoreBehaviorAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cIgnoreBehaviorIgnorablesParserRuleCall_6_0 = (RuleCall)cIgnoreBehaviorAssignment_6.eContents().get(0);
 		
-		/// *Mission 1
-		//Task BeepOnRed Uses ColorSensor on Color RED Do Beep (Turn Around)
-		//
-		//Task CloserThanFifteen Uses Ultrasonic whenDistance 'bigger/smaller|compare' 15 
-		//
-		//Task InBlackBorder Uses ColorSensor On Color Black Do Turn Around 
-		//
-		//Task BounceDaBounce Uses touchSensor On Left/Right/Both Do Beep/TurnAround
-		//
-		//Task DriveForward On true Do Drive* / / *
+		/// *
+		// * Mission DetectColourLakeAndMeasure
+		// * Task findLake 
+		// * Uses ColorSensor On New DetectedColor is: [kleuren] Do: Measure
+		// * 
+		// * Mission DetectRocksAndMeasure
+		// * Task findRock
+		// * Uses TouchSensor On TouchedSide [Any] Do: Measure
+		// * 
+		// * Mission CleanUpLightWeightRocks
+		// * Task pushRocks
+		// * Uses TouchSensor On TouchedSide [Any] Do: DriveToEdge
+		// * Not AvoidObjects
+		// * 
+		// * [Optional]
+		// * Mission ParkInCorner
+		// * Task findEdge
+		// * Do: DriveToEdge Do: TurnLeft Do: DriveToEdge Do: Stop 
+		// * 
+		// * / / *
 		// * A behavior consists of a name, an optional type (in case of driving), an optional priority
 		// * and a take control definition.
 		// * / Task:
-		//	'Task:' name=ID
-		//	'Uses:' sensor=SensorType
-		//	'Do:' action=Actions;
+		//	'Task:' name=ID ('Uses:' sensor=SensorType)?
+		//	'Do:' action=Actions
+		//	'Not:' ignoreBehavior?=Ignorables;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Task:' name=ID 'Uses:' sensor=SensorType 'Do:' action=Actions
+		//'Task:' name=ID ('Uses:' sensor=SensorType)? 'Do:' action=Actions 'Not:' ignoreBehavior?=Ignorables
 		public Group getGroup() { return cGroup; }
 		
 		//'Task:'
@@ -93,23 +107,50 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
+		//('Uses:' sensor=SensorType)?
+		public Group getGroup_2() { return cGroup_2; }
+		
 		//'Uses:'
-		public Keyword getUsesKeyword_2() { return cUsesKeyword_2; }
+		public Keyword getUsesKeyword_2_0() { return cUsesKeyword_2_0; }
 		
 		//sensor=SensorType
-		public Assignment getSensorAssignment_3() { return cSensorAssignment_3; }
+		public Assignment getSensorAssignment_2_1() { return cSensorAssignment_2_1; }
 		
 		//SensorType
-		public RuleCall getSensorSensorTypeParserRuleCall_3_0() { return cSensorSensorTypeParserRuleCall_3_0; }
+		public RuleCall getSensorSensorTypeParserRuleCall_2_1_0() { return cSensorSensorTypeParserRuleCall_2_1_0; }
 		
 		//'Do:'
-		public Keyword getDoKeyword_4() { return cDoKeyword_4; }
+		public Keyword getDoKeyword_3() { return cDoKeyword_3; }
 		
 		//action=Actions
-		public Assignment getActionAssignment_5() { return cActionAssignment_5; }
+		public Assignment getActionAssignment_4() { return cActionAssignment_4; }
 		
 		//Actions
-		public RuleCall getActionActionsEnumRuleCall_5_0() { return cActionActionsEnumRuleCall_5_0; }
+		public RuleCall getActionActionsEnumRuleCall_4_0() { return cActionActionsEnumRuleCall_4_0; }
+		
+		//'Not:'
+		public Keyword getNotKeyword_5() { return cNotKeyword_5; }
+		
+		//ignoreBehavior?=Ignorables
+		public Assignment getIgnoreBehaviorAssignment_6() { return cIgnoreBehaviorAssignment_6; }
+		
+		//Ignorables
+		public RuleCall getIgnoreBehaviorIgnorablesParserRuleCall_6_0() { return cIgnoreBehaviorIgnorablesParserRuleCall_6_0; }
+	}
+	public class IgnorablesElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Ignorables");
+		private final Assignment cAVOID_OBJECTSAssignment = (Assignment)rule.eContents().get(1);
+		private final Keyword cAVOID_OBJECTSAvoidObjectsKeyword_0 = (Keyword)cAVOID_OBJECTSAssignment.eContents().get(0);
+		
+		//Ignorables:
+		//	AVOID_OBJECTS="AvoidObjects";
+		@Override public ParserRule getRule() { return rule; }
+		
+		//AVOID_OBJECTS="AvoidObjects"
+		public Assignment getAVOID_OBJECTSAssignment() { return cAVOID_OBJECTSAssignment; }
+		
+		//"AvoidObjects"
+		public Keyword getAVOID_OBJECTSAvoidObjectsKeyword_0() { return cAVOID_OBJECTSAvoidObjectsKeyword_0; }
 	}
 	public class SensorTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.SensorType");
@@ -294,6 +335,10 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTURN_AROUNDTURNAROUNDKeyword_5_0 = (Keyword)cTURN_AROUNDEnumLiteralDeclaration_5.eContents().get(0);
 		private final EnumLiteralDeclaration cBEEPEnumLiteralDeclaration_6 = (EnumLiteralDeclaration)cAlternatives.eContents().get(6);
 		private final Keyword cBEEPBEEPKeyword_6_0 = (Keyword)cBEEPEnumLiteralDeclaration_6.eContents().get(0);
+		private final EnumLiteralDeclaration cMEASUREEnumLiteralDeclaration_7 = (EnumLiteralDeclaration)cAlternatives.eContents().get(7);
+		private final Keyword cMEASUREMEASUREKeyword_7_0 = (Keyword)cMEASUREEnumLiteralDeclaration_7.eContents().get(0);
+		private final EnumLiteralDeclaration cDRIVETOEDGEEnumLiteralDeclaration_8 = (EnumLiteralDeclaration)cAlternatives.eContents().get(8);
+		private final Keyword cDRIVETOEDGEDRIVETOEDGEKeyword_8_0 = (Keyword)cDRIVETOEDGEEnumLiteralDeclaration_8.eContents().get(0);
 		
 		//enum Actions:
 		//	ROTATE_L="ROTATELEFT" |
@@ -302,11 +347,13 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//	DRIVE_BACKWARD="DRIVEBACKWARD" |
 		//	STOP_DRIVING="STOP" |
 		//	TURN_AROUND="TURNAROUND" |
-		//	BEEP;
+		//	BEEP |
+		//	MEASURE |
+		//	DRIVETOEDGE;
 		public EnumRule getRule() { return rule; }
 		
 		//ROTATE_L="ROTATELEFT" | ROTATE_R="ROTATERIGHT" | DRIVE_FORWARD="DRIVEFORWARD" | DRIVE_BACKWARD="DRIVEBACKWARD" |
-		//STOP_DRIVING="STOP" | TURN_AROUND="TURNAROUND" | BEEP
+		//STOP_DRIVING="STOP" | TURN_AROUND="TURNAROUND" | BEEP | MEASURE | DRIVETOEDGE
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ROTATE_L="ROTATELEFT"
@@ -350,6 +397,18 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//"BEEP"
 		public Keyword getBEEPBEEPKeyword_6_0() { return cBEEPBEEPKeyword_6_0; }
+		
+		//MEASURE
+		public EnumLiteralDeclaration getMEASUREEnumLiteralDeclaration_7() { return cMEASUREEnumLiteralDeclaration_7; }
+		
+		//"MEASURE"
+		public Keyword getMEASUREMEASUREKeyword_7_0() { return cMEASUREMEASUREKeyword_7_0; }
+		
+		//DRIVETOEDGE
+		public EnumLiteralDeclaration getDRIVETOEDGEEnumLiteralDeclaration_8() { return cDRIVETOEDGEEnumLiteralDeclaration_8; }
+		
+		//"DRIVETOEDGE"
+		public Keyword getDRIVETOEDGEDRIVETOEDGEKeyword_8_0() { return cDRIVETOEDGEDRIVETOEDGEKeyword_8_0; }
 	}
 	public class DirectionsElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "robot.ev3.Dsl.Directions");
@@ -627,6 +686,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private final MissionElements pMission;
 	private final TaskElements pTask;
+	private final IgnorablesElements pIgnorables;
 	private final SensorTypeElements pSensorType;
 	private final ColorSensorElements pColorSensor;
 	private final TouchSensorElements pTouchSensor;
@@ -649,6 +709,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pMission = new MissionElements();
 		this.pTask = new TaskElements();
+		this.pIgnorables = new IgnorablesElements();
 		this.pSensorType = new SensorTypeElements();
 		this.pColorSensor = new ColorSensorElements();
 		this.pTouchSensor = new TouchSensorElements();
@@ -700,28 +761,48 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getMissionAccess().getRule();
 	}
 	
-	/// *Mission 1
-	//Task BeepOnRed Uses ColorSensor on Color RED Do Beep (Turn Around)
-	//
-	//Task CloserThanFifteen Uses Ultrasonic whenDistance 'bigger/smaller|compare' 15 
-	//
-	//Task InBlackBorder Uses ColorSensor On Color Black Do Turn Around 
-	//
-	//Task BounceDaBounce Uses touchSensor On Left/Right/Both Do Beep/TurnAround
-	//
-	//Task DriveForward On true Do Drive* / / *
+	/// *
+	// * Mission DetectColourLakeAndMeasure
+	// * Task findLake 
+	// * Uses ColorSensor On New DetectedColor is: [kleuren] Do: Measure
+	// * 
+	// * Mission DetectRocksAndMeasure
+	// * Task findRock
+	// * Uses TouchSensor On TouchedSide [Any] Do: Measure
+	// * 
+	// * Mission CleanUpLightWeightRocks
+	// * Task pushRocks
+	// * Uses TouchSensor On TouchedSide [Any] Do: DriveToEdge
+	// * Not AvoidObjects
+	// * 
+	// * [Optional]
+	// * Mission ParkInCorner
+	// * Task findEdge
+	// * Do: DriveToEdge Do: TurnLeft Do: DriveToEdge Do: Stop 
+	// * 
+	// * / / *
 	// * A behavior consists of a name, an optional type (in case of driving), an optional priority
 	// * and a take control definition.
 	// * / Task:
-	//	'Task:' name=ID
-	//	'Uses:' sensor=SensorType
-	//	'Do:' action=Actions;
+	//	'Task:' name=ID ('Uses:' sensor=SensorType)?
+	//	'Do:' action=Actions
+	//	'Not:' ignoreBehavior?=Ignorables;
 	public TaskElements getTaskAccess() {
 		return pTask;
 	}
 	
 	public ParserRule getTaskRule() {
 		return getTaskAccess().getRule();
+	}
+	
+	//Ignorables:
+	//	AVOID_OBJECTS="AvoidObjects";
+	public IgnorablesElements getIgnorablesAccess() {
+		return pIgnorables;
+	}
+	
+	public ParserRule getIgnorablesRule() {
+		return getIgnorablesAccess().getRule();
 	}
 	
 	//SensorType:
@@ -789,7 +870,9 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	//	DRIVE_BACKWARD="DRIVEBACKWARD" |
 	//	STOP_DRIVING="STOP" |
 	//	TURN_AROUND="TURNAROUND" |
-	//	BEEP;
+	//	BEEP |
+	//	MEASURE |
+	//	DRIVETOEDGE;
 	public ActionsElements getActionsAccess() {
 		return eActions;
 	}

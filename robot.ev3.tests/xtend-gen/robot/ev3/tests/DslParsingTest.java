@@ -4,15 +4,11 @@
 package robot.ev3.tests;
 
 import com.google.inject.Inject;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import robot.ev3.dls.Mission;
 import robot.ev3.tests.DslInjectorProvider;
 
 @RunWith(XtextRunner.class)
@@ -20,18 +16,11 @@ import robot.ev3.tests.DslInjectorProvider;
 @SuppressWarnings("all")
 public class DslParsingTest {
   @Inject
-  private ParseHelper<Mission> parseHelper;
+  private /* ParseHelper<Mission> */Object parseHelper;
   
   @Test
   public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
-      _builder.newLine();
-      final Mission result = this.parseHelper.parse(_builder);
-      Assert.assertNotNull(result);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe field DslParsingTest.parseHelper refers to the missing type Mission");
   }
 }

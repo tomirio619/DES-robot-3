@@ -3,19 +3,10 @@
  */
 package robot.ev3.generator;
 
-import com.google.common.base.Objects;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import robot.ev3.dls.Mission;
-import robot.ev3.dls.Task;
-import robot.ev3.generator.BehaviorGenerator;
 
 /**
  * Generates code from your model files on save.
@@ -26,26 +17,12 @@ import robot.ev3.generator.BehaviorGenerator;
 public class DslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    TreeIterator<EObject> _allContents = resource.getAllContents();
-    EObject _head = IteratorExtensions.<EObject>head(_allContents);
-    final Mission root = ((Mission) _head);
-    boolean _notEquals = (!Objects.equal(root, null));
-    if (_notEquals) {
-      EList<Task> _tasks = root.getTasks();
-      for (final Task t : _tasks) {
-        {
-          URI _uRI = resource.getURI();
-          String _lastSegment = _uRI.lastSegment();
-          String _plus = ("generated/" + _lastSegment);
-          String path = (_plus + "/");
-          String _name = t.getName();
-          String _plus_1 = (path + _name);
-          String _plus_2 = (_plus_1 + "Behavior");
-          String _plus_3 = (_plus_2 + ".java");
-          CharSequence _behavior = BehaviorGenerator.toBehavior(t);
-          fsa.generateFile(_plus_3, _behavior);
-        }
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nMission cannot be resolved to a type."
+      + "\nTask cannot be resolved to a type."
+      + "\nThe method toBehavior(Task) from the type BehaviorGenerator refers to the missing type Task"
+      + "\n!= cannot be resolved"
+      + "\ntasks cannot be resolved"
+      + "\nname cannot be resolved");
   }
 }
